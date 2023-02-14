@@ -68,7 +68,7 @@ class PositionCrudController extends AbstractCrudController
         ];
     }
 
-    /*
+
     public function persistEntity(EntityManagerInterface $em, $entityInstance): void
     {
         if (!$entityInstance instanceof Position) return;
@@ -81,7 +81,6 @@ class PositionCrudController extends AbstractCrudController
         $entityInstance->setUpdatedAt(new \DateTimeImmutable);
         parent::updateEntity($em, $entityInstance);
     }
-    */
 
     public function duplicatePosition(
         AdminContext $context,

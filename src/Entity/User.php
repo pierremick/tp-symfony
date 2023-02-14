@@ -46,6 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->positions = new ArrayCollection();
+        $this->setFullname();
     }
 
     public function getId(): ?int
@@ -179,7 +180,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->fullname;
     }
 
-    public function setFullname(?string $fullname): self
+    public function setFullname(): self
     {
         $this->fullName = $this->firstname . ' ' . $this->lastname;
 

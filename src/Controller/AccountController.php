@@ -18,7 +18,7 @@ class AccountController extends AbstractController
     }
 
     #[Route('/account/positions', name: 'app_account_positions')]
-    public function acount_positions(PositionRepository $positionRepository): Response
+    public function account_positions(PositionRepository $positionRepository): Response
     {
         $user = $this->getUser(); // Récupère l'utilisateur connecté
         $positions = $positionRepository->findByOwner($user);
