@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Position;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,16 @@ class PositionRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByOwner(User $owner)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.owner = :owner')
+            ->setParameter('owner', $owner)
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

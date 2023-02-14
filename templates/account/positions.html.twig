@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ page_title }}</h1>
+    <ul>
+        {% for position in positions %}
+            <li>
+                <strong>{{ position.name }}</strong><br>
+                {{ position.description }}<br>
+                Created at: {{ position.createdAt|date('Y-m-d H:i:s') }}
+            </li>
+        {% else %}
+            <li>No positions found.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
