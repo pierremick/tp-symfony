@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('app_home') }}">l’Espadrille Volante</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+                <a class="nav-link{% if app.request.get('_route') == 'app_features' %} active{% endif %}" href="{{ path('app_features') }}">Services</a>
+                <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">Contact</a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link text-success" href="{{ path('admin') }}">Admin</a>
+                {% endif %}
+                <a class="nav-link text-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                <a class="nav-link{% if app.request.get('_route') == 'app_login' %} active{% endif %}" href="{{ path('app_account') }}">Connexion</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

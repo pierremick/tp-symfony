@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+<div class="container login-container mt-5">
+    <h1 class="text-center mb-5">{{ page_title }}</h1>
+    {% if error %}
+        <div class=" mb-3">
+            <p class="alert alert-danger text-center" role="alert">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </p>
+        </div>
+    {% endif %}
+
+    <form class="form-floating" action="{{ path('app_login') }}" method="post">
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="name@example.com">
+            <label for="username">Adresse e-mail</label>
+        </div>
+        <div class="form-floating mb-4">
+            <input type="password" class="form-control" id="password" name="_password">
+            <label for="password">Mot de passe</label>
+        </div>
+        {# If you want to control the URL the user is redirected to on success
+        <input type="hidden" name="_target_path" value="/account"> #}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="mb-3 text-center">
+            <button type="submit" class="btn btn-lg btn-primary px-5">se connecter</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

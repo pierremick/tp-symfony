@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ page_title }}</h1>
+    <p>
+        Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir ! <br>
+        <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('app_logout') }}">cliquez ici</a></small>
+    </p>
+</div>
+{% endblock %}
