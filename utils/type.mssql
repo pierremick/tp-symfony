@@ -1,0 +1,42 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1deb5ubuntu1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost:3306
+-- Généré le : mar. 14 fév. 2023 à 02:43
+-- Version du serveur : 10.6.11-MariaDB-0ubuntu0.22.04.1
+-- Version de PHP : 8.1.2-1ubuntu2.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `db_camping`
+--
+
+--
+-- Déchargement des données de la table `type`
+--
+
+INSERT INTO `type` (`id`, `name`, `slug`, `capacity`, `description`, `created_at`, `updated_at`, `active`, `price`) VALUES
+(1, 'Mobile Home 3 personnes', 'mobile-home-3-personnes', 3, 'Adapté pour un couple et un enfant...', '2023-02-13 20:40:20', '2023-02-13 22:04:07', 1, 2000),
+(2, 'Mobile Home 4 personnes', 'mobile-home-4-personnes', 4, 'Parfait pour un couple et 2 enfants', '2023-02-13 20:52:55', '2023-02-13 22:04:17', 1, 2400),
+(3, 'Mobile Home 5 personnes', 'mobile-home-5-personnes', 5, 'parfait pour 5 personnes', '2023-02-13 20:53:29', '2023-02-13 22:04:28', 1, 2700),
+(4, 'Mobile Home 6-8 personnes', 'mobile-home-6-8-personnes', 8, 'parfait pour une famille nombreuses ou une bande d\'amis', '2023-02-13 20:54:23', '2023-02-13 22:04:56', 1, 3400),
+(5, 'Caravane 2 places', 'caravane-2-places', 2, 'petite caravane pour 2 personnes', '2023-02-13 21:48:12', '2023-02-13 22:05:11', 1, 1500),
+(6, 'Caravane 4 places', 'caravane-4-places', 4, 'Caravane pour un couple et deux enfants ou deux autres adultes', '2023-02-13 21:49:10', '2023-02-13 22:05:16', 1, 1800),
+(7, 'Caravane 6 places', 'caravane-6-places', 6, 'un grande caravane', '2023-02-13 21:50:42', '2023-02-13 22:05:21', 1, 2400),
+(8, 'Emplacement 8 m2', 'emplacement-8-m2', 4, 'emplacement pour une tente maximum 4m2 (soit 4 personnes)', '2023-02-13 21:55:03', '2023-02-13 21:58:17', 1, 1200),
+(9, 'Emplacement 12 m2', 'emplacement-12-m2', 6, 'Emplacement pour tente maxi 6 m2 (soit 6 personnes maximum)', '2023-02-13 21:57:55', '2023-02-13 22:05:26', 1, 1400);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
