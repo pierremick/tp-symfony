@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\PositionRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,11 +25,14 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/nos-hebergements', name: 'app_accommodations')]
-    public function accommodations(): Response
+    #[Route('/nos-hebergements', name: 'app_positions')]
+    public function positions(PositionRepository $positionRepository): Response
     {
-        return $this->render('front/index.html.twig', [
+        $positions = $positionRepository->findAllActivePositions();
+
+        return $this->render('front/positions.html.twig', [
             'page_title' => 'Les hébergements',
+            'positions' => $positions,
         ]);
     }
 

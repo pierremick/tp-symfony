@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ page_title }}</h1>
+    <ul>
+        {% for position in positions %}
+            <li>{{ position.type.name }} - {{ position.description }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -50,6 +50,15 @@ class PositionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllActivePositions()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.active = :active')
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Position[] Returns an array of Position objects
 //     */
