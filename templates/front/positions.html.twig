@@ -6,11 +6,11 @@
 <div class="container">
     <h1>{{ page_title }}</h1>
     <div>
-        {{ form_start(form) }}
-        {{ form_row(form.type) }}
-        {{ form_row(form.capacity) }}
-        {{ form_row(form.submit) }}
-        {{ form_end(form) }}
+        {{ form_start(PositionFilterType) }}
+        {{ form_row(PositionFilterType.type) }}
+        {{ form_row(PositionFilterType.capacity) }}
+        {{ form_row(PositionFilterType.submit) }}
+        {{ form_end(PositionFilterType) }}
     </div>
     <ul>
         {% for position in positions %}
