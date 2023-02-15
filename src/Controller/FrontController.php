@@ -52,6 +52,20 @@ class FrontController extends AbstractController
         ]);
     }
 
+    #[Route('/positions/{slug}', name: 'app_position')]
+    public function position(string $slug, PositionRepository $positionRepository): Response
+    {
+        $position = $positionRepository->findOneBySlug($slug);
+
+        if (!$position) {
+            throw $this->createNotFoundException('Aucune position trouvée');
+        }
+
+        return $this->render('position.html.twig', [
+            'position' => $position,
+        ]);
+    }
+
     #[Route('/camping-cooperatif', name: 'app_features')]
     public function features(): Response
     {

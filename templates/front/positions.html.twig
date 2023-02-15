@@ -17,7 +17,8 @@
                                 {{ position.type.name }}<br>
                                 {{ position.description }}<br>
                                 capacité maximale : {{ position.type.capacity }}<br>
-                                prix : {{ position.type.price|raw }}
+                                prix : {{ position.type.price|raw }}<br>
+                                <a href="{{ path('app_position', {'slug': position.slug}) }}">Détails</a>
                             </li>
                         {% endfor %}
                     </ul>

@@ -84,6 +84,17 @@ class PositionRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function findOneBySlug(string $slug): ?Position
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.slug = :slug')
+            ->andWhere('p.active = :active')
+            ->setParameter('slug', $slug)
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Position[] Returns an array of Position objects
 //     */
