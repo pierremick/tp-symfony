@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\PositionFilterType;
 use App\Repository\PositionRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
