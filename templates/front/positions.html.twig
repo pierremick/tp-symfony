@@ -9,6 +9,7 @@
         {{ form_start(form) }}
         {{ form_row(form.type) }}
         {{ form_row(form.capacity) }}
+        {{ form_row(form.price) }}
         {{ form_row(form.submit) }}
         {{ form_end(form) }}
     </div>
@@ -19,6 +20,7 @@
                 {{ position.type.name }}<br>
                 {{ position.description }}<br>
                 capacité maximale : {{ position.type.capacity }}
+                prix : {{ position.type.price|raw }}
             </li>
         {% endfor %}
     </ul>

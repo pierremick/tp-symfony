@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Type;
 use App\Form\PositionFilterType;
 use App\Repository\PositionRepository;
 use App\Form\RegistrationFormType;
@@ -27,29 +28,13 @@ class FrontController extends AbstractController
     }
 
     #[Route('/nos-hebergements', name: 'app_positions')]
-    public function positions(PositionRepository $positionRepository, Request $request): Response
+    public function positions(PositionRepository $positionRepository): Response
     {
-        $form = $this->createForm(PositionFilterType::class);
-        $form->handleRequest($request);
-
-        $positions = $positionRepository->findByActive(true);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            if ($data['type']) {
-                $positions = $positionRepository->findByType($data['type']);
-            }
-
-            if ($data['capacity']) {
-                $positions = $positionRepository->findByCapacity($data['capacity']);
-            }
-        }
+        $positions = $positionRepository->findByActive();
 
         return $this->render('front/positions.html.twig', [
             'page_title' => 'Les hébergements',
             'positions' => $positions,
-            'form' => $form->createView(),
         ]);
     }
 

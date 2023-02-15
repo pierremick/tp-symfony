@@ -50,40 +50,11 @@ class PositionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    //public function findAllActivePositions()
-    //{
-    //    return $this->createQueryBuilder('p')
-    //        ->andWhere('p.active = :active')
-    //        ->setParameter('active', true)
-    //        ->getQuery()
-    //        ->getResult();
-    //}
-
-    public function findByType($type)
-    {
-        return $this->createQueryBuilder('p')
-            ->join('p.type', 't')
-            ->andWhere('t = :type')
-            ->setParameter('type', $type)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findByCapacity($capacity)
-    {
-        return $this->createQueryBuilder('p')
-            ->join('p.type', 't')
-            ->andWhere('t.capacity >= :capacity')
-            ->setParameter('capacity', $capacity)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findByActive($active)
+    public function findByActive()
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.active = :active')
-            ->setParameter('active', $active)
+            ->setParameter('active', true)
             ->getQuery()
             ->getResult();
     }
