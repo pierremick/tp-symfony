@@ -26,9 +26,24 @@ class FrontController extends AbstractController
     }
 
     #[Route('/nos-hebergements', name: 'app_positions')]
-    public function positions(PositionRepository $positionRepository): Response
+    public function positions(PositionRepository $positionRepository, Request $request): Response
     {
-        $positions = $positionRepository->findAllActivePositions();
+        $form = $this->createForm(PositionFilterType::class);
+        $form->handleRequest($request);
+
+        $positions = $positionRepository->findByActive(true);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            if ($data['type']) {
+                $positions = $positionRepository->findByType($data['type']);
+            }
+
+            if ($data['capacity']) {
+                $positions = $positionRepository->findByCapacity($data['capacity']);
+            }
+        }
 
         return $this->render('front/positions.html.twig', [
             'page_title' => 'Les hébergements',

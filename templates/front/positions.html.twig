@@ -5,13 +5,20 @@
 {% block body %}
 <div class="container">
     <h1>{{ page_title }}</h1>
+    <div>
+        {{ form_start(form) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.capacity) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+    </div>
     <ul>
         {% for position in positions %}
             <li class="pb-3">
                 {{ position.name }}<br>
                 {{ position.type.name }}<br>
                 {{ position.description }}<br>
-                {{ position.type.capacity }}
+                capacité maximale : {{ position.type.capacity }}
             </li>
         {% endfor %}
     </ul>
