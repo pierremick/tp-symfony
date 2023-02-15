@@ -11,12 +11,34 @@
                     <p>{{ position.description }}</p>
                 </div>
                 <div class="col-md-5">
-                    <form method="post" action="{{ path('app_booking_new', {'id': position.id}) }}">
-                        {{ form_widget(form.checkin) }}
-                        {{ form_widget(form.checkout) }}
+                    <h3>Réserver cette position</h3>
+
+                    {% if form is defined %}
+                        {{ form_start(form) }}
+                        {{ form_row(form.checkin) }}
+                        {{ form_row(form.checkout) }}
                         <button type="submit">Vérifier la disponibilité</button>
-                    </form>
-                    </form>
+                        {{ form_end(form) }}
+
+                        {% if is_available is not null and is_available %}
+                            {{ form_start(bookingForm) }}
+                            {{ form_row(bookingForm.firstname) }}
+                            {{ form_row(bookingForm.lastname) }}
+                            {{ form_row(bookingForm.email) }}
+                            {{ form_row(bookingForm.phone) }}
+                            {{ form_row(bookingForm.address) }}
+                            {{ form_row(bookingForm.zipcode) }}
+                            {{ form_row(bookingForm.city) }}
+                            {{ form_row(bookingForm.adults) }}
+                            {{ form_row(bookingForm.childs) }}
+                            {{ form_row(bookingForm.poolAdult) }}
+                            {{ form_row(bookingForm.poolChild) }}
+                            <button type="submit">Confirmer la réservation</button>
+                            {{ form_end(bookingForm) }}
+                        {% elseif is_available is not null and not is_available %}
+                            <p>La position n'est pas disponible pour ces dates.</p>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>
