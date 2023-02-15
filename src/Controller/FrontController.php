@@ -19,11 +19,20 @@ class FrontController extends AbstractController
     public function index(): Response
     {
         return $this->render('front/index.html.twig', [
-            'page_title' => 'Accueil',
+            'page_title' => "l’Espadrille Volante",
+            'site_slogan' => "Camping Coopératif"
         ]);
     }
 
-    #[Route('/services', name: 'app_features')]
+    #[Route('/nos-hebergements', name: 'app_accommodations')]
+    public function accommodations(): Response
+    {
+        return $this->render('front/index.html.twig', [
+            'page_title' => 'Les hébergements',
+        ]);
+    }
+
+    #[Route('/camping-cooperatif', name: 'app_features')]
     public function features(): Response
     {
         return $this->render('front/services.html.twig', [
@@ -62,7 +71,7 @@ class FrontController extends AbstractController
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 
-    #[Route('/inscription', name: 'app_register')]
+    #[Route('/investir-dans-un-camping', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -86,7 +95,7 @@ class FrontController extends AbstractController
         }
 
         return $this->render('front/inscription.html.twig', [
-            'page_title' => 'Inscription',
+            'page_title' => "Investir dans un camping",
             'registrationForm' => $form->createView(),
         ]);
     }

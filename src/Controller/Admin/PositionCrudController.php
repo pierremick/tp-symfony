@@ -56,15 +56,20 @@ class PositionCrudController extends AbstractCrudController
             }),
             TextField::new('name'),
             SlugField::new('slug')
-                ->setTargetFieldName('name'),
+                ->setTargetFieldName('name')
+                ->hideOnIndex(),
             TextareaField::new('description'),
             ImageField::new('image')
                 ->setBasePath(self::POSITIONS_BASE_PATH)
                 ->setUploadDir(self::POSITIONS_UPLOAD_DIR)
                 ->setSortable(false),
             BooleanField::new('active'),
-            DateTimeField::new('updatedAt')->hideOnForm(),
-            DateTimeField::new('createdAt')->hideOnForm(),
+            DateTimeField::new('updatedAt')
+                ->hideOnIndex()
+                ->hideOnForm(),
+            DateTimeField::new('createdAt')
+                ->hideOnIndex()
+                ->hideOnForm(),
         ];
     }
 

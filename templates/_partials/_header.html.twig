@@ -6,17 +6,68 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="navbar-nav">
-                <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
-                <a class="nav-link{% if app.request.get('_route') == 'app_features' %} active{% endif %}" href="{{ path('app_features') }}">Services</a>
-                <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">Contact</a>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% if is_granted('ROLE_ADMIN') %}
-                <a class="nav-link text-success" href="{{ path('admin') }}">Admin</a>
-                {% endif %}
-                <a class="nav-link text-danger" href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                <a class="nav-link{% if app.request.get('_route') == 'app_login' %} active{% endif %}" href="{{ path('app_account') }}">Connexion</a>
-                {% endif %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_features' %} active{% endif %}" href="{{ path('app_features') }}">Le camping</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Nos hébergements
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li>
+                              <a class="dropdown-item" href="#">Mobile Home 3 personnes</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="#">Mobile Home 4 personnes</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="#">Mobile Home 5 personnes</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="#">Mobile Home 6/8 personnes</a>
+                          </li>
+                          <li>
+                              <hr class="dropdown-divider">
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="#">Caravane 2 places</a>
+                          </li>
+                              <a class="dropdown-item" href="#">Caravane 4 places</a>
+                          </li>
+                              <a class="dropdown-item" href="#">Caravane 6 places</a>
+                          </li>
+                          <li>
+                              <hr class="dropdown-divider">
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="#">Emplacement petite tente</a>
+                          </li>
+                              <a class="dropdown-item" href="#">Emplacement grand tente</a>
+                          </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                  <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">Nous contacter</a>
+                    </li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link text-success" href="{{ path('admin') }}">Admin</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                  <a class="nav-link{% if app.request.get('_route') == 'app_account' %} active{% endif %}" href="{{ path('app_account') }}">Tableau de bord</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_login' %} active{% endif %}" href="{{ path('app_account') }}">Connexion</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>

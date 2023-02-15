@@ -40,13 +40,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Position::class)]
     private Collection $positions;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $fullname = null;
+    #[ORM\Column(length: 15, nullable: true)]
+    private ?string $phone = null;
 
     public function __construct()
     {
         $this->positions = new ArrayCollection();
-        $this->setFullname();
     }
 
     public function getId(): ?int
@@ -127,7 +126,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
-        $this->setFullname();
 
         return $this;
     }
@@ -140,7 +138,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
-        $this->setFullname();
 
         return $this;
     }
@@ -175,20 +172,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFullname(): ?string
+    public function __toString(): string
     {
-        return $this->fullname;
+        return $this->firstname . ' ' . $this->lastname;
     }
 
-    public function setFullname(): self
+    public function getPhone(): ?string
     {
-        $this->fullName = $this->firstname . ' ' . $this->lastname;
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
 
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->fullname;
-    }
 }

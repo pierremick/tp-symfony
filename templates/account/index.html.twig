@@ -3,11 +3,64 @@
 {% block title %}{{ page_title }}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>{{ page_title }}</h1>
-    <p>
-        Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir ! <br>
-        <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('app_logout') }}">cliquez ici</a></small>
-    </p>
+<div class="heading mb-5">
+    <div class="container">
+        <h1>{{ page_title }}</h1>
+        <p>
+            Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir ! <br>
+            <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('app_logout') }}">cliquez ici</a></small>
+        </p>
+    </div>
+</div>
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><a href="{{ path('app_account') }}" class="{% if app.request.get('_route') == 'app_account' %}active{% endif %}">Tableau de bord</a></li>
+                        <li class="list-group-item"><a href="#">A second item</a></li>
+                        <li class="list-group-item"><a href="#">A third item</a></li>
+                        <li class="list-group-item"><a class="text-danger" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+          {% if positions|length == 1 %}
+          <h2>Mon Mobile-Home</h2>
+        {% elseif positions|length > 1 %}
+        <h2>Mes Mobile-Homes</h2>
+        {% endif %}
+                {% for position in positions %}
+                <div class="card mb-3 w-100">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3>{{ position.name }}</h3>
+                                <p class="text-mutted"><small>En ligne depuis le {{ position.createdAt|date('d/m/Y') }}</small></p>
+                                {{ position.type }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                      {% if position.image %}1{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                  <div class="card mb-3 w-100">
+                      <div class="row g-0">
+                          <div class="col-12">
+                              <div class="card-body">
+                                  <h3>Investissez dans un Mobile-Home</h3>
+                                  <p>texte explicatif</p>
+                                  <h4>Comment ça marche</h4>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -5,5 +5,14 @@
 {% block body %}
 <div class="container">
     <h1>{{ page_title }}</h1>
+  {% if app.request.get('_route') == 'app_home' %}<p>{{ site_slogan }}</p>{% endif %}
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-8">
+            <a href="{{ path('app_accommodations') }}" class="btn btn-primary">trouvez un hébergement</a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <a href="{{ path('app_register') }}" class="btn btn-primary">rejoignez l'espadrille</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
