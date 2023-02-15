@@ -36,7 +36,13 @@ class FrontController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // TODO: filtrer les positions en fonction des critères du formulaire
+            $data = $form->getData();
+
+            $positions = $positionRepository->findByFilters(
+                $data['type'],
+                $data['capacity'],
+                $data['price']
+            );
         }
 
         return $this->render('front/positions.html.twig', [
