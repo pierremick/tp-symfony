@@ -7,7 +7,12 @@
     <h1>{{ page_title }}</h1>
     <ul>
         {% for position in positions %}
-            <li class="pb-3">{{ position.name }}<br>{{ position.type.name }}<br>{{ position.description }}</li>
+            <li class="pb-3">
+                {{ position.name }}<br>
+                {{ position.type.name }}<br>
+                {{ position.description }}<br>
+                {{ position.type.capacity }}
+            </li>
         {% endfor %}
     </ul>
 </div>
