@@ -61,7 +61,7 @@ class FrontController extends AbstractController
             throw $this->createNotFoundException('Aucune position trouvée');
         }
 
-        return $this->render('position.html.twig', [
+        return $this->render('front/position.html.twig', [
             'position' => $position,
         ]);
     }
