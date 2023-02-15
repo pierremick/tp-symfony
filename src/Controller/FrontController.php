@@ -49,6 +49,7 @@ class FrontController extends AbstractController
         return $this->render('front/positions.html.twig', [
             'page_title' => 'Les hébergements',
             'positions' => $positions,
+            'form' => $form->createView(),
         ]);
     }
 
