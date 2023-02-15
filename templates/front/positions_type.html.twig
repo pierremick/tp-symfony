@@ -24,7 +24,7 @@
                                         <p class="card-text">{{ position.description }}</p>
                                         <p class="card-text">
                                             capacité maximale : {{ position.type.capacity }}<br>
-                                            prix : {{ position.type.price|raw }}
+                                            prix : {{ position.type.price }}
                                         </p>
                                         <div>
                                             <a class="btn btn-primary" href="{{ path('app_position', {'slug': position.slug}) }}">Détails</a>
