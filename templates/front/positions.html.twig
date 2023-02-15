@@ -5,24 +5,33 @@
 {% block body %}
 <div class="container">
     <h1>{{ page_title }}</h1>
-    <div>
-        {{ form_start(form) }}
-        {{ form_row(form.type) }}
-        {{ form_row(form.capacity) }}
-        {{ form_row(form.price) }}
-        {{ form_row(form.submit) }}
-        {{ form_end(form) }}
+</div>
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <ul>
+                        {% for position in positions %}
+                            <li class="pb-3">
+                                {{ position.name }}<br>
+                                {{ position.type.name }}<br>
+                                {{ position.description }}<br>
+                                capacité maximale : {{ position.type.capacity }}<br>
+                                prix : {{ position.type.price|raw }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    {{ form_start(form) }}
+                    {{ form_row(form.type) }}
+                    {{ form_row(form.capacity) }}
+                    {{ form_row(form.price) }}
+                    {{ form_row(form.submit) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
     </div>
-    <ul>
-        {% for position in positions %}
-            <li class="pb-3">
-                {{ position.name }}<br>
-                {{ position.type.name }}<br>
-                {{ position.description }}<br>
-                capacité maximale : {{ position.type.capacity }}<br>
-                prix : {{ position.type.price|raw }}
-            </li>
-        {% endfor %}
-    </ul>
 </div>
 {% endblock %}
