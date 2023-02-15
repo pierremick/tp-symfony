@@ -67,7 +67,7 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'app_positions_type')]
+    #[Route('/type/{slug}', name: 'app_positions_type')]
     public function positionsType($slug, TypeRepository $typeRepository): Response
     {
         $type = $typeRepository->findOneBySlug($slug);
@@ -123,7 +123,7 @@ class FrontController extends AbstractController
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 
-    #[Route('/investir-dans-un-camping', name: 'app_register')]
+    #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();

@@ -11,7 +11,12 @@
                     <p>{{ position.description }}</p>
                 </div>
                 <div class="col-md-5">
-                    formulaire de réservation
+                    <form method="post" action="{{ path('app_booking_new', {'id': position.id}) }}">
+                        {{ form_widget(form.checkin) }}
+                        {{ form_widget(form.checkout) }}
+                        <button type="submit">Vérifier la disponibilité</button>
+                    </form>
+                    </form>
                 </div>
             </div>
         </div>
