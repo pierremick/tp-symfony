@@ -39,6 +39,17 @@ class TypeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneBySlug(string $slug): ?Type
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.slug = :slug')
+            ->andWhere('t.active = :active')
+            ->setParameter('slug', $slug)
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Type[] Returns an array of Type objects
 //     */

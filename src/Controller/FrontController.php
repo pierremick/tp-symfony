@@ -7,6 +7,7 @@ use App\Entity\Type;
 use App\Form\PositionFilterType;
 use App\Repository\PositionRepository;
 use App\Form\RegistrationFormType;
+use App\Repository\TypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,6 +64,23 @@ class FrontController extends AbstractController
 
         return $this->render('front/position.html.twig', [
             'position' => $position,
+        ]);
+    }
+
+    #[Route('/{slug}', name: 'app_positions_type')]
+    public function positionsType($slug, TypeRepository $typeRepository): Response
+    {
+        $type = $typeRepository->findOneBySlug($slug);
+
+        if (!$type) {
+            throw $this->createNotFoundException('Type not found');
+        }
+
+        $positions = $type->getPositions();
+
+        return $this->render('front/positions_type.html.twig', [
+            'type' => $type,
+            'positions' => $positions,
         ]);
     }
 

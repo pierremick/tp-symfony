@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}titre{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>titre</h1>
+</div>
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <ul>
+                        {% for position in positions %}
+                            <li class="pb-3">
+                                {{ position.name }}<br>
+                                {{ position.description }}<br>
+                                capacité maximale : {{ position.type.capacity }}<br>
+                                prix : {{ position.type.price|raw }}<br>
+                                <a href="{{ path('app_position', {'slug': position.slug}) }}">Détails</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    filtres
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
