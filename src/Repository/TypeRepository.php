@@ -49,6 +49,7 @@ class TypeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+    
 
 //    /**
 //     * @return Type[] Returns an array of Type objects

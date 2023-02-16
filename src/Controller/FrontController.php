@@ -58,11 +58,14 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/positions/{slug}', name: 'app_position')]
-    public function position(string $slug, Request $request, PositionRepository $positionRepository): Response
+    #[Route('/{type}/{slug}', name: 'app_position')]
+    public function position(string $type, string $slug, Request $request, PositionRepository $positionRepository, TypeRepository $typeRepository): Response
     {
-        // Récupérer la position en fonction du slug
-        $position = $positionRepository->findOneBySlug($slug);
+        // Récupérer la position en fonction du slug et du type
+        $position = $positionRepository->findOneBy([
+            'slug' => $slug,
+            'type' => $typeRepository->findOneBy(['slug' => $type])
+        ]);
 
         // Si la position n'existe pas, renvoyer une erreur 404
         if (!$position) {
@@ -127,10 +130,10 @@ class FrontController extends AbstractController
     }
 
 
-    #[Route('/type/{slug}', name: 'app_positions_type')]
-    public function positionsType($slug, TypeRepository $typeRepository): Response
+    #[Route('/{type}', name: 'app_positions_type')]
+    public function positionsType($type, TypeRepository $typeRepository): Response
     {
-        $type = $typeRepository->findOneBySlug($slug);
+        $type = $typeRepository->findOneBySlug($type);
 
         if (!$type) {
             throw $this->createNotFoundException('Type not found');
@@ -143,6 +146,7 @@ class FrontController extends AbstractController
             'positions' => $positions,
         ]);
     }
+
 
     #[Route('/camping-cooperatif', name: 'app_features')]
     public function features(): Response

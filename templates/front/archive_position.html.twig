@@ -43,7 +43,7 @@
                             - basse saison {{ position.type.price/100*1.15 }} €<br>
                         </p>
                         <div>
-                            <a class="btn btn-primary" href="{{ path('app_position', {'slug': position.slug}) }}">Détails</a>
+                            <a class="btn btn-primary" href="{{ path('app_position', {'type': position.type.slug, 'slug': position.slug}) }}">Détails</a>
                         </div>
                     </div>
                 </div>

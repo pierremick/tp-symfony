@@ -27,7 +27,7 @@
                                             prix : {{ position.type.price }}
                                         </p>
                                         <div>
-                                            <a class="btn btn-primary" href="{{ path('app_position', {'slug': position.slug}) }}">Détails</a>
+                                            <a class="btn btn-primary" href="{{ path('app_position', {'type': position.type.slug, 'slug': position.slug}) }}">Détails</a>
                                         </div>
                                     </div>
                                 </div>
