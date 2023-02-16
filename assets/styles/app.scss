@@ -1,39 +1,124 @@
 @import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import 'fonts';
 
-@media (max-width: 991.98px) {
-    .navbar-collapse {
-        margin: 1.5rem 0;
-    }
-    .navbar-nav {
-        text-align: center;
-    }
-    .nav-link {
-        font-size: 1.4rem;
-        padding: 0.5rem 0;
-    }
+h1, h2, h3 {
+    font-family: 'Roboto Slab', serif;
 }
-@media (max-width: 575.98px) {
-    .login-container {
-        width: 80%;
-    }
+h1 {
+    color: #29335c;
+    font-size: 2.9rem;
+    font-weight: 700;
+    line-height: 3.6rem;
 }
-@media (min-width: 576px) and (max-width: 767.98px) {
-    .login-container {
-        width: 70%;
-    }
+section#introduction {
+    background-color: #daddd8;
 }
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .login-container {
-        width: 60%;
-    }
+p.intro {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 2rem;
 }
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    .login-container {
-        width: 50%;
-    }
+h2 {
+    color: #627264;
+    font-size: 2.3rem;
+    font-weight: 600;
+    line-height: 3rem;
 }
-@media (min-width: 1200px) {
-    .login-container {
-        width: 40%;
-    }
+.section-headline {
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 2rem;
 }
+.card-front {
+    border-radius: 1rem;
+}
+.card-img-front {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+.card-text-front {
+    font-weight:300;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+}
+h3 {
+    color: #627264;
+}
+.btn-camping {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #627264;
+    --bs-btn-border-color: #627264;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #157347;
+    --bs-btn-hover-border-color: #146c43;
+    --bs-btn-focus-shadow-rgb: 60, 153, 110;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #146c43;
+    --bs-btn-active-border-color: #13653f;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #198754;
+    --bs-btn-disabled-border-color: #198754;
+}
+.btn-camping-secondary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #29335c;
+    --bs-btn-border-color: #29335c;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #157347;
+    --bs-btn-hover-border-color: #146c43;
+    --bs-btn-focus-shadow-rgb: 60, 153, 110;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #146c43;
+    --bs-btn-active-border-color: #13653f;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #198754;
+    --bs-btn-disabled-border-color: #198754;
+}
+cite {
+    font-size: 0.8rem;
+}
+
+    @media (max-width: 991.98px) {
+        .navbar-collapse {
+            margin: 1.5rem 0;
+        }
+        .navbar-nav {
+            text-align: center;
+        }
+        .nav-link {
+            font-size: 1.4rem;
+            padding: 0.5rem 0;
+        }
+    }
+    @media (max-width: 575.98px) {
+        .login-container {
+            width: 80%;
+        }
+    }
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        .login-container {
+            width: 70%;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        .login-container {
+            width: 60%;
+        }
+    }
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+        .login-container {
+            width: 50%;
+        }
+    }
+    @media (min-width: 1200px) {
+        .login-container {
+            width: 40%;
+        }
+    }
+
