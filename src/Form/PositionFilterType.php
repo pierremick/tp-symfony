@@ -25,13 +25,7 @@ class PositionFilterType extends AbstractType
             ->add('capacity', IntegerType::class, [
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Capacité minimale',
-                ],
-            ])
-            ->add('price', IntegerType::class, [
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Prix régulier',
+                    'placeholder' => 'Capacité maximale',
                 ],
             ])
             ->add('submit', SubmitType::class, [

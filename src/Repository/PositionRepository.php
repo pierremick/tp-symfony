@@ -59,7 +59,7 @@ class PositionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByFilters($type, $capacity, $price)
+    public function findByFilters($type, $capacity)
     {
         $query = $this->createQueryBuilder('p')
             ->leftJoin('p.type', 't')
@@ -74,11 +74,6 @@ class PositionRepository extends ServiceEntityRepository
         if ($capacity) {
             $query->andWhere('t.capacity >= :capacity')
                 ->setParameter('capacity', $capacity);
-        }
-
-        if ($price) {
-            $query->andWhere('t.price <= :price')
-                ->setParameter('price', $price);
         }
 
         return $query->getQuery()->getResult();
