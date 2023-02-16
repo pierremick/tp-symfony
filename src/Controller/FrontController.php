@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
 use App\Entity\Company;
 use App\Entity\Position;
 use App\Entity\Type;
@@ -34,7 +35,7 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/position', name: 'app_positions')]
+    #[Route('/nos-emplacements', name: 'app_positions')]
     public function positions(Request $request, PositionRepository $positionRepository): Response
     {
         $positions = $positionRepository->findByActive();
@@ -58,7 +59,7 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/{type}/{slug}', name: 'app_position')]
+    #[Route('/fr/{type}/{slug}', name: 'app_position')]
     public function position(string $type, string $slug, Request $request, PositionRepository $positionRepository, TypeRepository $typeRepository): Response
     {
         // Récupérer la position en fonction du slug et du type
@@ -130,7 +131,7 @@ class FrontController extends AbstractController
     }
 
 
-    #[Route('/{type}', name: 'app_positions_type')]
+    #[Route('/fr/{type}', name: 'app_positions_type')]
     public function positionsType($type, TypeRepository $typeRepository): Response
     {
         $type = $typeRepository->findOneBySlug($type);
@@ -147,22 +148,6 @@ class FrontController extends AbstractController
         ]);
     }
 
-
-    #[Route('/camping-cooperatif', name: 'app_features')]
-    public function features(): Response
-    {
-        return $this->render('front/services.html.twig', [
-            'page_title' => 'Services et infrastructure',
-        ]);
-    }
-
-    #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
-    {
-        return $this->render('front/contact.html.twig', [
-            'page_title' => 'Nous contacter',
-        ]);
-    }
 
     #[Route('/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response

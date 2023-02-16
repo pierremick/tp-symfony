@@ -11,47 +11,13 @@
                         <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{% if app.request.get('_route') == 'app_features' %} active{% endif %}" href="{{ path('app_features') }}">Le camping</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Nos emplacements
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li>
-                              <a class="dropdown-item" href="/mobile-home-3-personnes">Mobile Home 3 personnes</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="/mobile-home-4-personnes">Mobile Home 4 personnes</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="/mobile-home-5-personnes">Mobile Home 5 personnes</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="/mobile-home-6-8-personnes">Mobile Home 6/8 personnes</a>
-                          </li>
-                          <li>
-                              <hr class="dropdown-divider">
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="/caravane-2-places">Caravane 2 places</a>
-                          </li>
-                              <a class="dropdown-item" href="/caravane-4-places">Caravane 4 places</a>
-                          </li>
-                              <a class="dropdown-item" href="/caravane-6-places">Caravane 6 places</a>
-                          </li>
-                          <li>
-                              <hr class="dropdown-divider">
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="/emplacement-8-m2">Emplacement petite tente</a>
-                          </li>
-                              <a class="dropdown-item" href="/emplacement-12-m2">Emplacement grand tente</a>
-                          </li>
-                        </ul>
+                        <a class="nav-link" href="#">Le camping</a>
                     </li>
                     <li class="nav-item">
-                  <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">Nous contacter</a>
+                  <a class="nav-link{% if app.request.get('_route') == 'app_positions' %} active{% endif %}" href="{{ path('app_positions') }}">Les emplacements</a>
+                    </li>
+                    <li class="nav-item">
+                  <a class="nav-link" href="#">Nous contacter</a>
                     </li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if is_granted('ROLE_ADMIN') %}

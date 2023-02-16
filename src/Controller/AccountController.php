@@ -20,4 +20,32 @@ class AccountController extends AbstractController
             'positions' => $positions,
         ]);
     }
+
+    #[Route('/account/change-password', name: 'account_change_password')]
+    public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ChangePasswordType::class, null, [
+            'action' => $this->generateUrl('account_change_password'),
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $newEncodedPassword = $passwordEncoder->encodePassword($user, $data['newPassword']);
+
+            $user->setPassword($newEncodedPassword);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Your password has been updated.');
+
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('account/change_password.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
