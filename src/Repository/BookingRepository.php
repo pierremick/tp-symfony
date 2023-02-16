@@ -39,6 +39,19 @@ class BookingRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByPositionAndDates(Position $position, \DateTimeInterface $checkin, \DateTimeInterface $checkout): array
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->where('b.position = :position')
+            ->andWhere(':checkin BETWEEN b.checkin AND b.checkout OR :checkout BETWEEN b.checkin AND b.checkout')
+            ->setParameter('position', $position)
+            ->setParameter('checkin', $checkin)
+            ->setParameter('checkout', $checkout);
+
+        return $qb->getQuery()->getResult();
+    }
+  }
+
 //    /**
 //     * @return Booking[] Returns an array of Booking objects
 //     */
@@ -63,4 +76,3 @@ class BookingRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
