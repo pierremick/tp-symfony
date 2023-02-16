@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Company;
 use App\Entity\Position;
 use App\Entity\Type;
 use App\Entity\Booking;
