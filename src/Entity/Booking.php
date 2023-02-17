@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BookingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -62,6 +64,17 @@ class Booking
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\ManyToMany(targetEntity: PurchaseOrder::class, mappedBy: 'booking')]
+    private Collection $purchaseOrders;
+
+    #[ORM\ManyToOne(inversedBy: 'booking')]
+    private ?PurchaseOrder $purchaseOrder = null;
+
+    public function __construct()
+    {
+        $this->purchaseOrders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -256,6 +269,45 @@ class Booking
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PurchaseOrder>
+     */
+    public function getPurchaseOrders(): Collection
+    {
+        return $this->purchaseOrders;
+    }
+
+    public function addPurchaseOrder(PurchaseOrder $purchaseOrder): self
+    {
+        if (!$this->purchaseOrders->contains($purchaseOrder)) {
+            $this->purchaseOrders->add($purchaseOrder);
+            $purchaseOrder->addBooking($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchaseOrder(PurchaseOrder $purchaseOrder): self
+    {
+        if ($this->purchaseOrders->removeElement($purchaseOrder)) {
+            $purchaseOrder->removeBooking($this);
+        }
+
+        return $this;
+    }
+
+    public function getPurchaseOrder(): ?PurchaseOrder
+    {
+        return $this->purchaseOrder;
+    }
+
+    public function setPurchaseOrder(?PurchaseOrder $purchaseOrder): self
+    {
+        $this->purchaseOrder = $purchaseOrder;
 
         return $this;
     }
