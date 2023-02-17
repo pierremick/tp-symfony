@@ -22,38 +22,17 @@ class Booking
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $checkout = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $firstname = null;
-
-    #[ORM\Column(length: 50)]
-    private ?string $lastname = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 14, nullable: true)]
-    private ?string $phone = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $address = null;
-
-    #[ORM\Column(length: 6)]
-    private ?string $zipcode = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $city = null;
-
     #[ORM\Column]
-    private ?int $adults = null;
+    private ?int $adult = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $childs = null;
+    private ?int $child = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $poolAdult = null;
+    private ?int $adultPool = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $poolChild = null;
+    private ?int $childPool = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -105,134 +84,50 @@ class Booking
         return $this;
     }
 
-    public function getFirstname(): ?string
+    public function getAdult(): ?int
     {
-        return $this->firstname;
+        return $this->adult;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setAdult(int $adult): self
     {
-        $this->firstname = $firstname;
+        $this->adult = $adult;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getChild(): ?int
     {
-        return $this->lastname;
+        return $this->child;
     }
 
-    public function setLastname(string $lastname): self
+    public function setChild(?int $child): self
     {
-        $this->lastname = $lastname;
+        $this->child = $child;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getAdultPool(): ?int
     {
-        return $this->email;
+        return $this->adultPool;
     }
 
-    public function setEmail(string $email): self
+    public function setAdultPool(?int $adultPool): self
     {
-        $this->email = $email;
+        $this->adultPool = $adultPool;
 
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getChildPool(): ?int
     {
-        return $this->phone;
+        return $this->childPool;
     }
 
-    public function setPhone(?string $phone): self
+    public function setChildPool(?int $childPool): self
     {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipcode(): ?string
-    {
-        return $this->zipcode;
-    }
-
-    public function setZipcode(string $zipcode): self
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getAdults(): ?int
-    {
-        return $this->adults;
-    }
-
-    public function setAdults(int $adults): self
-    {
-        $this->adults = $adults;
-
-        return $this;
-    }
-
-    public function getChilds(): ?int
-    {
-        return $this->childs;
-    }
-
-    public function setChilds(?int $childs): self
-    {
-        $this->childs = $childs;
-
-        return $this;
-    }
-
-    public function getPoolAdult(): ?int
-    {
-        return $this->poolAdult;
-    }
-
-    public function setPoolAdult(?int $poolAdult): self
-    {
-        $this->poolAdult = $poolAdult;
-
-        return $this;
-    }
-
-    public function getPoolChild(): ?int
-    {
-        return $this->poolChild;
-    }
-
-    public function setPoolChild(?int $poolChild): self
-    {
-        $this->poolChild = $poolChild;
+        $this->childPool = $childPool;
 
         return $this;
     }
