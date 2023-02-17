@@ -14,7 +14,7 @@
                         <a class="nav-link{% if app.request.get('_route') == 'app_about' %} active{% endif %}" href="{{ path('app_about') }}">Le camping</a>
                     </li>
                     <li class="nav-item">
-                  <a class="nav-link{% if app.request.get('_route') == 'app_positions' %} active{% endif %}" href="{{ path('app_positions') }}">Les emplacements</a>
+                  <a class="nav-link{% if app.request.get('_route') == 'app_position_list' %} active{% endif %}" href="{{ path('app_position_list') }}">Les emplacements</a>
                     </li>
                     <li class="nav-item">
                   <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}" href="{{ path('app_contact') }}">Nous contacter</a>
@@ -22,7 +22,7 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item">
-                        <a class="nav-link text-success" href="{{ path('admin') }}">Admin</a>
+                        <a class="nav-link text-success" href="{{ path('app_admin') }}">Admin</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">

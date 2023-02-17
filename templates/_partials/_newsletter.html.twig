@@ -1,0 +1,20 @@
+{% if app.session.flashBag.get('success') is not empty %}
+    <div class="alert alert-success">
+        {{ app.session.flashBag.get('success')[0] }}
+    </div>
+{% endif %}
+
+{{ form_start(form) }}
+
+{{ form_widget(form.fullname) }}
+{{ form_errors(form.fullname) }}
+
+{{ form_widget(form.email) }}
+{{ form_errors(form.email) }}
+
+{{ form_widget(form.optIn) }}
+{{ form_errors(form.optIn) }}
+
+{{ form_widget(form.submit) }}
+
+{{ form_end(form) }}

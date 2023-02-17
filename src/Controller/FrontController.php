@@ -27,34 +27,34 @@ class FrontController extends AbstractController
 {
 
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function app_home(): Response
     {
-        return $this->render('front/index.html.twig', [
+        return $this->render('front/home.html.twig', [
             'page_title' => "l’Espadrille Volante",
             'meta_description' => "Le Camping de l'Espadrille Volante, un lieu idéal pour passer des vacances natures mémorables en famille ou entre amis !"
         ]);
     }
 
-    #[Route('/camping', name: 'app_about')]
+    #[Route('/a-propos-du-camping', name: 'app_about')]
     public function app_about(): Response
     {
-        return $this->render('front/index.html.twig', [
+        return $this->render('front/camping.html.twig', [
             'page_title' => "le camping",
             'meta_description' => "à propos du camping de l'Espadrille volante"
         ]);
     }
 
-    #[Route('/nous-contacter', name: 'app_contact')]
+    #[Route('/a-propos-du-camping', name: 'app_contact')]
     public function app_contact(): Response
     {
-        return $this->render('front/index.html.twig', [
-            'page_title' => "nous contacter",
-            'meta_description' => "contacter l'espadrille volante"
+        return $this->render('front/contact.html.twig', [
+            'page_title' => "contacter le camping",
+            'meta_description' => "contacter le camping de l'Espadrille volante"
         ]);
     }
 
-    #[Route('/nos-emplacements', name: 'app_positions')]
-    public function positions(Request $request, PositionRepository $positionRepository): Response
+    #[Route('/camping', name: 'app_position_list')]
+    public function app_position_list(Request $request, PositionRepository $positionRepository): Response
     {
         // Récupère les positions actives à afficher
         $positions = $positionRepository->findByActive();
@@ -74,15 +74,32 @@ class FrontController extends AbstractController
         }
 
         // Envoi la réponse à la vue dans le template twig 'front/archive_position.html.twig'
-        return $this->render('front/archive_position.html.twig', [
+        return $this->render('front/position_list.html.twig', [
             'page_title' => 'emplacements',
             'positions' => $positions,
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/fr/{type}/{slug}', name: 'app_position')]
-    public function position(string $type, string $slug, Request $request, PositionRepository $positionRepository, TypeRepository $typeRepository): Response
+    #[Route('/camping/{type}', name: 'app_type')]
+    public function app_type($type, TypeRepository $typeRepository): Response
+    {
+        $type = $typeRepository->findOneBySlug($type);
+
+        if (!$type) {
+            throw $this->createNotFoundException('Type not found');
+        }
+
+        $positions = $type->getPositions();
+
+        return $this->render('front/positions_type.html.twig', [
+            'type' => $type,
+            'positions' => $positions,
+        ]);
+    }
+
+    #[Route('/camping/{type}/{slug}', name: 'app_position_show')]
+    public function app_position_show(string $type, string $slug, Request $request, PositionRepository $positionRepository, TypeRepository $typeRepository): Response
     {
         // Récupère la position en fonction du slug et du type
         $position = $positionRepository->findOneBy([
@@ -129,7 +146,7 @@ class FrontController extends AbstractController
         }
 
         // Affiche la page détail de la position avec le formulaire de réservation
-        return $this->render('front/detail_position.html.twig', [
+        return $this->render('front/position_show.html.twig', [
             'position' => $position,
             'form' => $form->createView(),
         ]);
@@ -151,24 +168,6 @@ class FrontController extends AbstractController
         return true;
     }
 
-    #[Route('/fr/{type}', name: 'app_positions_type')]
-    public function positionsType($type, TypeRepository $typeRepository): Response
-    {
-        $type = $typeRepository->findOneBySlug($type);
-
-        if (!$type) {
-            throw $this->createNotFoundException('Type not found');
-        }
-
-        $positions = $type->getPositions();
-
-        return $this->render('front/positions_type.html.twig', [
-            'type' => $type,
-            'positions' => $positions,
-        ]);
-    }
-
-
     #[Route('/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -185,14 +184,14 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/logout', name: 'app_logout', methods: ['GET'])]
+    #[Route('/déconnexion', name: 'app_logout', methods: ['GET'])]
     public function logout()
     {
         // controller can be blank: it will never be called!
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();

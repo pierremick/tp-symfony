@@ -30,7 +30,7 @@
             <div class="col-md-3 pb-3">
                 <div class="card">
                     {% if position.image %}
-                        1
+                        <img src="/upload/images/positions/{{ position.image }}" class="card-img-top" alt="photo de {{ position.name }}">
                     {% else %}
                         <img src="/upload/images/positions/default-mobil-home.webp" class="card-img-top" alt="photo de {{ position.name }}">
                     {% endif %}
@@ -43,7 +43,7 @@
                             - basse saison {{ position.type.price/100*1.15 }} €<br>
                         </p>
                         <div>
-                            <a class="btn btn-primary" href="{{ path('app_position', {'type': position.type.slug, 'slug': position.slug}) }}">Détails</a>
+                            <a class="btn btn-primary" href="{{ path('app_position_show', {'type': position.type.slug, 'slug': position.slug}) }}">Détails</a>
                         </div>
                     </div>
                 </div>
