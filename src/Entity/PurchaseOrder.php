@@ -28,6 +28,9 @@ class PurchaseOrder
     #[ORM\OneToMany(mappedBy: 'purchaseOrder', targetEntity: Booking::class)]
     private Collection $booking;
 
+    #[ORM\ManyToOne(inversedBy: 'purchaseOrder')]
+    private ?Invoice $invoice = null;
+
     public function __construct()
     {
         $this->booking = new ArrayCollection();
@@ -100,6 +103,18 @@ class PurchaseOrder
                 $booking->setPurchaseOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInvoice(): ?Invoice
+    {
+        return $this->invoice;
+    }
+
+    public function setInvoice(?Invoice $invoice): self
+    {
+        $this->invoice = $invoice;
 
         return $this;
     }
