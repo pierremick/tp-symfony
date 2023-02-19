@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'account.html.twig' %}
 
 {% block title %}{{ page_title }}{% endblock %}
 
@@ -8,7 +8,7 @@
         <h1>{{ page_title }}</h1>
         <p>
             Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir ! <br>
-            <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('app_logout') }}">cliquez ici</a></small>
+            <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
         </p>
     </div>
 </div>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                      {% if position.image %}1{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}
+                            {% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}
                         </div>
                     </div>
                 </div>

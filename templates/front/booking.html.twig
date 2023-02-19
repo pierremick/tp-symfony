@@ -3,7 +3,73 @@
 {% block title %}Booking{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Booking</h1>
-</div>
+    <div class="container my-5">
+        <h1 class="mb-3">Récapitulatif de votre commande</h1>
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>{{ position.name }}</h2>
+                <p>{{ position.description }}</p>
+                <p>Prix de base : {{ basePrice }} €</p>
+                {% if isHighSeason %}
+                    <p>Majoration saison haute : {{ highSeasonPrice }} €</p>
+                {% endif %}
+                {% if discount %}
+                    <p>Remise de {{ discount }}% : -{{ discountPrice }} €</p>
+                {% endif %}
+                {% if adult or child %}
+                    <p>Taxe de séjour :</p>
+                    {% if adult %}
+                        <p>Adulte ({{ adult }}) : {{ adultPrice }} €</p>
+                    {% endif %}
+                    {% if child %}
+                        <p>Enfant ({{ child }}) : {{ childPrice }} €</p>
+                    {% endif %}
+                {% endif %}
+                {% if adultPool or childPool %}
+                    <p>Accès piscine :</p>
+                    {% if adultPool %}
+                        <p>Adulte ({{ adultPool }}) : {{ adultPoolPrice }} €</p>
+                    {% endif %}
+                    {% if childPool %}
+                        <p>Enfant ({{ childPool }}) : {{ childPoolPrice }} €</p>
+                    {% endif %}
+                {% endif %}
+                <p class="font-weight-bold">Prix total : {{ totalPrice }} €</p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Informations personnelles</h2>
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.firstname, 'Prénom') }}
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.lastname, 'Nom') }}
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.address, 'Adresse') }}
+                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.zipcode, 'Code postal') }}
+                    {{ form_widget(form.zipcode, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.city, 'Ville') }}
+                    {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.country, 'Pays') }}
+                    {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group form-check">
+                    {{ form_widget(form.optin) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Confirmer la réservation</button>
+
+    {{ form_end(form) }}
+{% endblock %}
+
 {% endblock %}

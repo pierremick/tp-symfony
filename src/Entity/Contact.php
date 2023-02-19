@@ -30,10 +30,13 @@ class Contact
     private ?string $message = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTime $createdAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $recipient = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $status = null;
 
     public function getId(): ?int
     {
@@ -100,12 +103,12 @@ class Contact
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -120,6 +123,18 @@ class Contact
     public function setRecipient(?string $recipient): self
     {
         $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

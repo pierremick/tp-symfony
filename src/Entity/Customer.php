@@ -50,6 +50,9 @@ class Customer
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isOptinNews = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -195,6 +198,18 @@ class Customer
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsOptinNews(): ?bool
+    {
+        return $this->isOptinNews;
+    }
+
+    public function setIsOptinNews(?bool $isOptinNews): self
+    {
+        $this->isOptinNews = $isOptinNews;
 
         return $this;
     }

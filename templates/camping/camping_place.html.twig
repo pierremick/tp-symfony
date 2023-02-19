@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ position.name }}{% endblock %}
+
+{% block body %}
+    <div class="main-content my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row flex-row-reverse">
+                        <div>
+                            <h1>{{ position.name }}</h1>
+                            <p>{{ position.description }}</p>
+                        </div>
+                        <div>
+                            <img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-4" alt="{{ position.name }}{{ position.type.name }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="position-sidebar">
+                        <div>
+                            {{ position.type.name }}<br>
+                            {{ position.type.price }}
+                        </div>
+                        <h3>Vérifier la disponibilité</h3>
+                        <div class="form-content">
+                            {{ form_start(form) }}
+                            {{ form_row(form.checkin) }}
+                            {{ form_row(form.checkout) }}
+                            {{ form_row(form.submit) }}
+                            {{ form_end(form) }}
+                        </div>
+                        {% if app.session.flashbag.has('error') %}
+                        <div class="alert alert-danger">{{ app.session.flashbag.get('error')[0] }}</div>
+                        {% endif %}
+                        {% if app.session.flashbag.has('success') %}
+                            <div class="alert alert-success mb-3">{{ app.session.flashbag.get('success')[0] }}</div>
+                            <div>
+                                <button type="button" class="btn btn-primary w-100">je réserve !</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
