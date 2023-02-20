@@ -25,7 +25,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class CampingController extends AbstractController
 {
     // LE CAMPING
-    #[Route('/camping', name: 'camping_list')]
+    #[Route('/hebergement', name: 'camping_list')]
     public function camping_list(Request $request, PositionRepository $positionRepository): Response
     {
         // Récupère les positions actives à afficher
@@ -47,13 +47,14 @@ class CampingController extends AbstractController
 
         // Envoi la réponse à la vue dans le template twig 'front/archive_position.html.twig'
         return $this->render('camping/camping_list.html.twig', [
-            'page_title' => 'emplacements',
+            'page_name' => 'Hébergements',
+            'page_title' => 'Hébergements',
             'positions' => $positions,
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/camping/{type}', name: 'camping_type')]
+    #[Route('/hebergement/{type}', name: 'camping_type')]
     public function camping_type($type, TypeRepository $typeRepository): Response
     {
         $type = $typeRepository->findOneBySlug($type);
@@ -70,7 +71,7 @@ class CampingController extends AbstractController
         ]);
     }
 
-    #[Route('/camping/{type}/{slug}', name: 'camping_place')]
+    #[Route('/hebergement/{type}/{slug}', name: 'camping_place')]
     public function camping_place(string $type, string $slug, Request $request, PositionRepository $positionRepository, TypeRepository $typeRepository): Response
     {
         // Récupère la position en fonction du slug et du type

@@ -4,13 +4,5 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import 'fonts';
-@import 'themes/default';
-@import 'user-variables';
-@import 'front/variables';
-
-@import 'front/utilities';
-@import 'user-utilities';
-
-@import 'front/front';
-//@import 'custom';
-//@import 'theme';
+@import 'theme';
+@import 'custom';

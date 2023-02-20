@@ -32,6 +32,9 @@ class BookingType extends AbstractType
                 'html5' => true,
             ])
             ->add('checkout', DateType::class, [
+                'row_attr' => [
+                    'class' => 'mb-3', // Ajoute une classe de style à la row
+                ],
                 'label' => 'Date de départ',
                 'widget' => 'single_text',
                 'attr' => [

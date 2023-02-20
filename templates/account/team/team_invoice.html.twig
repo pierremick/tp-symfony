@@ -1,0 +1,94 @@
+{% extends 'account.html.twig' %}
+
+{% block title %}{{ page_name }}{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb -->
+    <div class="navbar-dark bg-dark" style="background-image: url(/svg/components/wave-pattern-light.svg);">
+      <div class="container content-space-1 content-space-b-lg-3">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="d-none d-lg-block">
+              <h1 class="h2 text-white">{{ page_title }}</h1>
+            </div>
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-light mb-0">
+                <li class="breadcrumb-item">mon compte</li>
+                <li class="breadcrumb-item">administration</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ page_name }}</li>
+              </ol>
+            </nav>
+            <!-- End Breadcrumb -->
+          </div>
+          <!-- End Col -->
+
+          <div class="col-auto">
+            <div class="d-none d-lg-block">
+              <a class="btn btn-soft-light btn-sm" href="{{ path('logout') }}">se déconnecter</a>
+            </div>
+
+            <!-- Responsive Toggle Button -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-default">
+                <i class="bi-list"></i>
+              </span>
+              <span class="navbar-toggler-toggled">
+                <i class="bi-x"></i>
+              </span>
+            </button>
+            <!-- End Responsive Toggle Button -->
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+    <!-- Content -->
+        <div class="container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10">
+          <div class="row">
+            <div class="col-lg-3">
+      <div class="navbar-expand-lg navbar-light">
+        <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
+          {% include 'account/_sidebar.html.twig' %}
+        </div>
+      </div>
+      <!-- End Navbar -->
+              <!-- End Navbar -->
+            </div>
+            <!-- End Col -->
+
+            <div class="col-lg-9">
+              <div class="d-grid gap-3 gap-lg-5">
+                <!-- Card -->
+                <div class="card">
+                  <div class="card-header border-bottom">
+                    <h4 class="card-header-title">{{ page_title }}</h4>
+                  </div>
+
+                  <!-- Body -->
+                  <div class="card-body">
+                    contenu
+                  </div>
+                  <!-- End Body -->
+
+                  <!-- Footer -->
+                  <div class="card-footer pt-0">
+                    <div class="d-flex justify-content-end gap-3">
+                      <a class="btn btn-white" href="javascript:;">Cancel</a>
+                      <a class="btn btn-primary" href="javascript:;">Save changes</a>
+                    </div>
+                  </div>
+                  <!-- End Footer -->
+                </div>
+                <!-- End Card -->
+              </div>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+        </div>
+        <!-- End Content -->
+{% endblock %}

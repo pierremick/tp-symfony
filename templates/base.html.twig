@@ -9,9 +9,9 @@
         {% endblock %}
     </head>
     <body>
-        <header>
-            {% include '_partials/_header.html.twig' %}
-        </header>
+
+            {% include '_partials/_header_basic.html.twig' %}
+
         <main>
         {% block body %}{% endblock %}
         </main>
@@ -22,4 +22,10 @@
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+    <script>
+        (function() {
+          new HSHeader('#header').init()
+          new HSMegaMenu('.js-mega-menu')
+        })();
+    </script>
 </html>

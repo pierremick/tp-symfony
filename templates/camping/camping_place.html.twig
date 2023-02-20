@@ -10,7 +10,6 @@
                     <div class="row flex-row-reverse">
                         <div>
                             <h1>{{ position.name }}</h1>
-                            <p>{{ position.description }}</p>
                         </div>
                         <div>
                             <img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-4" alt="{{ position.name }}{{ position.type.name }}">
@@ -19,9 +18,18 @@
                 </div>
                 <div class="col-md-4">
                     <div class="position-sidebar">
-                        <div>
-                            {{ position.type.name }}<br>
-                            {{ position.type.price }}
+                        <div class="sidebar-heading pt-3">
+                            <h2>{{ position.type.name }}</h2>
+                            <p>{{ position.description }}</p>
+                        </div>
+                        <div class="alert alert-light" role="alert">
+                            <p>
+                                <span class="position-price">{{ position.type.price/100 }} €</span> <span class="saison">en basse saison</span><br>
+                                <small class="text-mutted">du 5 mai au 20 juin <br>du 1<sup>er</sup> septembre au 10 octobre</small>
+                            </p><p>
+                                <span class="position-price">{{ position.type.price/100*1.15 }} €</span> <span class="saison">en haute saison</span><br>
+                                <small class="text-mutted">du 21 juin au 31 août</small>
+                            </p>
                         </div>
                         <h3>Vérifier la disponibilité</h3>
                         <div class="form-content">

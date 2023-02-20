@@ -3,57 +3,133 @@
 {% block title %}{{ page_title }}{% endblock %}
 
 {% block body %}
-<div class="heading mb-5">
-    <div class="container">
-        <h1>{{ page_title }}</h1>
-        <p>
-            Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir ! <br>
-            <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
-        </p>
-    </div>
-</div>
-<div class="main-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                {% include 'account/_sidebar.html.twig' %}
+<!-- Breadcrumb -->
+    <div class="navbar-dark bg-dark" style="background-image: url(/svg/components/wave-pattern-light.svg);">
+      <div class="container content-space-1 content-space-b-lg-3">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="d-none d-lg-block">
+              <h1 class="h2 text-white">{{ page_title }}</h1>
             </div>
-            <div class="col-md-9">
-          {% if positions|length == 1 %}
-          <h2>Mon Mobile-Home</h2>
-        {% elseif positions|length > 1 %}
-        <h2>Mes Mobile-Homes</h2>
-        {% endif %}
-                {% for position in positions %}
-                <div class="card mb-3 w-100">
-                    <div class="row g-0">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h3>{{ position.name }}</h3>
-                                <p class="text-mutted"><small>En ligne depuis le {{ position.createdAt|date('d/m/Y') }}</small></p>
-                                {{ position.type }}
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            {% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-light mb-0">
+                <li class="breadcrumb-item">Accueil</li>
+              </ol>
+            </nav>
+            <!-- End Breadcrumb -->
+          </div>
+          <!-- End Col -->
+
+          <div class="col-auto">
+            <div class="d-none d-lg-block">
+              <a class="btn btn-soft-light btn-sm" href="{{ path('logout') }}">se déconnecter</a>
+            </div>
+
+            <!-- Responsive Toggle Button -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-default">
+                <i class="bi-list"></i>
+              </span>
+              <span class="navbar-toggler-toggled">
+                <i class="bi-x"></i>
+              </span>
+            </button>
+            <!-- End Responsive Toggle Button -->
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+    <!-- Content -->
+        <div class="container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10">
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- Navbar -->
+                    <div class="navbar-expand-lg navbar-light">
+                        <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
+                            {% include 'account/_sidebar.html.twig' %}
                         </div>
                     </div>
+                      <!-- End Navbar -->
                 </div>
-                {% else %}
-                  <div class="card mb-3 w-100">
-                      <div class="row g-0">
-                          <div class="col-12">
-                              <div class="card-body">
-                                  <h3>Investissez dans un Mobile-Home</h3>
-                                  <p>texte explicatif</p>
-                                  <h4>Comment ça marche</h4>
+                            <!-- End Col -->
+
+                            <div class="col-lg-9">
+                              <div class="d-grid gap-3 gap-lg-5">
+                                <!-- Card -->
+                                <div class="card">
+                                  <div class="card-header border-bottom">
+                                    <p class="card-header-title">Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir ! <br>
+                                    <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small></p>
+                                  </div>
+
+                                  {% if app.user.isOwner %}
+                                  <div class="card-body">
+
+                                    <p class="card-text">When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.</p>
+
+                                    <div class="mb-4">
+                                      <!-- Content -->
+                                      <div class="card-text">
+                                      {% for position in positions %}
+                                      <div class="card mb-3 w-100">
+                                          <div class="row g-0">
+                                              <div class="col-md-8">
+                                                  <div class="card-body">
+                                                      <h3>{{ position.name }}</h3>
+                                                      <p class="text-mutted"><small>En ligne depuis le {{ position.createdAt|date('d/m/Y') }}</small></p>
+                                                      {{ position.type }}
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-4">
+                                                  {% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}
+                                              </div>
+                                          </div>
+                                      </div>
+                                    {% endfor %}
+                                    </div>
+                                  </div>
+                                {% endif %}
+                                {% if app.user.isTeam %}
+                                <div class="card-body">
+
+                                  <p class="card-text">When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.</p>
+
+                                  <div class="mb-4">
+                                    <!-- Content -->
+                                    <div class="card-text">
+                                    {% for position in positions %}
+                                    <div class="card mb-3 w-100">
+                                        <div class="row g-0">
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h3>{{ position.name }}</h3>
+                                                    <p class="text-mutted"><small>En ligne depuis le {{ position.createdAt|date('d/m/Y') }}</small></p>
+                                                    {{ position.type }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                {% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                  {% endfor %}
+                                  </div>
+                                </div>
+                              {% endif %}
+                                  <!-- End Body -->
+                                </div>
+                                <!-- End Card -->
                               </div>
+                            </div>
+                            <!-- End Col -->
                           </div>
-                      </div>
-                  </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
+                          <!-- End Row -->
+                        </div>
+                        <!-- End Content -->
+
 {% endblock %}

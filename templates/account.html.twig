@@ -10,9 +10,9 @@
     </head>
     <body>
         <header>
-            {% include '_partials/_header.html.twig' %}
+            {% include '_partials/_header_basic.html.twig' %}
         </header>
-        <main>
+        <main id="content" role="main" class="bg-light">
         {% block body %}{% endblock %}
         </main>
         <footer>

@@ -3,98 +3,253 @@
 {% block title %}{{ page_title }}{% endblock %}
 
 {% block body %}
-<div class="heading front-heading">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 d-flex align-items-center">
-                <div class="heading-intro">
-                    <h1>Camping de l'Espadrille Volante</h1>
-                    <p>
-                        Bienvenue au Camping de l'Espadrille Volante, le lieu idéal pour passer des
-                        vacances mémorables en famille ou entre amis !
-                    </p>
-                    <a href="{{ path('about') }}" class="btn btn-camping-primary btn-intro">découvrir le camping</a>
-                </div>
+<!-- Hero -->
+    <div class="overflow-hidden">
+      <div class="container content-space-t-2 content-space-b-3">
+        <div class="row justify-content-lg-between align-items-md-center">
+          <div class="col-md-6 col-lg-5 mb-7 mb-md-0">
+            <!-- Heading -->
+            <div class="mb-5">
+              <span class="text-cap">Qui sommes-nous ?</span>
+              <h1 class="mb-3">Camping de <br>l'Espadrille Volante</h1>
+              <p class="lead">
+                  Le camping idéal pour passer des vacances mémorables en famille ou entre amis !
+              </p>
             </div>
-            <div class="col-sm-12 col-md-6">
-                <img src="/img/photos/camping-la-sirene-le-domaine-011.webp" class="img-fluid" alt="Famille heureuse dans un camping en plein air">
+            <!-- End Heading -->
+
+            <div class="d-grid d-sm-flex gap-3">
+              <a class="btn btn-primary btn-transition" href="#camping-cooperatif">le camping coopératif</a>
+              <a class="btn btn-link" href="{{ path('about') }}">à propos du camping <i class="bi-chevron-right small ms-1"></i></a>
             </div>
+          </div>
+          <!-- End Col -->
+
+          <div class="col-md-6">
+            <div class="position-relative">
+              <img class="img-fluid rounded-2" src="/img/photos/camping-la-sirene-le-domaine-011.webp" alt="Image Description">
+              <div class="position-absolute top-0 end-0 w-100 h-100 bg-soft-primary rounded-2 zi-n1 mt-5 me-n5"></div>
+            </div>
+          </div>
+          <!-- End Col -->
         </div>
+        <!-- End Row -->
+      </div>
     </div>
-</div>
-<div class="section">
-    <section id="introduction" class="bg-light">
-        <div class="section-heading">
-            <div class="container">
-                <h2 class="section-title">l'expérience du camping coopératif...</h2>
-                <p class="section-headline">
-                    Situé en plein cœur de la nature, notre camping coopératif propose une expérience unique et
-                    conviviale, avec différents types d'emplacements pour répondre à tous les besoins.
-                    Que vous cherchiez un mobile-home confortable ou un emplacement pour votre tente, vous
-                    trouverez votre bonheur chez nous.
-                </p>
+    <!-- End Hero -->
+    <section id="camping">
+        <div class="container content-space-2 content-space-lg-3">
+            <div class="d-grid gap-7 gap-md-10">
+                <div id="camping-nature" data-aos="fade-up">
+                    <a class="card card-transition bg-soft-success shadow-none" href="#">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-lg-4 order-lg-2 mb-5 mb-lg-0">
+                            <div class="d-flex flex-column h-100">
+                              <div class="mb-7">
+                                <h2 class="card-title h1">Camping Nature</h2>
+                                <p class="card-text text-body">une expérience unique et conviviale en plein cœur de la nature. Du mobile-home confortable au simple emplacement ombragé pour planter votre tente, vous trouverez votre bonheur chez nous.</p>
+                              </div>
+
+                              <!-- Testimonials -->
+                              <div class="card shadow-none mt-auto">
+                                <div class="card-body">
+                                  <!-- Blockquote -->
+                                  <figure>
+                                    <div class="mb-4">
+                                      La place à l'ombre
+                                    </div>
+
+                                    <blockquote class="blockquote">“ J'ai testé la Place à l'Ombre, Génial ! Un emplacement réellement ombragé pour planter sa tente et profiter d'une journée de repos... Merci l'Espadrille ! ”</blockquote>
+
+                                    <figcaption class="blockquote-footer">
+                                      <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                          <img class="avatar avatar-circle" src="/img/160x160/img3.jpg" alt="Image Description">
+                                        </div>
+
+                                        <div class="flex-grow-1 ms-3">
+                                          Max Routard
+                                          <span class="blockquote-footer-source">Voyageur emmérite...</span>
+                                        </div>
+                                      </div>
+                                    </figcaption>
+                                  </figure>
+                                  <!-- End Blockquote -->
+                                </div>
+                              </div>
+                              <!-- End Testimonials -->
+                            </div>
+                          </div>
+                          <!-- End Col -->
+
+                          <div class="col-lg-8">
+                            <div class="mb-5">
+                              <img class="img-fluid rounded-2" src="/img/camping-nature.webp" alt="Image Description">
+                            </div>
+
+                            <div class="row">
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <h4 class="card-title">Mobilehomes Confort</h4>
+                                <p class="card-text text-body">Le Mobile Home Confort : un hébergement spacieux et tout confort pour des vacances sereines.</p>
+                              </div>
+                              <!-- End Col -->
+
+                              <div class="col-sm-6">
+                                <h4 class="card-title">Caravanes Cosy</h4>
+                                <p class="card-text text-body">La Caravane Cosy : un hébergement insolite pour profiter de vacances cool en mode glamping.</p>
+                              </div>
+                              <!-- End Col -->
+                            </div>
+                            <!-- End Row -->
+                          </div>
+                          <!-- End Col -->
+                        </div>
+                        <!-- End Row -->
+                      </div>
+                    </a>
+                  </div>
+                <div id="camping-detente" data-aos="fade-up">
+                    <a class="card card-transition bg-soft-danger shadow-none" href="#">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-lg-4 mb-5 mb-lg-0">
+                              <div class="d-flex flex-column h-100">
+                                <div class="mb-7">
+                                  <h2 class="card-title h1">Camping Détente</h2>
+                                  <p class="card-text text-body">For healthy and beautiful skin, get skincare customized just for you from experts at Curology.</p>
+                                </div>
+
+                                <!-- Testimonials -->
+                                <div class="card shadow-none mt-auto">
+                                  <div class="card-body">
+                                    <!-- Blockquote -->
+                                    <figure>
+                                      <div class="mb-4">
+                                        le mot de l'animatrice
+                                      </div>
+
+                                      <blockquote class="blockquote">“ I am absolutely floored by the level of care and attention to detail the team at Htmlstream have put into this theme and for one can guarantee that I will be a return customer. ”</blockquote>
+
+                                      <figcaption class="blockquote-footer">
+                                        <div class="d-flex align-items-center">
+                                          <div class="flex-shrink-0">
+                                            <img class="avatar avatar-circle" src="/img/160x160/img10.jpg" alt="Image Description">
+                                          </div>
+
+                                          <div class="flex-grow-1 ms-3">
+                                            Luisa
+                                            <span class="blockquote-footer-source">Animatrice Nature</span>
+                                          </div>
+                                        </div>
+                                      </figcaption>
+                                    </figure>
+                                    <!-- End Blockquote -->
+                                  </div>
+                                </div>
+                                <!-- End Testimonials -->
+                              </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="col-lg-8">
+                              <div class="mb-5">
+                                <img class="img-fluid rounded-2" src="/img/camping-detente.webp" alt="Camping détente">
+                              </div>
+
+                              <div class="row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <h4 class="card-title">Hit heavy, stay small</h4>
+                                  <p class="card-text text-body">Tight-knit, dynamic teams work with more agility, communication, and freedom than large-scale companies.</p>
+                                </div>
+                                <!-- End Col -->
+
+                                <div class="col-sm-6">
+                                  <h4 class="card-title">Ambition by the boatload</h4>
+                                  <p class="card-text text-body">We love people who aim for greatness. They inspire and excite their teammates, raising the bar for all of us.</p>
+                                </div>
+                                <!-- End Col -->
+                              </div>
+                              <!-- End Row -->
+                            </div>
+                            <!-- End Col -->
+                          </div>
+                          <!-- End Row -->
+                        </div>
+                    </a>
+                </div>
+                <div id="camping-sportif" data-aos="fade-up">
+                  <a class="card card-transition bg-soft-warning shadow-none" href="#">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-4 order-lg-2 mb-5 mb-lg-0">
+                          <div class="d-flex flex-column h-100">
+                            <div class="mb-7">
+                              <h2 class="card-title h1">Camping Sportif</h2>
+                              <p class="card-text text-body">LARQ Bottle Benefit Edition. 0. Lives will be saved with access. to clean water.</p>
+                            </div>
+
+                            <!-- Testimonials -->
+                            <div class="card shadow-none mt-auto">
+                              <div class="card-body">
+                                <!-- Blockquote -->
+                                <figure>
+                                  <div class="mb-4">
+                                    le mot de l'animatrice
+                                  </div>
+
+                                  <blockquote class="blockquote">“ It's a beautiful looking theme with great support from the developers. The included demos are a great way to understand the theme, its features and speed up development. ”</blockquote>
+
+                                  <figcaption class="blockquote-footer">
+                                    <div class="d-flex align-items-center">
+                                      <div class="flex-shrink-0">
+                                        <img class="avatar avatar-circle" src="/img/160x160/img8.jpg" alt="Image Description">
+                                      </div>
+
+                                      <div class="flex-grow-1 ms-3">
+                                        Christina
+                                        <span class="blockquote-footer-source">Head of Commercials</span>
+                                      </div>
+                                    </div>
+                                  </figcaption>
+                                </figure>
+                                <!-- End Blockquote -->
+                              </div>
+                            </div>
+                            <!-- End Testimonials -->
+                          </div>
+                        </div>
+                        <!-- End Col -->
+
+                        <div class="col-lg-8">
+                          <div class="mb-5">
+                            <img class="img-fluid rounded-2" src="/img/camping-sportif.webp" alt="Image Description">
+                          </div>
+
+                          <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                              <h4 class="card-title">Autonomy and attitude</h4>
+                              <p class="card-text text-body">We're a team of self-starters who take serious pride in our work – and it shows.</p>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="col-sm-6">
+                              <h4 class="card-title">Teamwork makes the dream work</h4>
+                              <p class="card-text text-body">We work together to bring our passions and expertise to make Teachable the best it can be.</p>
+                            </div>
+                            <!-- End Col -->
+                          </div>
+                          <!-- End Row -->
+                        </div>
+                        <!-- End Col -->
+                      </div>
+                      <!-- End Row -->
+                    </div>
+                  </a>
+                </div>
+                <!-- End Card -->
             </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div id="mobilhomes-confort" class="card text-center">
-                        <img class="card-img-top card-img-front" src="/img/photos/mobilhomes-confort-sur-la-plage.webp" width="320" height="180" alt="Les Mobilhomes Confort de l'Espadrille volante">
-                        <cite class="text-mutted pt-1">
-                            Photo de <a href="https://unsplash.com/@hypnoseworld?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Linda de Ruiter</a> sur <a href="https://unsplash.com/fr/s/photos/mobilhome?orientation=landscape&utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-                        </cite>
-                        <div class="card-body">
-                            <h3 class="card-title">
-                                Mobilhomes Confort
-                            </h3>
-                            <p class="card-text card-text-front py-2">
-                                Le Mobile Home Confort : un hébergement spacieux et confort pour des vacances sereines.
-                            </p>
-                            <a href="#" class="btn btn-camping-primary mb-3 py-2 px-4">vous voulez en savoir plus ?</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pb-5">
-                    <div class="card card-front text-center">
-                        <img class="card-img-top card-img-front" src="/img/photos/caravane-hyper-cosy.webp" width="320" height="180" alt="Les Caravanes Cosy de l'Espadrille volante">
-                        <cite class="text-mutted pt-1">
-                            Photo de <a href="https://unsplash.com/@blakewisz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Blake Wisz</a> sur <a href="https://unsplash.com/fr/s/photos/caravane?orientation=landscape&utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-                        </cite>
-                        <div class="card-body">
-                            <h3 class="card-title">
-                                Caravanes Cosy
-                            </h3>
-                            <p class="card-text card-text-front py-2">
-                                La Caravane Cosy : un hébergement insolite pour profiter de vacances cool en mode glamping.
-                            </p>
-                            <a href="#" class="btn btn-camping-primary mb-3 py-2 px-4">vous voulez en savoir plus ?</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pb-5">
-                    <div class="card card-front text-center">
-                        <img class="card-img-top card-img-front" src="/img/photos/une-place-a-l-ombre.webp" width="320" height="180" alt="Les Places à l'Ombre de l'espadrille Volante">
-                        <cite class="text-mutted pt-1">
-                            Photo de <a href="https://unsplash.com/@scottagoodwill?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Scott Goodwill</a> sur <a href="https://unsplash.com/fr/s/photos/tente?orientation=landscape&utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-                        </cite>
-                        <div class="card-body">
-                            <h3 class="card-title">
-                                Places à l'Ombre
-                            </h3>
-                            <p class="card-text card-text-front py-2">
-                                La Place à l'Ombre : un environnement ombragé pour planter sa tente et profiter des soirées.
-                            </p>
-                            <a href="#" class="btn btn-camping-primary mb-3 py-2 px-4">vous voulez en savoir plus ?</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="activities" class="py-5">
-        <div class="container">
             {# % include '_partials/_newsletter.html.twig' % #}
         </div>
     </section>
-</div>
 {% endblock %}

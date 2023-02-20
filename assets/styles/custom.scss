@@ -1,0 +1,15 @@
+/*------------------------------------
+  custom SCSS style
+------------------------------------*/
+:root {
+    --bs-body-font-family: Montserrat, sans-serif;
+    --bs-body-font-weight: 200;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+.btn {
+    border-radius: 10rem;
+}

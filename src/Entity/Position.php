@@ -55,6 +55,18 @@ class Position
     #[ORM\Column(type: Types::DECIMAL, precision: 9, scale: 6, nullable: true)]
     private ?string $lng = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $sleeping = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $shower = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $room = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $surface = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -228,6 +240,53 @@ class Position
     public function setLng(?string $lng): self
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getSleeping(): ?int
+    {
+        return $this->sleeping;
+    }
+
+    public function setSleeping(?int $sleeping): self
+    {
+        $this->sleeping = $sleeping;
+
+        return $this;
+    }
+
+    public function getShower(): ?int
+    {
+        return $this->shower;
+    }
+
+    public function setShower(?int $shower): self
+    {
+        $this->shower = $shower;
+
+        return $this;
+    }
+
+    public function getRoom(): ?int
+    {
+        return $this->room;
+    }
+
+    public function setRoom(?int $room): self
+    {
+        $this->room = $room;
+
+        return $this;
+    }
+    public function getSurface(): ?int
+    {
+        return $this->surface;
+    }
+
+    public function setSurface(?int $surface): self
+    {
+        $this->surface = $surface;
 
         return $this;
     }

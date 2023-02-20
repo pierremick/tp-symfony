@@ -1,10 +1,114 @@
-<div class="card">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ path('account') }}" class="{% if app.request.get('_route') == 'account' %}active{% endif %}">Tableau de bord</a><i class="fa-solid fa-gauge"></i></li>
-        {% if is_granted('ROLE_TEAM') %}
-        <li class="list-group-item"><a href="#">A second item</a></li>
-      {% endif %}
-        <li class="list-group-item d-flex justify-content-between align-items-center"><a href="#">Mot de passe</a><i class="fa-solid fa-key"></i></li>
-        <li class="list-group-item d-flex justify-content-between align-items-center"><a class="text-danger" href="{{ path('logout') }}">Déconnexion</a><i class="fa-solid fa-right-from-bracket"></i></li>
+<!-- START SIDEBAR -->
+<div class="card flex-grow-1 mb-5">
+  <div class="card-body">
+    <!-- Avatar -->
+    <div class="d-none d-lg-block text-center mb-5">
+      <div class="avatar avatar-xxl avatar-circle mb-3">
+        <img class="avatar-img" src="/upload/avatar/{{ app.user.avatar }}" alt="Avatar {{ app.user.firstname }} {{ app.user.lastname }}">
+        <img class="avatar-status avatar-lg-status" src="/svg/illustrations/top-vendor.svg" alt="Image Description" data-bs-toggle="tooltip" data-bs-placement="top" title="Verified user">
+      </div>
+
+      <h4 class="card-title mb-0">{{ app.user.firstname }} {{ app.user.lastname }}</h4>
+      <p class="card-text small">{{ app.user.email }}</p>
+    </div>
+    <!-- End Avatar -->
+
+    <!-- TEAM ADMIN -->
+    {% if app.user.isTeam %}
+    <span class="text-cap mt-4">Administration</span>
+    <!-- List -->
+    <ul class="nav nav-sm nav-tabs nav-vertical">
+      <li class="nav-item">
+        <a class="nav-link{% if app.request.get('_route') == 'team_booking' %} active{% endif %}" href="{{ path('team_booking') }}">
+          <i class="bi-credit-card nav-icon"></i> Booking
+        </a>
+      </li>
+      <li class="nav-item">
+    <a class="nav-link{% if app.request.get('_route') == 'team_customer' %} active{% endif %}" href="{{ path('team_customer') }}">
+          <i class="bi-credit-card nav-icon"></i> Clients
+        </a>
+      </li>
+      <li class="nav-item">
+    <a class="nav-link{% if app.request.get('_route') == 'team_invoice' %} active{% endif %}" href="{{ path('team_invoice') }}">
+          <i class="bi-credit-card nav-icon"></i> Factures
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">
+          <i class="bi-geo-alt nav-icon"></i> Proprétaires
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">
+          <i class="bi-people nav-icon"></i> Équipe
+        </a>
+      </li>
     </ul>
+  {% endif %}
+    <!-- End TEAM ADMIN -->
+
+    <!-- TABLEAU DE BORD -->
+    {% if app.user.isOwner %}
+    <span class="text-cap">Tableau de bord</span>
+    <!-- List -->
+    <ul class="nav nav-sm nav-tabs nav-vertical">
+        <li class="nav-item">
+            <a class="nav-link " href="#">
+                <i class="bi-credit-card nav-icon"></i> Mobilehomes
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#">
+                <i class="bi-credit-card nav-icon"></i> Réservations
+                <span class="badge bg-success text-light rounded-pill nav-link-badge">+2</span>
+            </a>
+        </li>
+    </ul>
+  {% endif %}
+    <!-- End TABLEAU DE BORD -->
+
+
+
+    <!-- MON COMPTE -->
+    <span class="text-cap mt-3">Mon compte</span>
+    <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
+      <li class="nav-item">
+    <a class="nav-link{% if app.request.get('_route') == 'account' %} active{% endif %}" href="{{ path('account') }}">
+          <i class="bi-person-badge nav-icon"></i> Accueil
+        </a>
+      </li>
+      <li class="nav-item">
+    <a class="nav-link{% if app.request.get('_route') == 'account_info' %} active{% endif %}" href="{{ path('account_info') }}">
+          <i class="bi-person-badge nav-icon"></i> Informations
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">
+          <i class="bi-shield-shaded nav-icon"></i> Securité
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">
+          <i class="bi-sliders nav-icon"></i> Préférences
+        </a>
+      </li>
+    </ul>
+    <!-- End MON COMPTE -->
+
+    <div class="d-lg-none">
+      <div class="dropdown-divider"></div>
+
+      <!-- List -->
+      <ul class="nav nav-sm nav-tabs nav-vertical">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('logout') }}">
+            <i class="bi-box-arrow-right nav-icon"></i> Log out
+          </a>
+        </li>
+      </ul>
+      <!-- End List -->
+    </div>
+    <!-- End Nav -->
+  </div>
 </div>
+<!-- END SIDEBAR -->

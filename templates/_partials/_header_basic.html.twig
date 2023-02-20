@@ -1,0 +1,103 @@
+<!-- Header -->
+<header class="navbar navbar-expand-lg navbar-shadow navbar-end mb-3">
+  <div class="container">
+    <div class="navbar-nav-wrap">
+      <div class="navbar-brand-wrapper">
+        <!-- Logo -->
+        <a class="navbar-brand" href="{{ path('homepage') }}" aria-label="Espadrille Volante">
+          l'Espadrille Volante
+        </a>
+        <!-- End Logo -->
+      </div>
+
+      <!-- Toggle -->
+      <button type="button" class="navbar-toggler ms-auto" data-bs-toggle="collapse" data-bs-target="#navbarNavMenuRightAligned" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbarNavMenuRightAligned">
+        <span class="navbar-toggler-default">
+          <i class="bi-list"></i>
+        </span>
+        <span class="navbar-toggler-toggled">
+          <i class="bi-x"></i>
+        </span>
+      </button>
+      <!-- End Toggle -->
+
+      <nav class="navbar-nav-wrap-col collapse navbar-collapse" id="navbarNavMenuRightAligned">
+        <!-- Navbar -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path('homepage') }}">accueil</a>
+          </li>
+
+          <!-- Nav Item -->
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarRightAlignedMegaMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              le camping
+            </a>
+
+            <div class="dropdown-menu w-100 px-5" aria-labelledby="navbarRightAlignedMegaMenu">
+              <div class="row">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                  <span class="dropdown-header">à propos du camping</span>
+
+                  <a class="dropdown-item" href="{{ path('about') }}">Notre histoire</a>
+                  <a class="dropdown-item" href="#">Notre équipe</a>
+                  <a class="dropdown-item" href="{{ path('register') }}">Nous rejoindre</a>
+                </div>
+
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                  <span class="dropdown-header">L'hébergement</span>
+
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'mobile-home-3-personnes'}) }}">Mobile Home 3 personnes</a>
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'mobile-home-4-personnes'}) }}">Mobile Home 4 personnes</a>
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'mobile-home-5-personnes'}) }}">Mobile Home 5 personnes</a>
+                </div>
+
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                  <span class="dropdown-header"></span>
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'mobile-home-6-8-personnes'}) }}">Mobile Home 6-8 personnes</a>
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'caravane-2-places'}) }}">Caravane 2 places</a>
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'caravane-4-places'}) }}">Caravane 4 places</a>
+                </div>
+
+                <div class="col-lg-3">
+                  <span class="dropdown-header"></span>
+
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'caravane-6-places'}) }}">Caravane 6 places</a>
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'emplacement-8-m2'}) }}">Emplacement 8 m2</a>
+                  <a class="dropdown-item" href="{{ path('camping_type', {'type': 'emplacement-12-m2'}) }}">Emplacement 12 m2</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- End Nav Item -->
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarRightAlignedDropdownSubMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              mon compte
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarRightAlignedDropdownSubMenu" style="min-width: 230px;">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a class="dropdown-item" href="{{ path('account') }}">mon compte</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a class="dropdown-item" href="{{ path('app_admin') }}">Admin</a>
+                {% endif %}
+                {% if app.user.isTeam %}
+                <a class="dropdown-item" href="{{ path('team') }}">working</a>
+                {% endif %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ path('logout') }}">se déconnecter</a>
+                {% else %}
+                <a class="dropdown-item" href="{{ path('login') }}">se connecter</a>
+                {% endif %}
+            </div>
+          </li>
+          <!-- End Dropdown -->
+        </ul>
+        <!-- End Navbar -->
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- End Header -->

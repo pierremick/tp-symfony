@@ -14,6 +14,7 @@ Encore
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
 
+
     /*
      * ENTRY CONFIG
      *
@@ -21,6 +22,9 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('core', './assets/js/hs.core.js')
+    .addEntry('header', './assets/vendor/hs-header/dist/hs-header.min.js')
+    .addEntry('mega-menu', './assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.css')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

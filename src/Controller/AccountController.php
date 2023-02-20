@@ -10,6 +10,7 @@ use App\Entity\Type;
 use App\Entity\Booking;
 use App\Repository\PositionRepository;
 use App\Repository\TypeRepository;
+use App\Repository\UserRepository;
 use App\Form\RegistrationFormType;
 use App\Form\PositionFilterType;
 use App\Form\BookingType;
@@ -34,6 +35,16 @@ class AccountController extends AbstractController
         return $this->render('account/index.html.twig', [
             'page_title' => 'Mon compte',
             'positions' => $positions,
+        ]);
+    }
+
+    #[Route('/account/information', name: 'account_info')]
+    public function account_info(UserRepository $userRepository): Response
+    {
+        $user = $this->getUser(); // Récupère l'utilisateur connecté
+
+        return $this->render('account/account_information.html.twig', [
+            'page_title' => 'Mon compte',
         ]);
     }
 
