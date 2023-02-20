@@ -25,9 +25,6 @@ class PurchaseOrder
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'purchaseOrder', targetEntity: Booking::class)]
-    private Collection $booking;
-
     #[ORM\ManyToOne(inversedBy: 'purchaseOrder')]
     private ?Invoice $invoice = null;
 
@@ -73,36 +70,6 @@ class PurchaseOrder
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Booking>
-     */
-    public function getBooking(): Collection
-    {
-        return $this->booking;
-    }
-
-    public function addBooking(Booking $booking): self
-    {
-        if (!$this->booking->contains($booking)) {
-            $this->booking->add($booking);
-            $booking->setPurchaseOrder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBooking(Booking $booking): self
-    {
-        if ($this->booking->removeElement($booking)) {
-            // set the owning side to null (unless already changed)
-            if ($booking->getPurchaseOrder() === $this) {
-                $booking->setPurchaseOrder(null);
-            }
-        }
 
         return $this;
     }

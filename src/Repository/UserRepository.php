@@ -56,6 +56,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+    public function findOwnersWithPositions(): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.firstname', 'u.lastname', 'u.email', 'u.phone', 'u.avatar', 'u.isOwner', 'u.isTeam', 'COUNT(p.id) AS nbPositions')
+            ->join('u.positions', 'p')
+            ->where('p.owner IS NOT NULL')
+            ->groupBy('u.id');
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

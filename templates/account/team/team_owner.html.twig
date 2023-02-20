@@ -66,41 +66,55 @@
                     <!-- Table -->
                     <div class="table-responsive">
                         <table class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead>
+                        <thead class="thead-light">
                             <tr>
-                                <th>Hébergement</th>
-                                <th>Séjour  <a href="{{ path('team_booking', {'order': nextOrder}) }}">⇅</a></th>
-                                <th>Réservé le <a href="{{ path('team_booking', {'order': nextOrder}) }}">⇅</a></th>
+                                <th>Prénom</th>
+                                <th>nom</th>
+                                <th>...</th>
+                                <th style="width: 5%;">...</th>
                             </tr>
                         </thead>
-                            <tbody>
-                            {% for booking in bookings %}
-                                <tr>
-                                    <td class="accommodation">
-                                        <span class="position-type">
-                                            <strong>{{ booking.position.type.name }}</strong>
-                                        </span><br>
-                                        <span class="position-name">
-                                            {{ booking.position.name }}
-                                    </td>
-                                    <td class="stay">
-                                        <span class="booking-checkin">
-                                            Arrivée : {{ booking.checkin|date('d/m/Y') }}
-                                        </span><br>
-                                        <span class="booking-checkout">
-                                            Départ : {{ booking.checkout|date('d/m/Y') }}
-                                        </span><br>
-                                        <span class="booking-checkout">
-                                            {{ booking.getPersons }} personnes
-                                        </span><br>
-                                        <span class="booking-checkout">
-                                            {{ booking.days }} jours
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        {% if user.avatar %}
+                                        <img class="avatar avatar-sm avatar-circle" src="/upload/avatar/{{ user.avatar }}" alt="Avatar {{ user.firstname }} {{ user.lastname }}">
+                                        {% else %}
+                                        <span class="avatar avatar-sm avatar-danger avatar-circle">
+                                            <span class="avatar-initials">SD</span>
                                         </span>
-                                    </td>
-                                    <td class="date">{{ booking.createdAt|date('d/m/Y') }}</td>
-                                </tr>
+                                      {% endif %}
+                                    </div>
+
+                                    <div class="flex-grow-1 ms-3">
+                                      <a class="d-inline-block link-dark" href="#">
+                                        <h6 class="text-hover-primary mb-0">{{ user.firstname }} {{ user.lastname }}</h6>
+                                      </a>
+                                      <small class="d-block">{{ user.email }}</small>
+                                    </div>
+                                  </div>
+                                </td>
+                                {% if user.isOwner %}
+                                <td>
+                                    {% if user.nbPositions %}
+                                    {{ user.nbPositions }} mobilehome{% if user.nbPositions >1 %}s{% endif %}
+                                    {% endif %}
+                                </td>
+                                {% endif %}
+                                <td>
+                                    {% if user.isTeam %}oui{% else %}non{% endif %}
+                                </td>
+                                <td>
+                                  <a class="text-body" href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove member">
+                                    <i class="bi-trash"></i>
+                                  </a>
+                                </td>
+                            </tr>
                             {% endfor %}
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
                 <!-- End Table -->

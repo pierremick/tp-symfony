@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Booking;
+use App\Repository\BookingRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +19,6 @@ class TeamController extends AbstractController
         // Récupère les positions actives à afficher
         $users = $userRepository->findBy(['isTeam' => true]);
 
-
-
         // Envoi la réponse à la vue dans le template twig 'front/archive_position.html.twig'
         return $this->render('account/team/index.html.twig', [
             'page_name' => 'Team',
@@ -27,12 +27,37 @@ class TeamController extends AbstractController
         ]);
     }
 
-    #[Route('/account/team/booking', name: 'team_booking')]
-    public function team_booking(): Response
+    #[Route('/account/team/booking/{order}', name: 'team_booking', requirements: ['order' => 'asc|desc'], defaults: ['order' => 'desc'])]
+    public function team_booking(BookingRepository $bookingRepository, Request $request, $order): Response
     {
+        $bookings = $bookingRepository->findBy([], [
+            'createdAt' => $order,
+            'checkin' => $order,
+            'checkout' => $order,
+            'position' => $order,
+            'status' => $order,
+        ]);
+
+        $nextOrder = $order == 'asc' ? 'desc' : 'asc';
+
         return $this->render('account/team/team_booking.html.twig', [
-            'page_name' => 'Booking',
-            'page_title' => 'Booking',
+            'page_name' => 'Bookings',
+            'page_title' => 'Bookings',
+            'bookings' => $bookings,
+            'order' => $order,
+            'nextOrder' => $nextOrder,
+        ]);
+    }
+
+    #[Route('/account/team/owner', name: 'team_owner')]
+    public function team_owner(UserRepository $userRepository): Response
+    {
+        $users = $userRepository->findOwnersWithPositions();
+
+        return $this->render('account/team/team_owner.html.twig', [
+            'page_name' => 'Propriétaires',
+            'page_title' => 'Propriétaires',
+            'users' => $users,
         ]);
     }
 

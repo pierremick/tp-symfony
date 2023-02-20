@@ -44,15 +44,23 @@ class Booking
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: PurchaseOrder::class, mappedBy: 'booking')]
-    private Collection $purchaseOrders;
-
-    #[ORM\ManyToOne(inversedBy: 'booking')]
-    private ?PurchaseOrder $purchaseOrder = null;
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $status = null;
 
     public function __construct()
     {
         $this->purchaseOrders = new ArrayCollection();
+    }
+
+    public function getPersons(): int
+    {
+        return $this->getAdult() + $this->getChild();
+    }
+    public function getDays(): int
+    {
+        $interval = $this->getCheckin()->diff($this->getCheckout());
+
+        return $interval->days;
     }
 
     public function getId(): ?int
@@ -168,41 +176,14 @@ class Booking
         return $this;
     }
 
-    /**
-     * @return Collection<int, PurchaseOrder>
-     */
-    public function getPurchaseOrders(): Collection
+    public function getStatus(): ?string
     {
-        return $this->purchaseOrders;
+        return $this->status;
     }
 
-    public function addPurchaseOrder(PurchaseOrder $purchaseOrder): self
+    public function setStatus(string $status): self
     {
-        if (!$this->purchaseOrders->contains($purchaseOrder)) {
-            $this->purchaseOrders->add($purchaseOrder);
-            $purchaseOrder->addBooking($this);
-        }
-
-        return $this;
-    }
-
-    public function removePurchaseOrder(PurchaseOrder $purchaseOrder): self
-    {
-        if ($this->purchaseOrders->removeElement($purchaseOrder)) {
-            $purchaseOrder->removeBooking($this);
-        }
-
-        return $this;
-    }
-
-    public function getPurchaseOrder(): ?PurchaseOrder
-    {
-        return $this->purchaseOrder;
-    }
-
-    public function setPurchaseOrder(?PurchaseOrder $purchaseOrder): self
-    {
-        $this->purchaseOrder = $purchaseOrder;
+        $this->status = $status;
 
         return $this;
     }
