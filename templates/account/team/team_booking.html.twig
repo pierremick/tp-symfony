@@ -68,9 +68,9 @@
                         <table class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
-                                <th>Hébergement</th>
-                                <th>Séjour  <a href="{{ path('team_booking', {'order': nextOrder}) }}">⇅</a></th>
-                                <th>Réservé le <a href="{{ path('team_booking', {'order': nextOrder}) }}">⇅</a></th>
+                                <th>Réservations</th>
+                                <th>Dates  <a href="{{ path('team_booking', {'order': nextOrder}) }}">⇅</a></th>
+                                <th>Statut <a href="{{ path('team_booking', {'order': nextOrder}) }}">⇅</a></th>
                             </tr>
                         </thead>
                             <tbody>
@@ -82,6 +82,10 @@
                                         </span><br>
                                         <span class="position-name">
                                             {{ booking.position.name }}
+                                        </span><br>
+                                        <span class="position-name">
+                                            réservé le : {{ booking.createdAt|date('d/m/Y') }}
+                                        </span>
                                     </td>
                                     <td class="stay">
                                         <span class="booking-checkin">
@@ -91,13 +95,12 @@
                                             Départ : {{ booking.checkout|date('d/m/Y') }}
                                         </span><br>
                                         <span class="booking-checkout">
-                                            {{ booking.getPersons }} personnes
-                                        </span><br>
-                                        <span class="booking-checkout">
-                                            {{ booking.days }} jours
+                                            {{ booking.getPersons }} personnes, {{ booking.days }} jours
                                         </span>
                                     </td>
-                                    <td class="date">{{ booking.createdAt|date('d/m/Y') }}</td>
+                                    <td>
+                                        status
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
