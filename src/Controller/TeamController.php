@@ -2,18 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TeamController extends AbstractController
 {
     #[Route('/account/team', name: 'team')]
-    public function team_account(): Response
+    public function team(Request $request, UserRepository $userRepository): Response
     {
+        // Récupère les positions actives à afficher
+        $users = $userRepository->findBy(['isTeam' => true]);
+
+
+
+        // Envoi la réponse à la vue dans le template twig 'front/archive_position.html.twig'
         return $this->render('account/team/index.html.twig', [
             'page_name' => 'Team',
-            'page_title' => 'Team',
+            'page_title' => "L'équipe",
+            'users' => $users,
         ]);
     }
 
