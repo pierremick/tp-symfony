@@ -69,8 +69,10 @@
                                     <h6>
                                         {{ booking.days }} jour{% if booking.days > 1 %}s{% endif %} en {{ booking.position.type.name }}
                                     </h6>
-                                    pour {{ booking.adult }} adulte{% if booking.adult > 1 %}s{% endif %} et {{ booking.child }} enfant{% if booking.child > 1 %}s{% endif %}<br>
-                                    du {{ booking.checkin|date("d/m/Y") }} au {{ booking.checkout|date("d/m/Y") }}
+                                    <p>
+                                        {{ booking.adult }} adulte{% if booking.adult > 1 %}s{% endif %} et {{ booking.child }} enfant{% if booking.child > 1 %}s{% endif %}<br>
+                                        du {{ booking.checkin|date("d/m/Y") }} au {{ booking.checkout|date("d/m/Y") }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
