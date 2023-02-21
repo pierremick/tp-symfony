@@ -176,7 +176,7 @@ class Booking
     }
     public function getTotalVat10(): int
     {
-        return $this->getTotalPositionTtcPrice() + $this->getTotalPositionHtPrice();
+        return $this->getTotalPositionTtcPrice() - $this->getTotalPositionHtPrice();
     }
 
     public function getId(): ?int
