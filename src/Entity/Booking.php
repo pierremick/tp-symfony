@@ -194,6 +194,11 @@ class Booking
         return $this->getTotalPoolTtcPrice() - $this->getTotalPoolHtPrice();
     }
 
+    public function getTotalHt(): int
+    {
+        return $this->getTotalPositionHtPrice() + $this->getTotalPoolHtPrice() + $this->getTotalTaxAdultPrice() + $this->getTotalTaxChildPrice();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
