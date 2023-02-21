@@ -49,6 +49,25 @@ class TeamController extends AbstractController
         ]);
     }
 
+    #[Route('/account/team/booking/{id}', name: 'team_booking_show')]
+    public function team_booking_show(Booking $booking): Response
+    {
+        $poolAdultPrice = Booking::POOL_ADULT_PRICE;
+        $poolChildPrice = Booking::POOL_CHILD_PRICE;
+        $taxAdultPrice = Booking::TAX_ADULT_PRICE;
+        $taxChildPrice = Booking::TAX_CHILD_PRICE;
+
+        return $this->render('account/team/team_booking_show.html.twig', [
+            'booking' => $booking,
+            'pool_adult' => $poolAdultPrice,
+            'pool_child' => $poolChildPrice,
+            'tax_adult' => $taxAdultPrice,
+            'tax_child' => $taxChildPrice,
+            'page_name' => "détail d'une réservation",
+            'page_title' => "Détail d'une réservation",
+        ]);
+    }
+
     #[Route('/account/team/owner', name: 'team_owner')]
     public function team_owner(UserRepository $userRepository): Response
     {

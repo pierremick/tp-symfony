@@ -1,0 +1,145 @@
+{% extends 'account.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb -->
+    <div class="navbar-dark bg-dark" style="background-image: url(/svg/components/wave-pattern-light.svg);">
+      <div class="container content-space-1 content-space-b-lg-3">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="d-none d-lg-block">
+              <h1 class="h2 text-white">{{ page_title }}</h1>
+            </div>
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-light mb-0">
+                <li class="breadcrumb-item">mon compte</li>
+                  <li class="breadcrumb-item">admin</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ page_name }}</li>
+              </ol>
+            </nav>
+            <!-- End Breadcrumb -->
+          </div>
+          <!-- End Col -->
+
+          <div class="col-auto">
+            <div class="d-none d-lg-block">
+              <a class="btn btn-soft-light btn-sm" href="{{ path('logout') }}">se déconnecter</a>
+            </div>
+
+            <!-- Responsive Toggle Button -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-default">
+                <i class="bi-list"></i>
+              </span>
+              <span class="navbar-toggler-toggled">
+                <i class="bi-x"></i>
+              </span>
+            </button>
+            <!-- End Responsive Toggle Button -->
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+    <!-- Content -->
+    <div class="container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="navbar-expand-lg navbar-light">
+                    <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
+                        {% include 'account/_sidebar.html.twig' %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-header-title">{{ page_title }}</h5>
+                    </div>
+                    <div class="card-body">
+                        {{ booking.createdAt|date("d/m/Y à G:i", "Europe/Paris") }}<br>
+                        {{ booking.position.name }}<br>
+                        {{ booking.position.type.name }}<br><br>
+                        du {{ booking.checkin|date("d/m/Y") }} au {{ booking.checkout|date("d/m/Y") }}<br><br>
+                      Nbre de jour{% if booking.days > 1 %}s{% endif %} : {{ booking.days }}<br>
+                    Nbre de Jour{% if booking.getHsDays > 1 %}s{% endif %} en Haute Saison : {{ booking.getHsDays }} = {{ booking.getTotalPriceHsDays/100 }} €<br>
+                  Nbre de Jour{% if booking.getBsDays > 1 %}s{% endif %} en Basse Saison : {{ booking.getBsDays }} = ??? €<br><br>
+                      Nbre d'adulte{% if booking.adult > 1 %}s{% endif %} : {{ booking.adult }}<br>
+                    Nbre d'enfant{% if booking.child > 1 %}s{% endif %} : {{ booking.child }}<br>
+                    Nbre de Personne{% if booking.getPersons > 1 %}s{% endif %} au total : {{ booking.getPersons }}
+
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Description</th>
+                          <th scope="col">Prix unit</th>
+                          <th scope="col">Qté</th>
+                          <th scope="col">Prix total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% if booking.getBsDays %}
+                        <tr>
+                          <td>
+                              journée/nuitée basse saison
+                          </td>
+                          <td>{{ booking.position.type.price / 100 }} €</td>
+                          <td>{{ booking.getBsDays }}</td>
+                          <td>{{ booking.getTotalPriceBsDays/100 }} €</td>
+                        </tr>
+                      {% endif %}
+                      {% if booking.getHsDays %}
+                        <tr>
+                          <td>
+                              journée/nuitée haute saison
+                          </td>
+                          <td>{{ booking.position.type.price / 100 * 1.15 }} €</td>
+                          <td>{{ booking.getHsDays }}</td>
+                          <td>{{ booking.getTotalPriceHsDays/100 }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                          <td>
+                            entrée piscine (adulte)
+                          </td>
+                          <td>{{ pool_adult }} €</td>
+                          <td>{{ booking.adultPool }}</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                            entrée piscine (enfant)
+                          </th>
+                          <td>{{ pool_child }} €</td>
+                          <td>{{ booking.childPool }}</td>
+                          <td>@mdo</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+
+                    </div>
+                </div>
+                <!-- End Table -->
+
+                <!-- Footer -->
+                <div class="card-footer border-top">
+                <div class="d-flex justify-content-end gap-3">
+                  <a class="btn btn-white" href="javascript:;">Cancel</a>
+                  <a class="btn btn-primary" href="javascript:;">Save changes</a>
+                </div>
+                </div>
+                <!-- End Footer -->
+                </div>
+                <!-- End Card -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

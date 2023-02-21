@@ -7,10 +7,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
 {
+    // Constantes pour les prix, taux de TVA, taxes, etc.
+    const DISCOUNT_RATE = 1.05;
+    const HS_RATE = 1.15;
+    const VAT_RATE_10 = 1.10;
+    const VAT_RATE_20 = 1.20;
+    const POOL_ADULT_PRICE = 1.50;
+    const POOL_CHILD_PRICE = 1.00;
+    const TAX_ADULT_PRICE = 0.60;
+    const TAX_CHILD_PRICE = 0.35;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -52,15 +63,63 @@ class Booking
         $this->purchaseOrders = new ArrayCollection();
     }
 
+    // Retourne le nombre total de personnes (adultes + enfants)
     public function getPersons(): int
     {
         return $this->getAdult() + $this->getChild();
     }
+
+    // Retourne le nombre total de jours de la réservation
     public function getDays(): int
     {
         $interval = $this->getCheckin()->diff($this->getCheckout());
 
         return $interval->days;
+    }
+
+    // Retourne le nombre de jours en haute saison
+    public function getHsDays(): int
+    {
+        $startDate = new DateTime('2023-06-21');
+        $endDate = new DateTime('2023-08-31');
+
+        $hsDays = 0;
+        $currentDate = clone $this->getCheckin();
+        while ($currentDate <= $this->getCheckout()) {
+            if ($currentDate >= $startDate && $currentDate <= $endDate) {
+                $hsDays++;
+            }
+            $currentDate->modify('+1 day');
+        }
+
+        return $hsDays;
+    }
+
+    public function getTotalPriceHsDays(): float
+    {
+        // Récupère le nombre de jours en haute saison pour cette réservation
+        $hsDays = $this->getHsDays();
+        $position = $this->getPosition();
+        $price = $position->getType()->getPrice() * self::HS_RATE;
+
+        return $hsDays * $price;
+    }
+
+    public function getBsDays(): int
+    {
+        $totalDays = $this->getDays();
+        $hsDays = $this->getHsDays();
+
+        return $totalDays - $hsDays;
+    }
+
+    public function getTotalPriceBsDays(): float
+    {
+        $bsDays = $this->getBsDays();
+        $position = $this->getPosition();
+        $price = $position->getType()->getPrice();
+
+        return $bsDays * $price;
     }
 
     public function getId(): ?int
