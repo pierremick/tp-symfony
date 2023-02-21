@@ -196,8 +196,11 @@ class Booking
 
     public function getTotalHt(): int
     {
-        $positionHt = $this->getTotalPositionHtPrice() + $this->getTotalPoolHtPrice() / 100;
-        return $this->$positionHt + $this->getTotalPoolHtPrice() + $this->getTotalTaxAdultPrice() + $this->getTotalTaxChildPrice();
+        $positionHt = $this->getTotalPositionHtPrice() / 100;
+        $poolHt = $this->getTotalPoolHtPrice();
+        $tax = $this->getTotalTaxAdultPrice() + $this->getTotalTaxChildPrice();
+        $total = $positionHt + $poolHt + $tax;
+        return $total;
     }
 
     public function getId(): ?int
