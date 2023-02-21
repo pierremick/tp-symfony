@@ -97,9 +97,9 @@
 
                         {% if booking.getBsDays %}
                             <tr>
-                                <th scope="row">
+                                <td>
                                     journée/nuitée basse saison
-                                </th>
+                                </td>
                                 <td class="text-end pe-3">{{ booking.position.type.price / 100 }} €</td>
                                 <td class="text-center">{{ booking.getBsDays }}</td>
                                 <td class="text-end pe-3">{{ booking.getTotalPriceBsDays / 100 }} €</td>
@@ -108,9 +108,9 @@
 
                         {% if booking.getHsDays %}
                             <tr>
-                                <th scope="row">
+                                <td>
                                     journée/nuitée haute saison
-                                </th>
+                                </td>
                                 <td class="text-end pe-3">{{ booking.position.type.price / 100 * 1.15 }} €</td>
                                 <td class="text-center">{{ booking.getHsDays }}</td>
                                 <td class="text-end pe-3">{{ booking.getTotalPriceHsDays/100 }} €</td>
@@ -118,62 +118,62 @@
                         {% endif %}
 
                         <tr>
-                            <th scope="row">
+                            <td>
                                 entrée piscine (adulte)
-                            </th>
+                            </td>
                             <td class="text-end pe-3">{{ pool_adult }} €</td>
                             <td class="text-center">{{ booking.adultPool }}</td>
                             <td class="text-end pe-3">{{ booking.getTotalPoolAdultPrice }} €</td>
                         </tr>
                         <tr>
-                            <th scope="row">
+                            <td>
                                 entrée piscine (enfant)
-                            </th>
+                            </td>
                             <td class="text-end pe-3">{{ pool_child }} €</td>
                             <td class="text-center">{{ booking.childPool }}</td>
                             <td class="text-end pe-3">{{ booking.getTotalPoolChildPrice }} €</td>
                         </tr>
                         <tr>
                             <td rowspan="7" class="border-0"></td>
-                            <th colspan="2" scope="row" class="text-end">
+                            <td colspan="2" class="text-end">
                                 total TTC
-                            </th>
+                            </td>
                             <td class="text-end pe-3">??? €</td>
                         </tr>
                         <tr>
-                            <th colspan="2" scope="row" class="vat text-end">
+                            <td colspan="2" class="vat text-end">
                                 TVA 10%
-                            </th>
+                            </td>
                             <td class="vat text-end pe-3">{{ booking.getTotalVat10/100 }} €</td>
                         </tr>
                         <tr>
-                            <th colspan="2" scope="row" class="vat text-end">
+                            <td colspan="2" class="vat text-end">
                                 TVA 20%
-                            </th>
+                            </td>
                             <td class="vat text-end pe-3">{{ booking.getTotalVat20 }} €</td>
                         </tr>
                         <tr>
-                            <th colspan="2" scope="row" class="text-end">
+                            <td colspan="2" class="text-end">
                                 total HT
-                            </th>
+                            </td>
                             <td class="text-end pe-3">{{ booking.getTotalHt }} €</td>
                         </tr>
                         <tr>
-                            <th colspan="2" scope="row" class="vat text-end">
+                            <td colspan="2" class="vat text-end">
                                 {{ booking.getTaxAdultQty }} taxe{% if booking.getTaxAdultQty > 1 %}s{% endif %} de séjour adulte
-                            </th>
+                            </td>
                             <td class="vat text-end pe-3">{{ booking.getTotalTaxAdultPrice }} €</td>
                         </tr>
                         <tr>
-                            <th colspan="2" scope="row" class="vat text-end">
+                            <td colspan="2" class="vat text-end">
                                 {{ booking.getTaxChildQty }} taxe{% if booking.getTaxChildQty > 1 %}s{% endif %} de séjour enfant
-                            </th>
+                            </td>
                             <td class="vat text-end pe-3">{{ booking.getTotalTaxChildPrice }} €</td>
                         </tr>
                         <tr>
-                            <th colspan="2" scope="row" class="text-end">
+                            <td colspan="2" class="text-end">
                                 <strong>Net à payer</strong>
-                            </th>
+                            </td>
                             <td class="text-end pe-3"><strong>??? €</strong></td>
                         </tr>
                         </tbody>
