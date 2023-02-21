@@ -69,7 +69,7 @@ class Booking
         return $this->getAdult() + $this->getChild();
     }
 
-    // Retourne le nombre total de jours de la réservation
+    // Retourne le nombre de jours total de la réservation
     public function getDays(): int
     {
         $interval = $this->getCheckin()->diff($this->getCheckout());
@@ -77,7 +77,7 @@ class Booking
         return $interval->days;
     }
 
-    // Retourne le nombre de jours en haute saison
+    // Retourne le nombre de jours total en haute saison
     public function getHsDays(): int
     {
         $startDate = new DateTime('2023-06-21');
@@ -100,9 +100,10 @@ class Booking
         // Récupère le nombre de jours en haute saison pour cette réservation et le mutiplie par 1.15
         $hsDays = $this->getHsDays();
         $position = $this->getPosition();
-        $price = $position->getType()->getPrice() * self::HS_RATE;
+        $price = $position->getType()->getPrice() / 100;
+        $totalPrice = $price * self::HS_RATE;
 
-        return $hsDays * $price;
+        return $hsDays * $totalPrice;
     }
 
     public function getBsDays(): int
