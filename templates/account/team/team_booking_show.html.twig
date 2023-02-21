@@ -63,15 +63,13 @@
                         <h5 class="card-header-title">{{ page_title }}</h5>
                     </div>
                     <div class="card-body">
-                        {{ booking.createdAt|date("d/m/Y à G:i", "Europe/Paris") }}<br>
-                        {{ booking.position.name }}<br>
-                        {{ booking.days }} jour{% if booking.days > 1 %}s{% endif %} en {{ booking.position.type.name }}<br><br>
-                        du {{ booking.checkin|date("d/m/Y") }} au {{ booking.checkout|date("d/m/Y") }}<br><br>
-                      Nbre de jour{% if booking.days > 1 %}s{% endif %} : {{ booking.days }}<br>
-                      Nbre d'adulte{% if booking.adult > 1 %}s{% endif %} : {{ booking.adult }}<br>
-                    Nbre d'enfant{% if booking.child > 1 %}s{% endif %} : {{ booking.child }}<br>
-                    Nbre de Personne{% if booking.getPersons > 1 %}s{% endif %} au total : {{ booking.getPersons }}
-
+                        <div>
+                            {{ booking.createdAt|date("d/m/Y à G:i", "Europe/Paris") }}<br>
+                            {{ booking.position.name }}<br>
+                            {{ booking.days }} jour{% if booking.days > 1 %}s{% endif %} en {{ booking.position.type.name }}<br>
+                            pour {{ booking.adult }} adulte{% if booking.adult > 1 %}s{% endif %} et {{ booking.child }}enfant{% if booking.child > 1 %}s{% endif %}<br>
+                            du {{ booking.checkin|date("d/m/Y") }} au {{ booking.checkout|date("d/m/Y") }}
+                        </div>
 
                     <table class="table table-nowrap table-vertical-border-striped table-team-booking">
                       <thead>
