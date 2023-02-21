@@ -129,6 +129,13 @@ class Booking
         return $totalTickets * self::POOL_ADULT_PRICE;
     }
 
+    public function getTaxAdultQty(): int
+    {
+        $totalAdult = $this->getAdult();
+        $totalDays = $this->getDays();
+        return $totalAdult * $totalDays;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
