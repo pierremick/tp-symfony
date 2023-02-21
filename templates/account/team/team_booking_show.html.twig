@@ -87,9 +87,9 @@
                       <tbody>
                       {% if booking.getBsDays %}
                         <tr>
-                          <td>
+                          <th scope="row">
                               journée/nuitée basse saison
-                          </td>
+                          </th>
                           <td>{{ booking.position.type.price / 100 }} €</td>
                           <td>{{ booking.getBsDays }}</td>
                           <td>{{ booking.getTotalPriceBsDays/100 }} €</td>
@@ -97,18 +97,18 @@
                       {% endif %}
                       {% if booking.getHsDays %}
                         <tr>
-                          <td>
+                          <th scope="row">
                               journée/nuitée haute saison
-                          </td>
+                          </th>
                           <td>{{ booking.position.type.price / 100 * 1.15 }} €</td>
                           <td>{{ booking.getHsDays }}</td>
-                          <td>{{ booking.getTotalPriceHsDays/100 }}</td>
+                          <td>{{ booking.getTotalPriceHsDays/100 }} €</td>
                         </tr>
                         {% endif %}
                         <tr>
-                          <td>
+                          <th scope="row">
                             entrée piscine (adulte)
-                          </td>
+                          </th>
                           <td>{{ pool_adult }} €</td>
                           <td>{{ booking.adultPool }}</td>
                           <td>{{ booking.getTotalPoolAdultPrice }} €</td>
@@ -119,8 +119,24 @@
                           </th>
                           <td>{{ pool_child }} €</td>
                           <td>{{ booking.childPool }}</td>
-                          <td>@mdo</td>
+                          <td>??? €</td>
                         </tr>
+                      <tr>
+                          <th scope="row">
+                              taxe de séjour (adulte)
+                          </th>
+                          <td>??? €</td>
+                          <td>qté</td>
+                          <td>??? €</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">
+                              taxe de séjour (enfant)
+                          </th>
+                          <td>??? €</td>
+                          <td>qté</td>
+                          <td>??? €</td>
+                      </tr>
                       </tbody>
                     </table>
 
