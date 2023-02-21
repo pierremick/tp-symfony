@@ -143,6 +143,13 @@ class Booking
         return $totalAdult * $totalDaysAdult;
     }
 
+    public function getTotalTaxAdultPrice(): int
+    {
+        $totalTax = $this->getTaxAdultQty();
+
+        return $totalTax * self::TAX_ADULT_PRICE;
+    }
+
     public function getTaxChildQty(): int
     {
         $totalChild = $this->getChild();
