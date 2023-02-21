@@ -181,8 +181,17 @@ class Booking
 
     public function getTotalPoolTtcPrice(): int
     {
-        $ttcPrice = $this->getTotalPriceBsDays() + $this->getTotalPriceBsDays();
-        return $ttcPrice;
+        return $this->getTotalPoolAdultPrice() + $this->getTotalPoolChildPrice();
+    }
+
+    public function getTotalPoolTtcPrice(): int
+    {
+        return $this->getTotalPoolTtcPrice() / self::VAT_RATE_20;
+    }
+
+    public function getTotalVat20(): int
+    {
+        return $this->getTotalPoolTtcPrice() - $this->getTotalPoolTtcPrice();
     }
 
     public function getId(): ?int
