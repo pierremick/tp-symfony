@@ -78,7 +78,7 @@
                         <tr>
                           <th scope="col">Detail de la réservation</th>
                           <th scope="col">Prix unit</th>
-                          <th scope="col">Qté</th>
+                          <th scope="col" class="text-center">Qté</th>
                           <th scope="col">Prix total</th>
                         </tr>
                       </thead>
@@ -89,7 +89,7 @@
                               journée/nuitée basse saison
                           </th>
                           <td>{{ booking.position.type.price / 100 }} €</td>
-                          <td>{{ booking.getBsDays }}</td>
+                          <td class="text-center">{{ booking.getBsDays }}</td>
                           <td>{{ booking.getTotalPriceBsDays/100 }} €</td>
                         </tr>
                       {% endif %}
@@ -99,7 +99,7 @@
                               journée/nuitée haute saison
                           </th>
                           <td>{{ booking.position.type.price / 100 * 1.15 }} €</td>
-                          <td>{{ booking.getHsDays }}</td>
+                          <td class="text-center">{{ booking.getHsDays }}</td>
                           <td>{{ booking.getTotalPriceHsDays/100 }} €</td>
                         </tr>
                         {% endif %}
@@ -108,7 +108,7 @@
                             entrée piscine (adulte)
                           </th>
                           <td>{{ pool_adult }} €</td>
-                          <td>{{ booking.adultPool }}</td>
+                          <td class="text-center">{{ booking.adultPool }}</td>
                           <td>{{ booking.getTotalPoolAdultPrice }} €</td>
                         </tr>
                         <tr>
@@ -116,7 +116,7 @@
                             entrée piscine (enfant)
                           </th>
                           <td>{{ pool_child }} €</td>
-                          <td>{{ booking.childPool }}</td>
+                          <td class="text-center">{{ booking.childPool }}</td>
                           <td>??? €</td>
                         </tr>
                       <tr>
@@ -124,7 +124,7 @@
                               taxe de séjour (adulte)
                           </th>
                           <td>{{ tax_adult }} €</td>
-                          <td>{{ booking.getTaxAdultQty }}</td>
+                          <td class="text-center">{{ booking.getTaxAdultQty }}</td>
                           <td>??? €</td>
                       </tr>
                       <tr>
@@ -132,7 +132,7 @@
                               taxe de séjour (enfant)
                           </th>
                           <td>{{ tax_child }} €</td>
-                          <td>{{ booking.getTaxChildQty }}</td>
+                          <td class="text-center">{{ booking.getTaxChildQty }}</td>
                           <td>??? €</td>
                       </tr>
                       <tr>
