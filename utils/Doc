@@ -1,15 +1,1 @@
-L'entity "Position" représente un emplacement au camping de l'espadrille volante.
-Elle est en relation (ManyToOne) via sa colonne "type" avec l'entité "Type" qui représente les types d'emplacements
-
-1. Afficher en front via FrontController :
-
-- la liste de toutes les "positions" disponibles à la location active (en ligne)
-(dans l'entity Position il existe un champ "active" de type boolean).
-code à écrire dans le PositionRepository, dans le FrontController et dans le template positions.html.twig
-
-Sur la page listant toutes les "positions" active, ajouter un formulaire permettant de filtrer les "positions" sans avoir à recharger la page.
-Les critères de filtre sont les suivants :
-
-- par types de positions,
-- par capacité maximale (champ "capacity" dans l'entity "Type").
 
