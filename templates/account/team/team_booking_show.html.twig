@@ -64,10 +64,13 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            {{ booking.createdAt|date("d/m/Y à G:i", "Europe/Paris") }} ({{ booking.position.name }})<br><br>
                             {{ booking.days }} jour{% if booking.days > 1 %}s{% endif %} en {{ booking.position.type.name }}<br>
                             pour {{ booking.adult }} adulte{% if booking.adult > 1 %}s{% endif %} et {{ booking.child }} enfant{% if booking.child > 1 %}s{% endif %}<br>
                             du {{ booking.checkin|date("d/m/Y") }} au {{ booking.checkout|date("d/m/Y") }}
+                        </div>
+                        <div>
+                            Date de réservation : {{ booking.createdAt|date("d/m/Y à G:i", "Europe/Paris") }}<br>
+                            Mobil-Home : {{ booking.position.name }}
                         </div>
 
                     <table class="table table-nowrap table-vertical-border-striped table-team-booking">
