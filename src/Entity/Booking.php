@@ -164,6 +164,21 @@ class Booking
         return $totalTax * self::TAX_CHILD_PRICE;
     }
 
+    public function getTotalPositionTtcPrice(): int
+    {
+        $ttcPrice = $this->getTotalPriceBsDays() + $this->getTotalPriceBsDays();
+        return $ttcPrice;
+    }
+    public function getTotalPositionHtPrice(): int
+    {
+        $htPrice = $this->getTotalPriceBsDays() + $this->getTotalPriceBsDays();
+        return $htPrice / self::VAT_RATE_10;
+    }
+    public function getTotalVat10(): int
+    {
+        return $this->getTotalPositionTtcPrice() + $this->getTotalPositionHtPrice();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
