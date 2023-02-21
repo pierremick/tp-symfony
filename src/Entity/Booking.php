@@ -179,6 +179,12 @@ class Booking
         return $this->getTotalPositionTtcPrice() - $this->getTotalPositionHtPrice();
     }
 
+    public function getTotalPoolTtcPrice(): int
+    {
+        $ttcPrice = $this->getTotalPriceBsDays() + $this->getTotalPriceBsDays();
+        return $ttcPrice;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
