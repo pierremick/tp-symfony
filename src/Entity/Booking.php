@@ -97,7 +97,7 @@ class Booking
 
     public function getTotalPriceHsDays(): float
     {
-        // Récupère le nombre de jours en haute saison pour cette réservation
+        // Récupère le nombre de jours en haute saison pour cette réservation et le mutiplie par 1.15
         $hsDays = $this->getHsDays();
         $position = $this->getPosition();
         $price = $position->getType()->getPrice() * self::HS_RATE;
@@ -120,6 +120,13 @@ class Booking
         $price = $position->getType()->getPrice();
 
         return $bsDays * $price;
+    }
+
+    public function getTotalPoolAdultPrice(): int
+    {
+        $totalTickets = $this->getAdultPool();
+
+        return $totalTickets * self::POOL_ADULT_PRICE;
     }
 
     public function getId(): ?int
