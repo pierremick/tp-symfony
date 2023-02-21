@@ -88,9 +88,9 @@
                           <th scope="row">
                               journée/nuitée basse saison
                           </th>
-                          <td>{{ booking.position.type.price / 100 }} €</td>
+                          <td class="text-end pe-3">{{ booking.position.type.price / 100 }} €</td>
                           <td class="text-center">{{ booking.getBsDays }}</td>
-                          <td>{{ booking.getTotalPriceBsDays/100 }} €</td>
+                          <td class="text-end pe-3">{{ booking.getTotalPriceBsDays/100 }} €</td>
                         </tr>
                       {% endif %}
                       {% if booking.getHsDays %}
@@ -98,66 +98,66 @@
                           <th scope="row">
                               journée/nuitée haute saison
                           </th>
-                          <td>{{ booking.position.type.price / 100 * 1.15 }} €</td>
+                          <td class="text-end pe-3">{{ booking.position.type.price / 100 * 1.15 }} €</td>
                           <td class="text-center">{{ booking.getHsDays }}</td>
-                          <td>{{ booking.getTotalPriceHsDays/100 }} €</td>
+                          <td class="text-end pe-3">{{ booking.getTotalPriceHsDays/100 }} €</td>
                         </tr>
                         {% endif %}
                         <tr>
                           <th scope="row">
                             entrée piscine (adulte)
                           </th>
-                          <td>{{ pool_adult }} €</td>
+                          <td class="text-end pe-3">{{ pool_adult }} €</td>
                           <td class="text-center">{{ booking.adultPool }}</td>
-                          <td>{{ booking.getTotalPoolAdultPrice }} €</td>
+                          <td class="text-end pe-3">{{ booking.getTotalPoolAdultPrice }} €</td>
                         </tr>
                         <tr>
                           <th scope="row">
                             entrée piscine (enfant)
                           </th>
-                          <td>{{ pool_child }} €</td>
+                          <td class="text-end pe-3">{{ pool_child }} €</td>
                           <td class="text-center">{{ booking.childPool }}</td>
-                          <td>??? €</td>
+                          <td class="text-end pe-3">??? €</td>
                         </tr>
                       <tr>
                           <th scope="row">
                               taxe de séjour (adulte)
                           </th>
-                          <td>{{ tax_adult }} €</td>
+                          <td class="text-end pe-3">{{ tax_adult }} €</td>
                           <td class="text-center">{{ booking.getTaxAdultQty }}</td>
-                          <td>??? €</td>
+                          <td class="text-end pe-3">??? €</td>
                       </tr>
                       <tr>
                           <th scope="row">
                               taxe de séjour (enfant)
                           </th>
-                          <td>{{ tax_child }} €</td>
+                          <td class="text-end pe-3">{{ tax_child }} €</td>
                           <td class="text-center">{{ booking.getTaxChildQty }}</td>
-                          <td>??? €</td>
+                          <td class="text-end pe-3">??? €</td>
                       </tr>
                       <tr>
                           <th colspan="3" scope="row" class="text-end">
                               total HT
                           </th>
-                          <td>??? €</td>
+                          <td class="text-end pe-3">??? €</td>
                       </tr>
                       <tr>
                           <th colspan="3" scope="row" class="text-end">
                               TVA 10%
                           </th>
-                          <td>??? €</td>
+                          <td class="text-end pe-3">??? €</td>
                       </tr>
                       <tr>
                           <th colspan="3" scope="row" class="text-end">
                               TVA 20%
                           </th>
-                          <td>??? €</td>
+                          <td class="text-end pe-3">??? €</td>
                       </tr>
                       <tr>
                           <th colspan="3" scope="row" class="text-end">
                               Net à payer
                           </th>
-                          <td>??? €</td>
+                          <td class="text-end pe-3">??? €</td>
                       </tr>
                       </tbody>
                     </table>
