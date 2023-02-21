@@ -100,7 +100,7 @@ class Booking
         // Récupère le nombre de jours en haute saison pour cette réservation et le mutiplie par 1.15
         $hsDays = $this->getHsDays();
         $position = $this->getPosition();
-        $price = $position->getType()->getPrice() / 100 * self::HS_RATE;
+        $price = $position->getType()->getPrice() * self::HS_RATE;
 
         return $hsDays * $price;
     }
