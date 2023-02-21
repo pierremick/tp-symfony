@@ -65,6 +65,10 @@
                     <div class="card-body">
                         <div class="row pb-5">
                             <div class="col-md-6">
+                                <p>
+                                    Date de : <strong>{{ booking.createdAt|date("d/m/Y à G:i", "Europe/Paris") }}</strong><br>
+                                    Mobil-Home : <strong>{{ booking.position.name }}</strong>
+                                </p>
                                 <div class="bg-soft-primary border border-primary rounded p-3">
                                     <h6>
                                         {{ booking.days }} jour{% if booking.days > 1 %}s{% endif %} en {{ booking.position.type.name }}
@@ -76,8 +80,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                Date de réservation : {{ booking.createdAt|date("d/m/Y à G:i", "Europe/Paris") }}<br>
-                                Mobil-Home : {{ booking.position.name }}
+                                customer
                             </div>
                         </div>
 
