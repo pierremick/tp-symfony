@@ -132,13 +132,13 @@
                       </tr>
                       <tr>
                           <th colspan="3" scope="row" class="text-end">
-                              {{ booking.getTaxAdultQty }} taxe{% booking.getTaxAdultQty > 1 %}s{% endif %} de séjour adulte
+                              {{ booking.getTaxAdultQty }} taxe{% if booking.getTaxAdultQty > 1 %}s{% endif %} de séjour adulte
                           </th>
                           <td class="text-end pe-3">{{ booking.getTotalTaxAdultPrice }} €</td>
                       </tr>
                       <tr>
                           <th colspan="3" scope="row" class="text-end">
-                              {{ booking.getTaxChildQty }} taxe{% booking.getTaxChildQty > 1 %}s{% endif %} de séjour enfant
+                              {{ booking.getTaxChildQty }} taxe{% if booking.getTaxChildQty > 1 %}s{% endif %} de séjour enfant
                           </th>
                           <td class="text-end pe-3">{{ booking.getTotalTaxChildPrice }} €</td>
                       </tr>
