@@ -82,7 +82,10 @@
                                             <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="100" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
                                             <td class="align-items-center">{{ position.name }} {% if position.isActive %} <sup><span class="badge bg-success">en ligne</span></sup>{% else %} <sup><span class="badge bg-danger">hors ligne</span></sup>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}</td>
                                             <td class="align-items-center">{{ position.type.price / 100 }} €<br>{{ position.type.price * 1.15 / 100 }} € (HS)</td>
-                                            <td class="align-items-center">...</td>
+                                            <td class="align-items-center">
+                                                <div><button type="button" class="btn btn-primary btn-sm rounded-pill">détail</button></div>
+                                                <div><button type="button" class="btn btn-primary btn-sm rounded-pill">réserver</button></div>
+                                            </td>
                                         </tr>
                                         {% endfor %}
                                         </tbody>
