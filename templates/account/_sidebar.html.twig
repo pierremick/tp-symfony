@@ -45,6 +45,9 @@
                 </li>
             {% endif %}
             <!-- End User is OWNER -->
+        </ul>
+        <span class="text-cap mt-3">Mon compte</span>
+        <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
             <li class="nav-item">
                 <a class="nav-link{% if app.request.get('_route') == 'account_info' %} active{% endif %}" href="{{ path('account_info') }}">
                     <i class="bi-person-badge nav-icon"></i> Informations
