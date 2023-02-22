@@ -26,7 +26,7 @@ class OwnerController extends AbstractController
         return $this->render('account/index.html.twig', [
             'page_title' => 'Mon compte',
             'positions' => $positions,
-            'users' => $users,
+            //'users' => $users,
         ]);
     }
 }
