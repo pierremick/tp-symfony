@@ -80,7 +80,7 @@
                                         {% for position in positions %}
                                         <tr>
                                             <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="100" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
-                                            <td class="align-items-center">{{ position.name }}<br>{{ position.type.name }}<br>{% if position.isActive %}en ligne{% else %}hors ligne{% endif %}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}</td>
+                                            <td class="align-items-center">{{ position.name }} {% if position.isActive %}<span class="badge badge-success">en ligne</span>{% else %}<span class="badge badge-warning">hors ligne</span>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}</td>
                                             <td class="align-items-center">{{ position.type.price / 100 }} €<br>{{ position.type.price * 1.15 / 100 }} € (HS)</td>
                                             <td class="align-items-center">...</td>
                                         </tr>
