@@ -13,14 +13,14 @@ use DateTime;
 class Booking
 {
     // Constantes pour les prix, taux de TVA, taxes, etc.
-    const DISCOUNT_RATE = 1.05;
+    const DISCOUNT_RATE = 0.05;
     const HS_RATE = 1.15;
     const VAT_RATE_10 = 1.10;
     const VAT_RATE_20 = 1.20;
     const POOL_ADULT_PRICE = 1.50;
     const POOL_CHILD_PRICE = 1.00;
-    const TAX_ADULT_PRICE = 0.60;
-    const TAX_CHILD_PRICE = 0.35;
+    const TAX_ADULT_PRICE = 60;
+    const TAX_CHILD_PRICE = 35;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -58,150 +58,8 @@ class Booking
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $status = null;
 
-    public function __construct()
-    {
-        $this->purchaseOrders = new ArrayCollection();
-    }
-
-    // Retourne le nombre total de personnes (adultes + enfants)
-    public function getPersons(): int
-    {
-        return $this->getAdult() + $this->getChild();
-    }
-
-    // Retourne le nombre de jours total de la réservation
-    public function getDays(): int
-    {
-        $interval = $this->getCheckin()->diff($this->getCheckout());
-
-        return $interval->days;
-    }
-
-    // Retourne le nombre de jours en haute saison
-    public function getHsDays(): int
-    {
-        $startDate = new DateTime('2023-06-21');
-        $endDate = new DateTime('2023-08-31');
-
-        $hsDays = 0;
-        $currentDate = clone $this->getCheckin();
-        while ($currentDate <= $this->getCheckout()) {
-            if ($currentDate >= $startDate && $currentDate <= $endDate) {
-                $hsDays++;
-            }
-            $currentDate->modify('+1 day');
-        }
-
-        return $hsDays;
-    }
-
-    public function getTotalPriceHsDays(): float
-    {
-        // Récupère le nombre de jours en haute saison pour cette réservation et le mutiplie par 1.15
-        $hsDays = $this->getHsDays();
-        $position = $this->getPosition();
-        $price = $position->getType()->getPrice() * self::HS_RATE;
-
-        return $hsDays * $price;
-    }
-
-    public function getBsDays(): int
-    {
-        $totalDays = $this->getDays();
-        $hsDays = $this->getHsDays();
-
-        return $totalDays - $hsDays;
-    }
-
-    public function getTotalPriceBsDays(): float
-    {
-        $bsDays = $this->getBsDays();
-        $position = $this->getPosition();
-        $price = $position->getType()->getPrice();
-
-        return $bsDays * $price;
-    }
-
-    public function getTotalPoolAdultPrice(): int
-    {
-        $totalTickets = $this->getAdultPool();
-
-        return $totalTickets * self::POOL_ADULT_PRICE;
-    }
-
-    public function getTotalPoolChildPrice(): int
-    {
-        $totalTickets = $this->getChildPool();
-
-        return $totalTickets * self::POOL_CHILD_PRICE;
-    }
-
-    public function getTaxAdultQty(): int
-    {
-        $totalAdult = $this->getAdult();
-        $totalDaysAdult = $this->getDays();
-        return $totalAdult * $totalDaysAdult;
-    }
-
-    public function getTotalTaxAdultPrice(): int
-    {
-        $totalTax = $this->getTaxAdultQty();
-
-        return $totalTax * self::TAX_ADULT_PRICE;
-    }
-
-    public function getTaxChildQty(): int
-    {
-        $totalChild = $this->getChild();
-        $totalDaysChild = $this->getDays();
-        return $totalChild * $totalDaysChild;
-    }
-
-    public function getTotalTaxChildPrice(): int
-    {
-        $totalTax = $this->getTaxChildQty();
-
-        return $totalTax * self::TAX_CHILD_PRICE;
-    }
-
-    public function getTotalPositionTtcPrice(): int
-    {
-        $ttcPrice = $this->getTotalPriceBsDays() + $this->getTotalPriceBsDays();
-        return $ttcPrice;
-    }
-    public function getTotalPositionHtPrice(): int
-    {
-        $htPrice = $this->getTotalPriceBsDays() + $this->getTotalPriceBsDays();
-        return $htPrice / self::VAT_RATE_10;
-    }
-    public function getTotalVat10(): int
-    {
-        return $this->getTotalPositionTtcPrice() - $this->getTotalPositionHtPrice();
-    }
-
-    public function getTotalPoolTtcPrice(): int
-    {
-        return $this->getTotalPoolAdultPrice() + $this->getTotalPoolChildPrice();
-    }
-
-    public function getTotalPoolHtPrice(): int
-    {
-        return $this->getTotalPoolTtcPrice() / self::VAT_RATE_20;
-    }
-
-    public function getTotalVat20(): int
-    {
-        return $this->getTotalPoolTtcPrice() - $this->getTotalPoolHtPrice();
-    }
-
-    public function getTotalHt(): int
-    {
-        $positionHt = $this->getTotalPositionHtPrice() / 100;
-        $poolHt = $this->getTotalPoolHtPrice();
-        $tax = $this->getTotalTaxAdultPrice() + $this->getTotalTaxChildPrice();
-        $total = $positionHt + $poolHt + $tax;
-        return $total;
-    }
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    private ?Customer $customer = null;
 
     public function getId(): ?int
     {
@@ -324,6 +182,234 @@ class Booking
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    // Retourne le nombre total de personnes (adultes + enfants)
+    public function getPersons(): int
+    {
+        return $this->getAdult() + $this->getChild();
+    }
+
+    // Retourne le nombre de jours total de la réservation
+    public function getDays(): int
+    {
+        $interval = $this->getCheckin()->diff($this->getCheckout());
+
+        return $interval->days;
+    }
+
+    // Retourne le nombre de jours en haute saison
+    public function getHsDays(): int
+    {
+        $startDate = new DateTime('2023-06-21');
+        $endDate = new DateTime('2023-08-31');
+
+        $hsDays = 0;
+        $currentDate = clone $this->getCheckin();
+        while ($currentDate <= $this->getCheckout()) {
+            if ($currentDate >= $startDate && $currentDate <= $endDate) {
+                $hsDays++;
+            }
+            $currentDate->modify('+1 day');
+        }
+
+        return $hsDays;
+    }
+
+    public function getNormalPrice(): float
+    {
+        $price = $this->getPosition()->getType()->getPrice();
+        return $price / 100;
+    }
+
+    public function getHsPrice(): float
+    {
+        $price = $this->getNormalPrice();
+        return $price * self::HS_RATE;
+    }
+
+    // Calcul du prix total Haute Saison
+    public function getTotalPriceHsDays(): float
+    {
+        $hsDays = $this->getHsDays();
+        $price = $this->getNormalPrice() * self::HS_RATE;
+
+        return $hsDays * $price;
+    }
+
+    public function getBsDays(): int
+    {
+        $totalDays = $this->getDays();
+        $hsDays = $this->getHsDays();
+
+        return $totalDays - $hsDays;
+    }
+
+    // Calcul du prix total Basse Saison
+    public function getTotalPriceBsDays(): float
+    {
+        $bsDays = $this->getBsDays();
+        $price = $this->getNormalPrice();
+
+        return $bsDays * $price;
+    }
+
+    public function getPoolAdultPrice(): float
+    {
+      return self::POOL_ADULT_PRICE;
+    }
+
+    public function getPoolChildPrice(): float
+    {
+      return self::POOL_CHILD_PRICE;
+    }
+
+    public function getTotalPoolAdultPrice(): float
+    {
+        $totalTickets = $this->getAdultPool();
+
+        return $totalTickets * self::POOL_ADULT_PRICE;
+    }
+
+    public function getTotalPoolChildPrice(): float
+    {
+        $totalTickets = $this->getChildPool();
+
+        return $totalTickets * self::POOL_CHILD_PRICE;
+    }
+
+    public function getTaxAdultQty(): int
+    {
+        $totalAdult = $this->getAdult();
+        $totalDaysAdult = $this->getDays();
+        return $totalAdult * $totalDaysAdult;
+    }
+
+    public function getTotalTaxAdultPrice(): int
+    {
+      $qty = $this->getTaxAdultQty();
+      $total = $qty * self::TAX_ADULT_PRICE;
+
+      return $total / 100;
+    }
+
+    // Nombre de taxe de séjour (enfant)
+    public function getTaxChildQty(): int
+    {
+        $totalChild = $this->getChild();
+        $totalDaysChild = $this->getDays();
+        return $totalChild * $totalDaysChild;
+    }
+
+    // Calcul du montant total de la taxe de séjour (enfant)
+    public function getTotalTaxChildPrice(): float
+    {
+        $qty = $this->getTaxChildQty();
+        $total = $qty * self::TAX_CHILD_PRICE;
+
+        return $total / 100;
+    }
+
+
+    public function getTotalTtc(): float
+    {
+        $positionBs = $this->getTotalPriceBsDays();
+        $positionHs = $this->getTotalPriceHsDays();
+        $poolAdult = $this->getTotalPoolAdultPrice();
+        $poolChild = $this->getTotalPoolChildPrice();
+        $totalPrice = $positionBs + $positionHs + $poolAdult + $poolChild;
+        return $totalPrice;
+    }
+
+    public function getVat10(): float
+    {
+        $bs = $this->getTotalPriceBsDays();
+        $hs = $this->getTotalPriceHsDays();
+        $total = $bs + $hs;
+        $ht = $total / self::VAT_RATE_10;
+        $vat = $total - $ht;
+
+        return $vat;
+    }
+
+    public function getVat20(): float
+    {
+        $adult = $this->getTotalPoolAdultPrice();
+        $child = $this->getTotalPoolChildPrice();
+        $total = $adult + $child;
+        $ht = $total / self::VAT_RATE_20;
+        $vat = $total - $ht;
+
+        return $vat;
+    }
+
+    public function getTotalHt(): float
+    {
+        $ttc = $this->getTotalTtc();
+        $vat10 = $this->getVat10();
+        $vat20 = $this->getVat20();
+        $total = $ttc - $vat10 + $vat20;
+
+        return $total;
+    }
+
+    // Calcul du prix remisé
+    public function getDiscountedPrice(): float
+    {
+        $price = 0;
+        $totalDays = $this->getDays();
+        $hsDays = $this->getHsDays();
+        $bsDays = $this->getBsDays();
+        $normalPrice = $this->getNormalPrice();
+
+        // Calcule le prix total des jours en haute saison
+        $hsPrice = $hsDays * $normalPrice * self::HS_RATE;
+        $price += $hsPrice;
+
+        // Calcule le prix total des jours en basse saison
+        $bsPrice = $bsDays * $normalPrice;
+        $price += $bsPrice;
+
+        // Applique une remise pour chaque tranche de 7 jours
+        $weeks = (int) ($totalDays / 7);
+        for ($i = 0; $i < $weeks; $i++) {
+            $price -= ($normalPrice * 7 * self::DISCOUNT_RATE);
+        }
+
+        return $price;
+    }
+
+    // Montant de la remise
+    public function getDiscount(): float
+    {
+        $normalPrice = $this->getTotalPriceBsDays() + $this->getTotalPriceHsDays();
+        $discountPrice = $this->getDiscountedPrice();
+        $total = $normalPrice - $discountPrice;
+
+        return $total;
+    }
+
+    public function getPayable(): float
+    {
+        $ttc = $this->getTotalTtc();
+        $adultTax = $this->getTotalTaxAdultPrice();
+        $childTax = $this->getTotalTaxChildPrice();
+        $discount = $this->getDiscount();
+        $total = $ttc + $adultTax + $childTax - $discount;
+
+        return $total;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
 
         return $this;
     }

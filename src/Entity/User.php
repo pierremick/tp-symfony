@@ -234,4 +234,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getTotalRetribution(): float
+    {
+        $totalRetribution = 0;
+
+        foreach ($this->getPositions() as $position) {
+            $totalRetribution += $position->getTotalRetribution($this);
+        }
+
+        return $totalRetribution;
+    }
+
 }

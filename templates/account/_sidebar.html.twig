@@ -29,33 +29,38 @@
     <span class="text-cap mt-4">Équipe</span>
     <!-- List -->
     <ul class="nav nav-sm nav-tabs nav-vertical">
-    <li class="nav-item">
-      <a class="nav-link{% if app.request.get('_route') == 'team' %} active{% endif %}" href="{{ path('team') }}">
-        <i class="bi-people nav-icon"></i> Équipe
-      </a>
-    </li>
-      <li class="nav-item">
-        <a class="nav-link{% if app.request.get('_route') == 'team_booking' %} active{% endif %}" href="{{ path('team_booking') }}">
-          <i class="bi-credit-card nav-icon"></i> Booking
-        </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.get('_route') == 'team_booking' %} active{% endif %}" href="{{ path('team_booking') }}">
+                <i class="bi-credit-card nav-icon"></i> Booking
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.get('_route') == 'team_positions' %} active{% endif %}" href="{{ path('team_positions') }}">
+                <i class="bi-credit-card nav-icon"></i> Emplacements
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link{% if app.request.get('_route') == 'team_owner' %} active{% endif %}" href="{{ path('team_owner') }}">
                 <i class="bi-geo-alt nav-icon"></i> Propriétaires
             </a>
         </li>
-      <li class="nav-item">
-    <a class="nav-link{% if app.request.get('_route') == 'team_customer' %} active{% endif %}" href="{{ path('team_customer') }}">
-          <i class="bi-credit-card nav-icon"></i> Clients
-        </a>
-      </li>
-      <li class="nav-item">
-    <a class="nav-link{% if app.request.get('_route') == 'team_invoice' %} active{% endif %}" href="{{ path('team_invoice') }}">
-          <i class="bi-credit-card nav-icon"></i> Factures
-        </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.get('_route') == 'team_customers' %} active{% endif %}" href="{{ path('team_customers') }}">
+                <i class="bi-credit-card nav-icon"></i> Clients
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.get('_route') == 'team_invoice' %} active{% endif %}" href="{{ path('team_invoice') }}">
+                <i class="bi-credit-card nav-icon"></i> Factures
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if app.request.get('_route') == 'team' %} active{% endif %}" href="{{ path('team') }}">
+                <i class="bi-people nav-icon"></i> Équipe
+            </a>
+        </li>
     </ul>
-  {% endif %}
+    {% endif %}
     <!-- End TEAM ADMIN -->
 
     <!-- TABLEAU DE BORD -->

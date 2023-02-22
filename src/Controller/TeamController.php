@@ -4,7 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Booking;
+use App\Entity\Customer;
+use App\Entity\Position;
 use App\Repository\BookingRepository;
+use App\Repository\CustomerRepository;
+use App\Repository\PositionRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TeamController extends AbstractController
 {
-    #[Route('/account/team', name: 'team')]
+    #[Route('/account/team/team', name: 'team')]
     public function team(Request $request, UserRepository $userRepository): Response
     {
         // Récupère les positions actives à afficher
@@ -27,7 +31,25 @@ class TeamController extends AbstractController
         ]);
     }
 
-    #[Route('/account/team/booking/{order}', name: 'team_booking', requirements: ['order' => 'asc|desc'], defaults: ['order' => 'desc'])]
+    #[Route('/account/team/positions', name: 'team_positions')]
+    public function team_positions(PositionRepository $positionRepository, Request $request): Response
+    {
+        // Récupérer les paramètres de tri dans l'URL
+        $sortColumn = $request->query->get('sortColumn', 'id');
+        $sortOrder = $request->query->get('sortOrder', 'asc');
+
+        $positions = $positionRepository->findAllSorted($sortColumn, $sortOrder);
+
+        return $this->render('account/team/team_positions.html.twig', [
+            'positions' => $positions,
+            'sortColumn' => $sortColumn,
+            'sortOrder' => $sortOrder,
+            'page_name' => 'emplacements',
+            'page_title' => 'Emplacements',
+        ]);
+    }
+
+    #[Route('/account/team/{order}', name: 'team_booking', requirements: ['order' => 'asc|desc'], defaults: ['order' => 'desc'])]
     public function team_booking(BookingRepository $bookingRepository, Request $request, $order): Response
     {
         $bookings = $bookingRepository->findBy([], [
@@ -52,17 +74,8 @@ class TeamController extends AbstractController
     #[Route('/account/team/booking/{id}', name: 'team_booking_show')]
     public function team_booking_show(Booking $booking): Response
     {
-        $poolAdultPrice = Booking::POOL_ADULT_PRICE;
-        $poolChildPrice = Booking::POOL_CHILD_PRICE;
-        $taxAdultPrice = Booking::TAX_ADULT_PRICE;
-        $taxChildPrice = Booking::TAX_CHILD_PRICE;
-
         return $this->render('account/team/team_booking_show.html.twig', [
             'booking' => $booking,
-            'pool_adult' => $poolAdultPrice,
-            'pool_child' => $poolChildPrice,
-            'tax_adult' => $taxAdultPrice,
-            'tax_child' => $taxChildPrice,
             'page_name' => "détail d'une réservation",
             'page_title' => "Détail d'une réservation",
         ]);
@@ -80,14 +93,31 @@ class TeamController extends AbstractController
         ]);
     }
 
-    #[Route('/account/team/customer', name: 'team_customer')]
-    public function team_customer(): Response
+    #[Route('/account/team/customers', name: 'team_customers')]
+    public function team_customers(CustomerRepository $customerRepository, Request $request): Response
     {
-        return $this->render('account/team/team_customer.html.twig', [
+        // Récupérer les paramètres de tri dans l'URL
+        $sortColumn = $request->query->get('sortColumn', 'id');
+        $sortOrder = $request->query->get('sortOrder', 'asc');
+
+        $customers = $customerRepository->findAllSorted($sortColumn, $sortOrder);
+
+        return $this->render('account/team/team_customers.html.twig', [
+            'customers' => $customers,
+            'sortColumn' => $sortColumn,
+            'sortOrder' => $sortOrder,
             'page_name' => 'Clients',
             'page_title' => 'Clients',
         ]);
     }
+
+
+
+
+
+
+
+
 
     #[Route('/account/team/invoice', name: 'team_invoice')]
     public function team_invoice(): Response

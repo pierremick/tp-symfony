@@ -39,6 +39,29 @@ class CustomerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllSorted(string $sortColumn = 'id', string $sortOrder = 'asc')
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+
+        // Ajout de clauses ORDER BY en fonction des paramètres de tri
+        switch ($sortColumn) {
+            case 'fullname':
+                $queryBuilder->orderBy('c.fullname', $sortOrder);
+                break;
+            case 'city':
+                $queryBuilder->orderBy('c.city', $sortOrder);
+                break;
+            case 'createdAt':
+                $queryBuilder->orderBy('c.createdAt', $sortOrder);
+                break;
+            default:
+                $queryBuilder->orderBy('c.id', $sortOrder);
+                break;
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Customer[] Returns an array of Customer objects
 //     */

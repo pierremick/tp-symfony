@@ -13,6 +13,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class Position
 {
+    // Constantes pour les prix, taux de TVA, taxes, etc.
+    const HS_RATE = 1.15;
+    const RETRIBUTION = 0.35;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -290,5 +294,86 @@ class Position
 
         return $this;
     }
+
+    public function getTotalBookings(): int
+    {
+        $total = 0;
+
+        foreach ($this->getBookings() as $booking) {
+            $total++;
+        }
+
+        return $total;
+    }
+
+    public function getHsDays(): int
+    {
+        $startDate = new DateTime('2023-06-21');
+        $endDate = new DateTime('2023-08-31');
+
+        $hsDays = 0;
+
+        foreach ($this->getBookings() as $booking) {
+            $checkin = $booking->getCheckin();
+            $checkout = $booking->getCheckout();
+
+            $currentDate = clone $checkin;
+
+            while ($currentDate <= $checkout) {
+                if ($currentDate >= $startDate && $currentDate <= $endDate) {
+                    $hsDays++;
+                }
+
+                $currentDate->modify('+1 day');
+            }
+        }
+
+        return $hsDays;
+    }
+
+    public function getBsDays(): int
+    {
+        $totalDays = $this->getTotalDays();
+        $hsDays = $this->getHsDays();
+
+        return $totalDays - $hsDays;
+    }
+
+    public function getTotalBsDays(): int
+    {
+        $total = 0;
+
+        foreach ($this->getBookings() as $booking) {
+            $total += $booking->getBsDays();
+        }
+
+        return $total;
+    }
+
+
+    public function getNormalPrice(): ?float
+    {
+        return $this->getPrice / 100;
+    }
+
+    public function getTotalRetribution(User $owner): float
+    {
+        $totalBsDays = 0;
+        $totalHsDays = 0;
+
+        foreach ($this->getBookings() as $booking) {
+            if ($booking->getCheckin() >= new \DateTime('2023-06-21') && $booking->getCheckout() <= new \DateTime('2023-08-31') && $booking->getStatus() === 'confirmed' && $booking->getPosition()->getOwner() === $owner) {
+                $totalBsDays += $booking->getBsDays();
+                $totalHsDays += $booking->getHsDays();
+            }
+        }
+
+        $normalPrice = $this->getNormalPrice();
+        $totalBsRetribution = $totalBsDays * $normalPrice * self::RETRIBUTION;
+        $totalHsRetribution = $totalHsDays * $normalPrice * self::HS_RATE * self::RETRIBUTION;
+
+        return $totalBsRetribution + $totalHsRetribution;
+    }
+
 
 }

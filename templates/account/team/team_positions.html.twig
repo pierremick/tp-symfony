@@ -1,0 +1,120 @@
+{% extends 'account.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb -->
+    <div class="navbar-dark bg-dark" style="background-image: url(/svg/components/wave-pattern-light.svg);">
+      <div class="container content-space-1 content-space-b-lg-3">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="d-none d-lg-block">
+              <h1 class="h2 text-white">{{ page_title }}</h1>
+            </div>
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-light mb-0">
+                <li class="breadcrumb-item">mon compte</li>
+                  <li class="breadcrumb-item">admin</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ page_name }}</li>
+              </ol>
+            </nav>
+            <!-- End Breadcrumb -->
+          </div>
+          <!-- End Col -->
+
+          <div class="col-auto">
+            <div class="d-none d-lg-block">
+              <a class="btn btn-soft-light btn-sm" href="{{ path('logout') }}">se déconnecter</a>
+            </div>
+
+            <!-- Responsive Toggle Button -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-default">
+                <i class="bi-list"></i>
+              </span>
+              <span class="navbar-toggler-toggled">
+                <i class="bi-x"></i>
+              </span>
+            </button>
+            <!-- End Responsive Toggle Button -->
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+    <!-- Content -->
+    <div class="container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="navbar-expand-lg navbar-light">
+                    <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
+                        {% include 'account/_sidebar.html.twig' %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-header-title">{{ page_title }}</h5>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                        <thead>
+                            <tr>
+                                <th class="ps-5">
+                                    <a href="{{ path('team_positions', {'sortColumn': 'id', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
+                                        ID
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ path('team_positions', {'sortColumn': 'name', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
+                                        Name
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ path('team_positions', {'sortColumn': 'type', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
+                                        Type
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ path('team_positions', {'sortColumn': 'owner', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
+                                        Owner
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for position in positions %}
+                                <tr>
+                                    <td class="ps-5">{{ position.id }}</td>
+                                    <td>{{ position.name }}</td>
+                                    <td>{{ position.type }}</td>
+                                    <td>{{ position.owner }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <!-- End Table -->
+
+                <!-- Footer -->
+                <div class="card-footer border-top">
+                <div class="d-flex justify-content-end gap-3">
+                  <a class="btn btn-white" href="{{ path('team') }}">Retour</a>
+                </div>
+                </div>
+                <!-- End Footer -->
+                </div>
+                <!-- End Card -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

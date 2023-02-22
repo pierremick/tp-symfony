@@ -90,6 +90,32 @@ class PositionRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    // PositionRepository.php
+
+    public function findAllSorted(string $sortColumn = 'id', string $sortOrder = 'asc')
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+
+        // Ajout de clauses ORDER BY en fonction des paramètres de tri
+        switch ($sortColumn) {
+            case 'name':
+                $queryBuilder->orderBy('p.name', $sortOrder);
+                break;
+            case 'owner':
+                $queryBuilder->orderBy('p.owner', $sortOrder);
+                break;
+            case 'type':
+                $queryBuilder->orderBy('p.type', $sortOrder);
+                break;
+            default:
+                $queryBuilder->orderBy('p.id', $sortOrder);
+                break;
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Position[] Returns an array of Position objects
 //     */
