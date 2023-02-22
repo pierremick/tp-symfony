@@ -84,6 +84,11 @@
                                     </a>
                                 </th>
                                 <th>
+                                    <a href="{{ path('team_customers', {'sortColumn': 'isOptinNews', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
+                                        Optin
+                                    </a>
+                                </th>
+                                <th>
                                     actions
                                 </th>
                             </tr>
@@ -94,6 +99,7 @@
                                     <td class="ps-5">{{ customer.id }}</td>
                                     <td>{{ customer.fullname }}</td>
                                     <td>{{ customer.city }}</td>
+                                    <td>{% if customer.isOptinNews %}Oui{% else %}Non{% endif %}</td>
                                     <td><a href="{{ path('team_customer_show', {'id': customer.id}) }}">Voir</a></td>
                                 </tr>
                             {% endfor %}

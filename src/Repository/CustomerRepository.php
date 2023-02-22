@@ -54,6 +54,9 @@ class CustomerRepository extends ServiceEntityRepository
             case 'createdAt':
                 $queryBuilder->orderBy('c.createdAt', $sortOrder);
                 break;
+            case 'isOptinNews':
+                $queryBuilder->orderBy('c.isOptinNews', $sortOrder);
+                break;
             default:
                 $queryBuilder->orderBy('c.id', $sortOrder);
                 break;
