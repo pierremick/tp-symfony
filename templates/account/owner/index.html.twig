@@ -65,7 +65,6 @@
                                     <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
                                 </p>
                             </div>
-                            {% if app.user.isOwner %}
                             <!-- Table -->
                             <table class="table table-owner-positions">
                                 <thead class="thead-light">
@@ -116,8 +115,6 @@
 
                                 </tbody>
                             </table>
-                            <!-- End Table -->
-                            {% endif %}
                         </div>
                     </div>
                 </div>
