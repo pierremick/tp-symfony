@@ -65,8 +65,8 @@
                                     <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
                                 </p>
                             </div>
-                            <!-- Table -->
                             {% if app.user.isOwner %}
+                            <!-- Table -->
                             <table class="table table-owner-positions">
                                 <thead class="thead-light">
                                 <tr>
@@ -90,8 +90,9 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                            {% endif %}
                             <!-- End Table -->
+                            {% endif %}
+
                                 {% if app.user.isTeam %}
                                 <div class="card-body">
 
