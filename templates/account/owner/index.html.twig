@@ -105,12 +105,6 @@
                                     </tr>
                                     {% for booking in position.bookings %}
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
                                             <td>{{ booking.checkin }}</td>
                                             <td>{{ booking.checkout }}</td>
                                             <td>{{ booking.customer.fullname }}<br>{{ booking.adult }} adulte(s) et {{ booking.child }} enfant(s)</td>
@@ -118,6 +112,7 @@
                                         </tr>
                                     {% endfor %}
                                 {% endfor %}
+
 
                                 </tbody>
                             </table>
