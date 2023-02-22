@@ -59,38 +59,6 @@
                             <!-- End Col -->
 
                             <div class="col-lg-9">
-                                <!-- Table -->
-                                <table class="table">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!-- End Table -->
                               <div class="d-grid gap-3 gap-lg-5">
                                 <!-- Card -->
                                 <div class="card">
@@ -98,6 +66,38 @@
                                     <p class="card-header-title">Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir ! <br>
                                     <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small></p>
                                   </div>
+                                    <!-- Table -->
+                                    <table class="table">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table -->
 
                                   {% if app.user.isOwner %}
                                   <div class="card-body">
