@@ -71,8 +71,7 @@
                                         <thead class="thead-light">
                                         <tr>
                                             <th scope="col">image</th>
-                                            <th scope="col">name</th>
-                                            <th scope="col">type</th>
+                                            <th scope="col">description</th>
                                             <th scope="col">active</th>
                                             <th scope="col">en line depuis</th>
                                         </tr>
@@ -81,8 +80,7 @@
                                         {% for position in positions %}
                                         <tr>
                                             <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="80" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
-                                            <td class="align-items-center">{{ position.name }}</td>
-                                            <td class="align-items-center">{{ position.type.name }}</td>
+                                            <td class="align-items-center">{{ position.name }}<br>{{ position.type.name }}</td>
                                             <td class="align-items-center">{% if position.isActive %}en ligne{% else %}hots ligne{% endif %}</td>
                                             <td class="align-items-center">{{ position.createdAt|date('d/m/Y') }}</td>
                                         </tr>
