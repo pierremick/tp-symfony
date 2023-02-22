@@ -24,37 +24,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class AccountController extends AbstractController
+class OwnerController extends AbstractController
 {
-    #[Route('/account', name: 'account')]
-    public function account_positions(PositionRepository $positionRepository): Response
+    #[Route('/account/owner', name: 'account_owner')]
+    public function account_owner(PositionRepository $positionRepository): Response
     {
         $user = $this->getUser(); // Récupère l'utilisateur connecté
         $positions = $positionRepository->findByOwner($user);
 
-        return $this->render('account/index.html.twig', [
-            'page_title' => 'Mon compte',
+        return $this->render('account/owner/index.html.twig', [
+            'page_name' => 'propriétaire',
+            'page_title' => 'Propriétaire',
             'positions' => $positions,
-        ]);
-    }
-
-    #[Route('/account/information', name: 'account_info')]
-    public function account_info(UserRepository $userRepository): Response
-    {
-        $user = $this->getUser(); // Récupère l'utilisateur connecté
-
-        return $this->render('account/account_information.html.twig', [
-            'page_title' => 'Mon compte',
-        ]);
-    }
-
-    #[Route('/account/change-password', name: 'account_change_password')]
-    public function account_change_password(): Response
-    {
-
-        return $this->render('account/account_change_password.html.twig', [
-            'page_name' => 'modification du mot de passe',
-            'page_title' => 'Modification du mot de passe',
         ]);
     }
 }
