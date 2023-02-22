@@ -111,6 +111,16 @@ class TeamController extends AbstractController
         ]);
     }
 
+    #[Route('/account/team/customer/{id}', name: 'team_customer_show')]
+    public function team_customer_show(Customer $customer): Response
+    {
+        return $this->render('account/team/team_customer_show.html.twig', [
+            'customer' => $customer,
+            'page_name' => "détail d'un client",
+            'page_title' => "Détail d'un client",
+        ]);
+    }
+
 
 
 

@@ -58,61 +58,16 @@
             </div>
             <div class="col-lg-9">
                 <!-- Card -->
-                <div class="card">
+                <div class="card pb-5">
                     <div class="card-header">
-                        <h5 class="card-header-title">{{ page_title }}</h5>
+                        <h5 class="card-header-title">Client : {{ customer.fullname }}</h5>
                     </div>
-
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead>
-                            <tr>
-                                <th class="ps-5">
-                                    <a href="{{ path('team_customers', {'sortColumn': 'id', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
-                                        ID
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="{{ path('team_customers', {'sortColumn': 'fullname', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
-                                        Fullname
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href="{{ path('team_customers', {'sortColumn': 'city', 'sortOrder': sortOrder == 'asc' ? 'desc' : 'asc'}) }}">
-                                        City
-                                    </a>
-                                </th>
-                                <th>
-                                    actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for customer in customers %}
-                                <tr>
-                                    <td class="ps-5">{{ customer.id }}</td>
-                                    <td>{{ customer.fullname }}</td>
-                                    <td>{{ customer.city }}</td>
-                                    <td><a href="{{ path('team_customer_show', {'id': customer.id}) }}">Voir</a></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    <div class="card-body">
+                        content
                     </div>
                 </div>
-                <!-- End Table -->
-
-                <!-- Footer -->
-                <div class="card-footer border-top">
-                <div class="d-flex justify-content-end gap-3">
-                  <a class="btn btn-white" href="{{ path('team') }}">Retour</a>
-                </div>
-                </div>
-                <!-- End Footer -->
-                </div>
-                <!-- End Card -->
             </div>
+            <!-- End Card -->
         </div>
     </div>
 {% endblock %}
