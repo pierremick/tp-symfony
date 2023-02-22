@@ -16,6 +16,11 @@ class Position
     // Constantes pour les prix, taux de TVA, taxes, etc.
     const HS_RATE = 1.15;
     const RETRIBUTION = 0.35;
+    const HS_START_MONTH = 6;  // Juin
+    const HS_START_DAY = 21;   // 21 juin
+    const HS_END_MONTH = 8;    // Août
+    const HS_END_DAY = 31;     // 31 août
+    const RETRIBUTION = 0.15;  // 15%
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

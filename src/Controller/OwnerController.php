@@ -21,7 +21,7 @@ class OwnerController extends AbstractController
     public function account_owner(Request $request, UserRepository $userRepository, PositionRepository $positionRepository): Response
     {
         $user = $this->getUser();
-        $positions = $positionRepository->findByOwner($user);
+        $positions = $positionRepository->findByOwnerBooking($user);
 
         // Débogage
         foreach ($positions as $position) {

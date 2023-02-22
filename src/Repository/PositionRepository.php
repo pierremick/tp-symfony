@@ -50,6 +50,19 @@ class PositionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // src/Repository/PositionRepository.php
+
+    public function findByOwnerBooking(User $user): array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.bookings', 'b')
+            ->where('p.owner = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     public function findByActive()
     {
         return $this->createQueryBuilder('p')
