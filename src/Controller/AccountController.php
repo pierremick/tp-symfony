@@ -38,6 +38,19 @@ class AccountController extends AbstractController
         ]);
     }
 
+    #[Route('/account/owner', name: 'account_owner')]
+    public function account_owner(PositionRepository $positionRepository): Response
+    {
+        $user = $this->getUser(); // Récupère l'utilisateur connecté
+        $positions = $positionRepository->findByOwner($user);
+
+        return $this->render('account/owner/index.html.twig', [
+            'page_name' => 'propriétaire',
+            'page_title' => 'Propriétaire',
+            'positions' => $positions,
+        ]);
+    }
+
     #[Route('/account/information', name: 'account_info')]
     public function account_info(UserRepository $userRepository): Response
     {
