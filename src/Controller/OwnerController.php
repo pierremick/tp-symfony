@@ -18,16 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class OwnerController extends AbstractController
 {
     #[Route('/account/owner', name: 'account_owner')]
-    public function account_owner(Request $request, UserRepository $userRepository): Response
+    public function account_owner(PositionRepository $positionRepository): Response
     {
-        // Récupère les positions actives à afficher
-        $users = $userRepository->findBy(['isOwner' => true]);
+        $user = $this->getUser(); // Récupère l'utilisateur connecté
+        $positions = $positionRepository->findByOwner($user);
 
-        // Envoi la réponse à la vue dans le template twig 'front/archive_position.html.twig'
         return $this->render('account/team/index.html.twig', [
-            'page_name' => 'owner positions',
-            'page_title' => "owner positions",
-            'users' => $users,
+            'page_title' => 'Mon compte',
+            'page_name' => 'Mon compte',
+            'positions' => $positions,
         ]);
     }
 }
