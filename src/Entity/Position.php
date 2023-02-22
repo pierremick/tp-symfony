@@ -298,4 +298,10 @@ class Position
 
         return $this;
     }
+
+    public function getPositionPrice(): float
+    {
+        $price = $this->getType()->getPrice();
+        return $price / 100;
+    }
 }

@@ -65,7 +65,11 @@
                             <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
                         </p>
                     </div>
-                    CONTENT
+                    {% if app.user.isOwner %}
+                    USER OWNER
+                    {% else %}
+                    OTHER USER
+                    {% endif %}
                 </div>
             </div>
         </div>
