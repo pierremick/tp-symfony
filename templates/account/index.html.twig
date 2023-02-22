@@ -65,58 +65,11 @@
                             <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
                         </p>
                     </div>
-                    {% if app.user.isOwner %}
-                        <!-- Table -->
-                        <table class="table table-owner-positions">
-                            <thead class="thead-light">
-                            <tr>
-                                <th scope="col">image</th>
-                                <th scope="col">description</th>
-                                <th scope="col">price</th>
-                                <th scope="col">statut</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for position in positions %}
-                                <tr>
-                                    <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="120" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
-                                    <td class="align-items-center">{{ position.name }} {% if position.isActive %} <sup><span class="badge bg-success">en ligne</span></sup>{% else %} <sup><span class="badge bg-danger">hors ligne</span></sup>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}</td>
-                                    <td class="align-items-center">{{ position.type.price / 100 }} €<br>{{ position.type.price * 1.15 / 100 }} € (HS)</td>
-                                    <td class="align-items-center">
-                                        <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">détail</button></div>
-                                        <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">réserver</button></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="pb-5">
-                                        Réservations
-                                        <table class="w-100">
-                                            <thead>
-                                            <tr>
-                                                <td>start date</td>
-                                                <td>end date</td>
-                                                <td>locataires</td>
-                                                <td>rétributions</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {# for booking in bookings #}
-                                                hello
-                                            {# endfor #}
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <!-- End Table -->
-                    {% endif %}
+                    CONTENT
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
 
-
-                    {% endblock %}
