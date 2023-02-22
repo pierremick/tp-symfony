@@ -80,7 +80,7 @@
                                         <tbody>
                                         {% for position in positions %}
                                         <tr>
-                                            <td>{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
+                                            <td>{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-end" width="160" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
                                             <td>{{ position.name }}</td>
                                             <td>{{ position.type.name }}</td>
                                             <td>{% if position.isActive %}en ligne{% else %}hots ligne{% endif %}</td>
