@@ -103,6 +103,7 @@
                                         </td>
                                     </tr>
                                     {% for booking in position.bookings %}
+                                        {{ dump(booking) }}
                                         <tr>
                                             <td>{{ booking.checkin }}</td>
                                             <td>{{ booking.checkout }}</td>
