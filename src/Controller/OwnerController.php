@@ -23,7 +23,7 @@ class OwnerController extends AbstractController
         $user = $this->getUser(); // Récupère l'utilisateur connecté
         $positions = $positionRepository->findByOwner($user);
 
-        return $this->render('account/team/index.html.twig', [
+        return $this->render('account/owner/index.html.twig', [
             'page_title' => 'Mon compte',
             'page_name' => 'Mon compte',
             'positions' => $positions,
