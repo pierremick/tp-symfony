@@ -20,17 +20,13 @@ class OwnerController extends AbstractController
     #[Route('/account/owner', name: 'account_owner')]
     public function account_owner(Request $request, UserRepository $userRepository, PositionRepository $positionRepository): Response
     {
-        $user = $this->getUser();
+        $user = $this->getUser(); // Récupère l'utilisateur connecté
         $positions = $positionRepository->findByOwnerBooking($user);
-
-        // Débogage
-        foreach ($positions as $position) {
-            dump($position->getBookings());
-        }
 
         return $this->render('account/index.html.twig', [
             'page_title' => 'Mon compte',
             'positions' => $positions,
+            //'users' => $users,
         ]);
     }
 }
