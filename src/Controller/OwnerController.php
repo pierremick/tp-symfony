@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class OwnerController extends AbstractController
 {
     #[Route('/account/owner', name: 'account_owner')]
-    public function account_owner(Request $request, UserRepository $userRepository): Response
+    public function account_owner(Request $request, UserRepository $userRepository, PositionRepository $positionRepository): Response
     {
         $user = $this->getUser(); // Récupère l'utilisateur connecté
         $positions = $positionRepository->findByOwner($user);
