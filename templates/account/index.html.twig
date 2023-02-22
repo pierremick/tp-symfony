@@ -73,8 +73,8 @@
                                             <th scope="col">image</th>
                                             <th scope="col">description</th>
                                             <th scope="col">price</th>
-                                            <th scope="col">active</th>
-                                            <th scope="col">en ligne depuis</th>
+                                            <th scope="col">statut</th>
+                                            <th scope="col">e?</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -83,8 +83,8 @@
                                             <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="80" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
                                             <td class="align-items-center">{{ position.name }}<br>{{ position.type.name }}</td>
                                             <td class="align-items-center">{{ position.type.price / 100 }} € (basse saison)<br>{{ position.type.price * 1.15 / 100 }} € (haute saison)</td>
-                                            <td class="align-items-center">{% if position.isActive %}en ligne{% else %}hots ligne{% endif %}</td>
-                                            <td class="align-items-center">{{ position.createdAt|date('d/m/Y') }}</td>
+                                            <td class="align-items-center">{% if position.isActive %}en ligne{% else %}hots ligne{% endif %}<br>depuis le {{ position.createdAt|date('d/m/Y') }}</td>
+                                            <td class="align-items-center">...</td>
                                         </tr>
                                         {% endfor %}
                                         </tbody>
