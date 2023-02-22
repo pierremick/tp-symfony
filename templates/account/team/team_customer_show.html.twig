@@ -70,6 +70,7 @@
                         {{ customer.zipcode }}<br>
                         {{ customer.city }}<br>
                         {{ customer.country }}<br>
+                        Newsletter : {% if customer.isOptinNews %}Oui{% else %}Non{% endif %}{{ customer.isOptinNews }}
                     </div>
                 </div>
             </div>
