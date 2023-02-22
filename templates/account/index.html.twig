@@ -5,120 +5,120 @@
 {% block body %}
 <!-- Breadcrumb -->
 <div class="navbar-dark bg-dark" style="background-image: url(/svg/components/wave-pattern-light.svg);">
-      <div class="container content-space-1 content-space-b-lg-3">
+    <div class="container content-space-1 content-space-b-lg-3">
         <div class="row align-items-center">
-          <div class="col">
-            <div class="d-none d-lg-block">
-              <h1 class="h2 text-white">{{ page_title }}</h1>
+            <div class="col">
+                <div class="d-none d-lg-block">
+                    <h1 class="h2 text-white">{{ page_title }}</h1>
+                </div>
+
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-light mb-0">
+                        <li class="breadcrumb-item">Accueil</li>
+                    </ol>
+                </nav>
+                <!-- End Breadcrumb -->
             </div>
+            <!-- End Col -->
 
-            <!-- Breadcrumb -->
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb breadcrumb-light mb-0">
-                <li class="breadcrumb-item">Accueil</li>
-              </ol>
-            </nav>
-            <!-- End Breadcrumb -->
-          </div>
-          <!-- End Col -->
+            <div class="col-auto">
+                <div class="d-none d-lg-block">
+                    <a class="btn btn-soft-light btn-sm" href="{{ path('logout') }}">se déconnecter</a>
+                </div>
 
-          <div class="col-auto">
-            <div class="d-none d-lg-block">
-              <a class="btn btn-soft-light btn-sm" href="{{ path('logout') }}">se déconnecter</a>
-            </div>
-
-            <!-- Responsive Toggle Button -->
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Responsive Toggle Button -->
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-default">
                 <i class="bi-list"></i>
               </span>
-              <span class="navbar-toggler-toggled">
+                    <span class="navbar-toggler-toggled">
                 <i class="bi-x"></i>
               </span>
-            </button>
-            <!-- End Responsive Toggle Button -->
-          </div>
-          <!-- End Col -->
+                </button>
+                <!-- End Responsive Toggle Button -->
+            </div>
+            <!-- End Col -->
         </div>
         <!-- End Row -->
-      </div>
     </div>
-    <!-- End Breadcrumb -->
-    <!-- Content -->
-        <div class="container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10">
-            <div class="row">
-                <div class="col-lg-3">
-                    <!-- Navbar -->
-                    <div class="navbar-expand-lg navbar-light">
-                        <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
-                            {% include 'account/_sidebar.html.twig' %}
-                        </div>
-                    </div>
-                      <!-- End Navbar -->
+</div>
+<!-- End Breadcrumb -->
+<!-- Content -->
+<div class="container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10">
+    <div class="row">
+        <div class="col-lg-3">
+            <!-- Navbar -->
+            <div class="navbar-expand-lg navbar-light">
+                <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
+                    {% include 'account/_sidebar.html.twig' %}
                 </div>
-                <div class="col-lg-9">
-                    <div class="d-grid gap-3 gap-lg-5">
-                        <!-- Card -->
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <p class="card-header-title">Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir !<br>
-                                    <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
-                                </p>
-                            </div>
-                            {% if app.user.isOwner %}
-                            <!-- Table -->
-                            <table class="table table-owner-positions">
-                                <thead class="thead-light">
+            </div>
+            <!-- End Navbar -->
+        </div>
+        <div class="col-lg-9">
+            <div class="d-grid gap-3 gap-lg-5">
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <p class="card-header-title">Hey {{ app.user.firstname }} {{ app.user.lastname }}, heureux de vous revoir !<br>
+                            <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
+                        </p>
+                    </div>
+                    {% if app.user.isOwner %}
+                        <!-- Table -->
+                        <table class="table table-owner-positions">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">image</th>
+                                <th scope="col">description</th>
+                                <th scope="col">price</th>
+                                <th scope="col">statut</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for position in positions %}
                                 <tr>
-                                    <th scope="col">image</th>
-                                    <th scope="col">description</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">statut</th>
+                                    <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="120" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
+                                    <td class="align-items-center">{{ position.name }} {% if position.isActive %} <sup><span class="badge bg-success">en ligne</span></sup>{% else %} <sup><span class="badge bg-danger">hors ligne</span></sup>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}</td>
+                                    <td class="align-items-center">{{ position.type.price / 100 }} €<br>{{ position.type.price * 1.15 / 100 }} € (HS)</td>
+                                    <td class="align-items-center">
+                                        <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">détail</button></div>
+                                        <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">réserver</button></div>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
+                                <tr>
+                                    <td colspan="4" class="pb-5">
+                                        Réservations
+                                        <table class="w-100">
+                                            <thead>
+                                            <tr>
+                                                <td>start date</td>
+                                                <td>end date</td>
+                                                <td>locataires</td>
+                                                <td>rétributions</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!-- End Table -->
+                    {% endif %}
+
+                    {% if app.user.isTeam %}
+                    <div class="card-body">
+
+                        <p class="card-text">When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.</p>
+
+                        <div class="mb-4">
+                            <!-- Content -->
+                            <div class="card-text">
                                 {% for position in positions %}
-                                    <tr>
-                                        <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="120" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
-                                        <td class="align-items-center">{{ position.name }} {% if position.isActive %} <sup><span class="badge bg-success">en ligne</span></sup>{% else %} <sup><span class="badge bg-danger">hors ligne</span></sup>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}</td>
-                                        <td class="align-items-center">{{ position.type.price / 100 }} €<br>{{ position.type.price * 1.15 / 100 }} € (HS)</td>
-                                        <td class="align-items-center">
-                                            <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">détail</button></div>
-                                            <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">réserver</button></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" class="pb-5">
-                                            Réservations
-                                            <table class="w-100">
-                                                <thead>
-                                                <tr>
-                                                    <td>start date</td>
-                                                    <td>end date</td>
-                                                    <td>locataires</td>
-                                                    <td>rétributions</td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                            <!-- End Table -->
-                            {% endif %}
-
-                                {% if app.user.isTeam %}
-                                <div class="card-body">
-
-                                  <p class="card-text">When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.</p>
-
-                                  <div class="mb-4">
-                                    <!-- Content -->
-                                    <div class="card-text">
-                                    {% for position in positions %}
                                     <div class="card mb-3 w-100">
                                         <div class="row g-0">
                                             <div class="col-md-8">
@@ -133,11 +133,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                  {% endfor %}
-                                  </div>
-                                </div>
-                              {% endif %}
-                                    <!-- End Body --></div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- End Body --></div>
 
 
-{% endblock %}
+                    {% endblock %}
