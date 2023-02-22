@@ -109,35 +109,11 @@
                         </table>
                         <!-- End Table -->
                     {% endif %}
-
-                    {% if app.user.isTeam %}
-                    <div class="card-body">
-
-                        <p class="card-text">When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.</p>
-
-                        <div class="mb-4">
-                            <!-- Content -->
-                            <div class="card-text">
-                                {% for position in positions %}
-                                    <div class="card mb-3 w-100">
-                                        <div class="row g-0">
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h3>{{ position.name }}</h3>
-                                                    <p class="text-mutted"><small>En ligne depuis le {{ position.createdAt|date('d/m/Y') }}</small></p>
-                                                    {{ position.type }}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                {% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        {% endif %}
-                        <!-- End Body --></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
                     {% endblock %}
