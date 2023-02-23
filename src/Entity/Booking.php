@@ -191,7 +191,7 @@ class Booking
     // Retourne le nombre total de personnes (adultes + enfants)
     public function getPersons(): int
     {
-        return $this->getAdult() + $this->getChild();
+        return $this->adult + $this->child;
     }
 
     // Retourne le nombre de jours total de la réservation
@@ -202,22 +202,16 @@ class Booking
         return $interval->days;
     }
 
-    // Retourne le nombre de jours en haute saison
     public function getHsDays(): int
     {
         $startDate = new DateTime('2023-06-21');
         $endDate = new DateTime('2023-08-31');
 
-        $hsDays = 0;
-        $currentDate = clone $this->getCheckin();
-        while ($currentDate <= $this->getCheckout()) {
-            if ($currentDate >= $startDate && $currentDate <= $endDate) {
-                $hsDays++;
-            }
-            $currentDate->modify('+1 day');
-        }
+        $start = max($this->getCheckin(), $startDate);
+        $end = min($this->getCheckout(), $endDate);
 
-        return $hsDays;
+        $interval = $start->diff($end);
+        return $interval->days;
     }
 
     public function getNormalPrice(): float
@@ -295,9 +289,7 @@ class Booking
 
     public function getTaxAdultQty(): int
     {
-        $totalAdult = $this->getAdult();
-        $totalDaysAdult = $this->getDays();
-        return $totalAdult * $totalDaysAdult;
+        return $this->getAdult() * $this->getDays();
     }
 
     public function getTotalTaxAdultPrice(): int
@@ -311,9 +303,7 @@ class Booking
     // Nombre de taxe de séjour (enfant)
     public function getTaxChildQty(): int
     {
-        $totalChild = $this->getChild();
-        $totalDaysChild = $this->getDays();
-        return $totalChild * $totalDaysChild;
+        return $this->getChild() * $this->getDays();
     }
 
     // Calcul du montant total de la taxe de séjour (enfant)
