@@ -78,7 +78,7 @@
                             </thead>
                             <tbody>
                             {% for position in positions %}
-                                <tr>
+                            <tr>
                               <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="140" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
                                   <td class="align-items-center">{{ position.name }} {% if position.isActive %} <sup><span class="badge bg-success">en ligne</span></sup>{% else %} <sup><span class="badge bg-danger">hors ligne</span></sup>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}<br>Nbre total réservation : {{ position.bookings|length }}</td>
                                     <td class="align-items-center">BS : {{ position.type.price / 100 }} € /j<br>HS : {{ position.type.price * 1.15 / 100 }} € /j</td>
@@ -87,10 +87,11 @@
                                         <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">réserver</button></div>
                                     </td>
                                 </tr>
+                                {% if position.bookings|length >= 1 %}
                                 <tr>
                                     <td colspan="4" class="pb-5">
                                         Réservations
-                                        <table class="w-100">
+                                        <table class="w-100 mb-5">
                                             <thead>
                                             <tr class="border-bottom">
                                                 <td>Arrivée</td>
@@ -115,6 +116,7 @@
                                         </table>
                                     </td>
                                 </tr>
+                              {% endif %}
                             {% endfor %}
                             </tbody>
                         </table>

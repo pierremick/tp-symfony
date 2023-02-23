@@ -18,6 +18,7 @@ use App\Form\CustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,17 +48,42 @@ class BookingController extends AbstractController
       // Crée un nouveau formulaire de recherche de disponibilité
       $availabilityForm = $this->createFormBuilder()
           ->add('checkin', DateType::class, [
-              'label' => 'Date d\'arrivée',
+              'row_attr' => [
+                  'class' => 'mb-3', // Ajoute une classe de style à la row
+              ],
+              'label' => 'Arrivée',
               'widget' => 'single_text',
+              'attr' => [
+                  'min' => '2023-05-05',
+                  'max' => '2023-10-10',
+              ],
+              'html5' => true,
           ])
+          //->add('checkin', DateType::class, [
+          //    'label' => 'Date d\'arrivée',
+          //    'widget' => 'single_text',
+          //])
           ->add('checkout', DateType::class, [
-              'label' => 'Date de départ',
+              'row_attr' => [
+                  'class' => 'mb-3', // Ajoute une classe de style à la row
+              ],
+              'label' => 'Départ',
               'widget' => 'single_text',
+              'attr' => [
+                  'min' => '2023-05-05',
+                  'max' => '2023-10-10',
+              ],
+              'html5' => true,
           ])
-          ->add('adults', IntegerType::class, [
+          //->add('checkout', DateType::class, [
+          //    'label' => 'Date de départ',
+          //    'widget' => 'single_text',
+          //])
+
+          ->add('adult', NumberType::class, [
               'label' => 'Nombre d\'adultes',
           ])
-          ->add('children', IntegerType::class, [
+          ->add('child', NumberType::class, [
               'label' => 'Nombre d\'enfants',
           ])
           ->add('submit', SubmitType::class, ['label' => 'Vérifier la disponibilité'])
@@ -72,8 +98,8 @@ class BookingController extends AbstractController
           $data = $availabilityForm->getData();
           $checkin = $data['checkin'];
           $checkout = $data['checkout'];
-          $adults = $data['adults'];
-          $children = $data['children'];
+          $adult = $data['adult'];
+          $child = $data['child'];
 
           // Vérifie si la position est disponible pour les dates sélectionnées
           if (!$this->checkAvailability($position, $checkin, $checkout)) {
@@ -86,10 +112,12 @@ class BookingController extends AbstractController
                   'position_id' => $position->getId(),
                   'checkin' => $checkin->format('Y-m-d'),
                   'checkout' => $checkout->format('Y-m-d'),
-                  'adults' => $adults,
-                  'children' => $children,
-                  'adult_pool' => $request->request->get('adult_pool'),
-                  'child_pool' => $request->request->get('child_pool')
+                  'adult' => $adult,
+                  'child' => $child,
+                  //'adult_pool' => $request->request->get('adult_pool'),
+                  'adultPool' => $request->request->get('adultPool'),
+                  //'child_pool' => $request->request->get('child_pool'),
+                  'childPool' => $request->request->get('childPool')
               ]);
 
               // Affiche un message de confirmation
@@ -98,10 +126,12 @@ class BookingController extends AbstractController
               // Crée le formulaire de détail de la réservation
               $booking = new Booking();
               $booking->setPosition($entityManager->getReference(Position::class, $position->getId()));
-              $booking->setCheckin(new \DateTime($checkin));
-              $booking->setCheckout(new \DateTime($checkout));
-              $booking->setAdults($adults);
-              $booking->setChildren($children);
+              //$booking->setCheckin(new \DateTime($checkin));
+              $booking->setCheckin($checkin);
+              //$booking->setCheckout(new \DateTime($checkout));
+              $booking->setCheckout($checkout);
+              $booking->setAdult($adult);
+              $booking->setChild($child);
               $booking->setAdultPool($request->request->get('adult_pool'));
               $booking->setChildPool($request->request->get('child_pool'));
               $bookingForm = $this->createForm(BookingType::class, $booking);
@@ -184,13 +214,16 @@ class BookingController extends AbstractController
 
         // Crée une nouvelle instance de l'entité Booking
         $bookingEntity = new Booking();
-        $bookingEntity->setPosition($booking['position_id']);
+        //$bookingEntity->setPosition($booking['position_id']);
+        $bookingEntity->setPosition($booking['position']);
         $bookingEntity->setCheckin(new DateTime($booking['checkin']));
         $bookingEntity->setCheckout(new DateTime($booking['checkout']));
-        $bookingEntity->setAdults($booking['adults']);
-        $bookingEntity->setChildren($booking['children']);
-        $bookingEntity->setAdultPool($booking['adult_pool']);
-        $bookingEntity->setChildPool($booking['child_pool']);
+        $bookingEntity->setAdult($booking['adult']);
+        $bookingEntity->setChild($booking['child']);
+        //$bookingEntity->setAdultPool($booking['adult_pool']);
+        $bookingEntity->setAdultPool($booking['adultPool']);
+        //$bookingEntity->setChildPool($booking['child_pool']);
+        $bookingEntity->setChildPool($booking['childPool']);
         $bookingEntity->setCustomer($customer);
 
         // Affiche un récapitulatif de la réservation
@@ -214,13 +247,16 @@ class BookingController extends AbstractController
 
         // Crée une nouvelle instance de l'entité Booking à partir des données de session
         $bookingEntity = new Booking();
-        $bookingEntity->setPosition($booking['position_id']);
+        //$bookingEntity->setPosition($booking['position_id']);
+        $bookingEntity->setPosition($booking['position']);
         $bookingEntity->setCheckin(new DateTime($booking['checkin']));
         $bookingEntity->setCheckout(new DateTime($booking['checkout']));
-        $bookingEntity->setAdults($booking['adults']);
-        $bookingEntity->setChildren($booking['children']);
-        $bookingEntity->setAdultPool($booking['adult_pool']);
-        $bookingEntity->setChildPool($booking['child_pool']);
+        $bookingEntity->setAdult($booking['adult']);
+        $bookingEntity->setChild($booking['child']);
+        //$bookingEntity->setAdultPool($booking['adult_pool']);
+        $bookingEntity->setAdultPool($booking['adultPool']);
+        //$bookingEntity->setChildPool($booking['child_pool']);
+        $bookingEntity->setChildPool($booking['childPool']);
         $bookingEntity->setCustomer($customer);
 
         // Affiche un récapitulatif de la réservation

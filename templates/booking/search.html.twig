@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de disponibilité{% endblock %}
+
+{% block body %}
+  <div class="container w-50">
+    <h1>Recherche de disponibilité</h1>
+    {{ form_start(availabilityForm) }}
+    <div class="row">
+        <div class="col-sm-6 mb-3">
+            {{ form_widget(availabilityForm.checkin) }}
+        </div>
+        <div class="col-sm-6 mb-3">
+            {{ form_widget(availabilityForm.checkout) }}
+        </div>
+        <div class="col-sm-6 mb-3">
+            {#{ form_widget(availabilityForm.adult) }#}
+        </div>
+        <div class="col-sm-6 mb-3">
+            {#{ form_widget(availabilityForm.child) }#}
+        </div>
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    {{ form_end(availabilityForm) }}
+  </div>
+{% endblock %}
