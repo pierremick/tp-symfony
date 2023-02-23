@@ -15,15 +15,16 @@ Ce code définit une classe Booking appartenant au namespace App\Entity. La clas
 La section suivante définit les constantes de la classe pour les prix, les taux de TVA, les taxes, etc.
 
 ### Constantes pour les prix, taux de TVA, taxes, etc.
-const RETRIBUTION = 0.35; // 35%
-const DISCOUNT_RATE = 0.05; // Remise 5%
-const HS_RATE = 1.15; // +15%
-const VAT_RATE_10 = 1.10;
-const VAT_RATE_20 = 1.20;
-const POOL_ADULT_PRICE = 1.50;
-const POOL_CHILD_PRICE = 1.00;
-const TAX_ADULT_PRICE = 60;
-const TAX_CHILD_PRICE = 35;
+
+- const RETRIBUTION = 0.35; // 35%
+- const DISCOUNT_RATE = 0.05; // Remise 5%
+- const HS_RATE = 1.15; // +15%
+- const VAT_RATE_10 = 1.10;
+- const VAT_RATE_20 = 1.20;
+- const POOL_ADULT_PRICE = 1.50;
+- const POOL_CHILD_PRICE = 1.00;
+- const TAX_ADULT_PRICE = 60;
+- const TAX_CHILD_PRICE = 35;
 
 ### Propriétés de la classe :
 
