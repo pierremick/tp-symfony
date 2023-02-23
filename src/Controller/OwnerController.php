@@ -35,4 +35,5 @@ class OwnerController extends AbstractController
             'positions' => $positions,
         ]);
     }
+
 }

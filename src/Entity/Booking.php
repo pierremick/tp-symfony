@@ -202,16 +202,33 @@ class Booking
         return $interval->days;
     }
 
+    //public function getHsDays(): int
+    //{
+    //    $startDate = new DateTime('2023-06-21');
+    //    $endDate = new DateTime('2023-08-31');
+
+    //    $start = max($this->getCheckin(), $startDate);
+    //    $end = min($this->getCheckout(), $endDate);
+
+    //    $interval = $start->diff($end);
+    //    return $interval->days;
+    //}
+
     public function getHsDays(): int
     {
         $startDate = new DateTime('2023-06-21');
         $endDate = new DateTime('2023-08-31');
 
-        $start = max($this->getCheckin(), $startDate);
-        $end = min($this->getCheckout(), $endDate);
+        $hsDays = 0;
+        $currentDate = clone $this->getCheckin();
+        while ($currentDate <= $this->getCheckout()) {
+              if ($currentDate >= $startDate && $currentDate <= $endDate) {
+                  $hsDays++;
+              }
+              $currentDate->modify('+1 day');
+        }
 
-        $interval = $start->diff($end);
-        return $interval->days;
+        return $hsDays;
     }
 
     public function getNormalPrice(): float

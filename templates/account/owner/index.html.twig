@@ -65,7 +65,6 @@
                             <small class="text-muted">si vous n'êtes pas {{ app.user.firstname }} {{ app.user.lastname }} : <a href="{{ path('logout') }}">cliquez ici</a></small>
                         </p>
                     </div>
-                    {% if app.user.isOwner %}
                         <!-- Table -->
                         <table class="table table-owner-positions">
                             <thead class="thead-light">
@@ -87,26 +86,26 @@
                                         <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">réserver</button></div>
                                     </td>
                                 </tr>
-                                {% if position.bookings|length >= 1 %}
+
                                 <tr>
                                     <td colspan="4" class="pb-5">
-                                        Réservations
+                                        <h6 class="text-center my-3">Réservations</h6>
                                         <table class="w-100 mb-5">
                                             <thead>
                                             <tr class="border-bottom">
-                                                <td>Arrivée</td>
-                                                <td>Départ</td>
-                                                <td>locataires</td>
-                                                <td>rétributions</td>
+                                                <td class="text-center">Arrivée</td>
+                                                <td class="text-center">Départ</td>
+                                                <td class="text-center">locataires</td>
+                                                <td class="text-center">rétributions</td>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             {% for booking in position.bookings %}
-                                            <tr class="border-bottom">
-                                            <td>{{ booking.checkin | date('d/m/Y') }}</td>
-                                            <td>{{ booking.checkout | date('d/m/Y') }}</td>
-                                          <td>famille {{ booking.customer.lastname }}<br>{{ booking.adult }} adulte{% if booking.adult > 1 %}s{% endif %} et {{ booking.child }} enfant{% if booking.child > 1 %}s{% endif %}</td>
-                                            <td>
+                                            <tr>
+                                            <td class="border-bottom py-3">{{ booking.checkin | date('d/m/Y') }}</td>
+                                            <td class="border-bottom py-3">{{ booking.checkout | date('d/m/Y') }}</td>
+                                            <td class="border-bottom py-3">famille {{ booking.customer.lastname }}<br>{{ booking.adult }} adulte{% if booking.adult > 1 %}s{% endif %} et {{ booking.child }} enfant{% if booking.child > 1 %}s{% endif %}</td>
+                                            <td class="border-bottom py-3">
                                           BS : {{ booking.getBsCash|number_format(2, ',', ' ') }} € ({{ booking.getBsDays }} jour{% if booking.getBsDays > 1 %}s{% endif %})<br>
                                         HS :  {{ booking.getHsCash|number_format(2, ',', ' ') }} € ({{ booking.getHsDays }} jour{% if booking.getHsDays > 1 %}s{% endif %})
                                             </td>
@@ -116,12 +115,10 @@
                                         </table>
                                     </td>
                                 </tr>
-                              {% endif %}
                             {% endfor %}
                             </tbody>
                         </table>
                         <!-- End Table -->
-                    {% endif %}
                 </div>
             </div>
         </div>

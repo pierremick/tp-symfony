@@ -50,6 +50,20 @@ class BookingRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function countBookingsByOwnerAndUser($ownerId, $userId)
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->select('SUM(b.getDays()) as totalDays')
+            ->addSelect('SUM(b.getBsDays()) as totalBsDays')
+            ->addSelect('SUM(b.getHsDays()) as totalHsDays')
+            ->where('b.position IN (SELECT p.id FROM App\Entity\Position p WHERE p.owner = :ownerId)')
+            ->andWhere('b.user = :userId')
+            ->setParameter('ownerId', $ownerId)
+            ->setParameter('userId', $userId);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
   }
 
 //    /**
