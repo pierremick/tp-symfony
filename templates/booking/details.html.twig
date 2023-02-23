@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la réservation{% endblock %}
+
+{% block body %}
+  <h1>Détails de la réservation</h1>
+
+  {% for flash_message in app.session.flashbag.get('success') %}
+    <div class="alert alert-success">{{ flash_message }}</div>
+  {% endfor %}
+
+  {% for flash_message in app.session.flashbag.get('error') %}
+    <div class="alert alert-danger">{{ flash_message }}</div>
+  {% endfor %}
+
+  {{ form_start(bookingForm) }}
+
+  <div class="form-group">
+    {{ form_label(bookingForm.adults, 'Nombre d\'adultes') }}
+    {{ form_widget(bookingForm.adults, {'attr': {'class': 'form-control'}}) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_label(bookingForm.children, 'Nombre d\'enfants') }}
+    {{ form_widget(bookingForm.children, {'attr': {'class': 'form-control'}}) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_label(bookingForm.adult_pool, 'Nombre d\'adultes pour la piscine') }}
+    {{ form_widget(bookingForm.adult_pool, {'attr': {'class': 'form-control'}}) }}
+  </div>
+
+  <div class="form-group">
+    {{ form_label(bookingForm.child_pool, 'Nombre d\'enfants pour la piscine') }}
+    {{ form_widget(bookingForm.child_pool, {'attr': {'class': 'form-control'}}) }}
+  </div>
+
+  {{ form_widget(bookingForm.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+  {{ form_end(bookingForm) }}
+{% endblock %}

@@ -79,9 +79,9 @@
                             <tbody>
                             {% for position in positions %}
                                 <tr>
-                                    <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="120" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
-                                    <td class="align-items-center">{{ position.name }} {% if position.isActive %} <sup><span class="badge bg-success">en ligne</span></sup>{% else %} <sup><span class="badge bg-danger">hors ligne</span></sup>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}</td>
-                                    <td class="align-items-center">{{ position.type.price / 100 }} €<br>{{ position.type.price * 1.15 / 100 }} € (HS)</td>
+                              <td class="align-items-center">{% if position.image %}<img src="/upload/images/positions/{{ position.image }}" class="img-fluid" width="140" alt="photo de {{ position.name }}">{% else %}<img src="/upload/images/positions/default-mobil-home.webp" class="img-fluid rounded-end" alt="photo de {{ position.name }}">{% endif %}</td>
+                                  <td class="align-items-center">{{ position.name }} {% if position.isActive %} <sup><span class="badge bg-success">en ligne</span></sup>{% else %} <sup><span class="badge bg-danger">hors ligne</span></sup>{% endif %}<br>{{ position.type.name }}<br>ajouté le {{ position.createdAt|date('d/m/Y') }}<br>Nbre total réservation : {{ position.bookings|length }}</td>
+                                    <td class="align-items-center">BS : {{ position.type.price / 100 }} € /j<br>HS : {{ position.type.price * 1.15 / 100 }} € /j</td>
                                     <td class="align-items-center">
                                         <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">détail</button></div>
                                         <div><button type="button" class="btn btn-owner-action btn-primary btn-sm rounded-pill">réserver</button></div>
@@ -92,17 +92,25 @@
                                         Réservations
                                         <table class="w-100">
                                             <thead>
-                                            <tr>
-                                                <td>start date</td>
-                                                <td>end date</td>
+                                            <tr class="border-bottom">
+                                                <td>Arrivée</td>
+                                                <td>Départ</td>
                                                 <td>locataires</td>
                                                 <td>rétributions</td>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {# for booking in bookings #}
-                                                hello
-                                            {# endfor #}
+                                            {% for booking in position.bookings %}
+                                            <tr class="border-bottom">
+                                            <td>{{ booking.checkin | date('d/m/Y') }}</td>
+                                            <td>{{ booking.checkout | date('d/m/Y') }}</td>
+                                          <td>famille {{ booking.customer.lastname }}<br>{{ booking.adult }} adulte{% if booking.adult > 1 %}s{% endif %} et {{ booking.child }} enfant{% if booking.child > 1 %}s{% endif %}</td>
+                                            <td>
+                                          BS : {{ booking.getBsCash|number_format(2, ',', ' ') }} € ({{ booking.getBsDays }} jour{% if booking.getBsDays > 1 %}s{% endif %})<br>
+                                        HS :  {{ booking.getHsCash|number_format(2, ',', ' ') }} € ({{ booking.getHsDays }} jour{% if booking.getHsDays > 1 %}s{% endif %})
+                                            </td>
+                                            </tr>
+                                            {% endfor %}
                                             </tbody>
                                         </table>
                                     </td>

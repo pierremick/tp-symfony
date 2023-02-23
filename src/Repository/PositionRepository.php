@@ -50,6 +50,17 @@ class PositionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByOwnerWithBookings(User $owner)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.bookings', 'b')
+            ->where('p.owner = :owner')
+            ->setParameter('owner', $owner)
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findByActive()
     {
         return $this->createQueryBuilder('p')

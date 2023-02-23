@@ -14,8 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Booking
 {
     // Constantes pour les prix, taux de TVA, taxes, etc.
-    const DISCOUNT_RATE = 0.05;
-    const HS_RATE = 1.15;
+    const RETRIBUTION = 0.35; // 35%
+    const DISCOUNT_RATE = 0.05; // Remise 5%
+    const HS_RATE = 1.15; // +15%
     const VAT_RATE_10 = 1.10;
     const VAT_RATE_20 = 1.20;
     const POOL_ADULT_PRICE = 1.50;
@@ -231,6 +232,7 @@ class Booking
         return $price * self::HS_RATE;
     }
 
+
     // Calcul du prix total Haute Saison
     public function getTotalPriceHsDays(): float
     {
@@ -238,6 +240,11 @@ class Booking
         $price = $this->getNormalPrice() * self::HS_RATE;
 
         return $hsDays * $price;
+    }
+
+    public function getHsCash(): float
+    {
+        return $this->getHsDays() * $this->getHsPrice() * self::RETRIBUTION;
     }
 
     public function getBsDays(): int
@@ -255,6 +262,11 @@ class Booking
         $price = $this->getNormalPrice();
 
         return $bsDays * $price;
+    }
+
+    public function getBsCash(): float
+    {
+        return $this->getBsDays() * $this->getNormalPrice() * self::RETRIBUTION;
     }
 
     public function getPoolAdultPrice(): float
@@ -414,4 +426,5 @@ class Booking
 
         return $this;
     }
+
 }

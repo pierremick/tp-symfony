@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations client{% endblock %}
+
+{% block body %}
+    <h1>Informations client</h1>
+
+    {% if errors is not empty %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{ path('booking_confirmation') }}">
+        {{ form_start(customerForm) }}
+        <div class="form-group row">
+            {{ form_label(customerForm.firstName, 'Prénom', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(customerForm.firstName, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(customerForm.lastName, 'Nom de famille', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(customerForm.lastName, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(customerForm.email, 'Email', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(customerForm.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(customerForm.phone, 'Téléphone', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(customerForm.phone, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(customerForm.address, 'Adresse', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(customerForm.address, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(customerForm.zipCode, 'Code postal', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(customerForm.zipCode, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(customerForm.city, 'Ville', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(customerForm.city, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        {{ form_end(customerForm) }}
+        <br>
+        <button type="submit" class="btn btn-primary">Confirmer la réservation</button>
+    </form>
+
+{% endblock %}

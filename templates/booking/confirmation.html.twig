@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de réservation{% endblock %}
+
+{% block body %}
+  <h1>Confirmation de réservation</h1>
+  <p>Votre réservation a été confirmée.</p>
+  <p>Vous avez réservé :</p>
+  <ul>
+    <li>{{ booking.position.name }} du {{ booking.checkin|date('d/m/Y') }} au {{ booking.checkout|date('d/m/Y') }}</li>
+    <li>{{ booking.adults }} adulte(s) et {{ booking.children }} enfant(s)</li>
+    <li>{{ booking.adult_pool }} accès adulte(s) à la piscine et {{ booking.child_pool }} accès enfant(s) à la piscine</li>
+  </ul>
+  <p>Vos informations de contact :</p>
+  <ul>
+    <li>{{ customer.firstName }} {{ customer.lastName }}</li>
+    <li>{{ customer.email }}</li>
+    <li>{{ customer.phone }}</li>
+  </ul>
+{% endblock %}

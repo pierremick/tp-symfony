@@ -140,4 +140,5 @@ class CampingController extends AbstractController
         // Si aucune réservation n'a été trouvée pour les dates sélectionnées, la position est disponible
         return true;
     }
+
 }
