@@ -16,7 +16,7 @@ La classe Booking est l'entité qui représente une réservation pour une positi
 
 Le prix d'une réservation est calculé en fonction du nombre de jours réservés, du type de la position (emplacement) et de la saison (haute ou basse).
 
-La classe contient donc les méthodes associés qui permettent de calculer le prix d'une réservation en fonction de ces différents facteurs. D'autres méthodes dans la classe permettent de calculer la taxe de séjour et le montant d'une éventuelle remise à appliquer, le cas échéant (dans ce cas, pour un séjour de minimum 7 jours consécutif, une remise de 5% par tranche de 7 jours).
+La classe contient donc les méthodes associées qui permettent de calculer le prix d'une réservation en fonction de ces différents facteurs. D'autres méthodes dans la classe permettent de calculer la taxe de séjour et le montant d'une éventuelle remise à appliquer, le cas échéant (dans ce cas, pour un séjour de minimum 7 jours consécutif, une remise de 5% par tranche de 7 jours).
 
 Les différentes méthodes de la classe peuvent faire appel à des constantes qui permettent de définir en un seul endroit, les prix des options (tickets piscine), les taux de TVA (10% pour les hébergements, 20% pour les services tels que l'accès à la piscine), les taxes de séjour, etc. Ces constantes sont essentielles pour les calculs du prix total à payer par le clients ou de la rétribution à payer au propriétaire d'un mobilehome.
 
@@ -91,3 +91,13 @@ Les annotations #[ORM\Entity], #[ORM\Id], #[ORM\Column], #[ORM\ManyToOne], et #[
 - La méthode booking_summary : Elle affiche un récapitulatif de la réservation en cours en récupérant les données de réservation et de client stockées dans la session. Si ces données ne sont pas présentes en session, la méthode envoie une erreur 404.
 
 - La méthode booking_confirmation : Elle affiche une confirmation de la réservation en cours en récupérant les données de réservation et de client stockées dans la session. Si ces données ne sont pas présentes en session, la méthode envoie une erreur 404.
+
+## Templates : templates/booking
+
+- booking.html.twig
+- booking_place.html.twig
+- booking_confirmation.html.twig
+- booking_summary.html.twig
+- booking_customer.html.twig
+- booking_search.html.twig
+- 

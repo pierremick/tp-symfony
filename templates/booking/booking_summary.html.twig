@@ -7,12 +7,12 @@
   <p>Vous avez réservé :</p>
   <ul>
     <li>{{ booking.position.name }} du {{ booking.checkin|date('d/m/Y') }} au {{ booking.checkout|date('d/m/Y') }}</li>
-    <li>{{ booking.adults }} adulte(s) et {{ booking.children }} enfant(s)</li>
-    <li>{{ booking.adult_pool }} accès adulte(s) à la piscine et {{ booking.child_pool }} accès enfant(s) à la piscine</li>
+    <li>{{ booking.adult }} adulte(s) et {{ booking.child }} enfant(s)</li>
+    <li>{{ booking.adultPool }} accès adulte(s) à la piscine et {{ booking.childPool }} accès enfant(s) à la piscine</li>
   </ul>
   <p>Vos informations de contact :</p>
   <ul>
-    <li>{{ customer.firstName }} {{ customer.lastName }}</li>
+    <li>{{ customer.firstname }} {{ customer.lastname }}</li>
     <li>{{ customer.email }}</li>
     <li>{{ customer.phone }}</li>
   </ul>
@@ -21,10 +21,10 @@
   {{ form_row(bookingForm.position) }}
   {{ form_row(bookingForm.checkin) }}
   {{ form_row(bookingForm.checkout) }}
-  {{ form_row(bookingForm.adults) }}
-  {{ form_row(bookingForm.children) }}
-  {{ form_row(bookingForm.adult_pool) }}
-  {{ form_row(bookingForm.child_pool) }}
+  {{ form_row(bookingForm.adult) }}
+  {{ form_row(bookingForm.child) }}
+  {{ form_row(bookingForm.adultPool) }}
+  {{ form_row(bookingForm.childPool) }}
   {{ form_row(bookingForm.submit) }}
   {{ form_end(bookingForm) }}
 {% endblock %}
