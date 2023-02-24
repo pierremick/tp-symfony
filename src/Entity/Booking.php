@@ -188,7 +188,7 @@ class Booking
         return $this;
     }
 
-    // Retourne le nombre total de personnes (adultes + enfants)
+    // retourne le nombre total de personnes (adultes + enfants).
     public function getPersons(): int
     {
         return $this->adult + $this->child;
@@ -202,18 +202,7 @@ class Booking
         return $interval->days;
     }
 
-    //public function getHsDays(): int
-    //{
-    //    $startDate = new DateTime('2023-06-21');
-    //    $endDate = new DateTime('2023-08-31');
-
-    //    $start = max($this->getCheckin(), $startDate);
-    //    $end = min($this->getCheckout(), $endDate);
-
-    //    $interval = $start->diff($end);
-    //    return $interval->days;
-    //}
-
+    // retourne le nombre de jours en haute saison
     public function getHsDays(): int
     {
         $startDate = new DateTime('2023-06-21');
@@ -229,6 +218,15 @@ class Booking
         }
 
         return $hsDays;
+    }
+
+    // retourne le nombre de jours en basse saison
+    public function getBsDays(): int
+    {
+        $totalDays = $this->getDays();
+        $hsDays = $this->getHsDays();
+
+        return $totalDays - $hsDays;
     }
 
     public function getNormalPrice(): float
@@ -256,14 +254,6 @@ class Booking
     public function getHsCash(): float
     {
         return $this->getHsDays() * $this->getHsPrice() * self::RETRIBUTION;
-    }
-
-    public function getBsDays(): int
-    {
-        $totalDays = $this->getDays();
-        $hsDays = $this->getHsDays();
-
-        return $totalDays - $hsDays;
     }
 
     // Calcul du prix total Basse Saison

@@ -1,65 +1,83 @@
-# documentation
+# Le système de réservation
 
-## Booking (Entity)
+## L'entité : Booking.php
 
-La classe Booking est l'entité qui représente une réservation pour une position (emplacements ou hébergements) donnée. Elle contient plusieurs propriétés qui représentent les informations associées à une réservation, telles que les dates d'arrivée et de départ, le nombre d'adultes et d'enfants, le nombre de billets pour la piscine, etc.
+La classe Booking est l'entité qui représente une réservation pour une position (un emplacement, un mobil-home, un hébergement plus globalement) précis. Elle contient plusieurs propriétés qui représentent les informations nécessaires à une réservation :
 
-Le prix d'une réservation est calculé en fonction du nombre de jours réservés, du type de la position (emplacements ou hébergements) et de la saison (haute ou basse). La classe contient donc des méthodes qui permettent de calculer le prix total en fonction de ces facteurs. Il y a également des méthodes qui permettent de calculer la taxe de séjour et le montant de la remise appliquée, le cas échéant.
+- la date d'arrivée (checkin)
+- la date de départ (checkout)
+- le nombre d'adultes
+- le nombre d'enfants
+- le nombre de tickets piscine pour adulte
+- le nombre de tickets piscine pour adulte
+- les informations sur le client
+- la position à laquelle elle est liée
+- un statut (en attente, annulée, confirmée, arrivée, départ, clôturée)
 
-La classe utilise également des constantes pour définir les prix, taux de TVA, taxes, etc. Ces constantes sont utilisées dans les méthodes pour calculer le prix total.
+Le prix d'une réservation est calculé en fonction du nombre de jours réservés, du type de la position (emplacement) et de la saison (haute ou basse).
 
-La classe utilise l'ORM Doctrine pour la persistance des données. Les annotations #[ORM\Entity], #[ORM\Id], #[ORM\Column], #[ORM\ManyToOne], et #[ORM\JoinColumn] sont utilisées pour définir les propriétés de la classe et les relations avec d'autres entités. La classe utilise également le Repository BookingRepository pour l'accès aux données.
+La classe contient donc les méthodes associés qui permettent de calculer le prix d'une réservation en fonction de ces différents facteurs. D'autres méthodes dans la classe permettent de calculer la taxe de séjour et le montant d'une éventuelle remise à appliquer, le cas échéant (dans ce cas, pour un séjour de minimum 7 jours consécutif, une remise de 5% par tranche de 7 jours).
 
-Ce code définit une classe Booking appartenant au namespace App\Entity. La classe représente une réservation effectuée par un client pour un emplacement de camping. Voici une description de la signification et de l'utilisation de chacune des parties du code :
+Les différentes méthodes de la classe peuvent faire appel à des constantes qui permettent de définir en un seul endroit, les prix des options (tickets piscine), les taux de TVA (10% pour les hébergements, 20% pour les services tels que l'accès à la piscine), les taxes de séjour, etc. Ces constantes sont essentielles pour les calculs du prix total à payer par le clients ou de la rétribution à payer au propriétaire d'un mobilehome.
 
-La section suivante définit les constantes de la classe pour les prix, les taux de TVA, les taxes, etc.
+La classe Booking utilise l'ORM Doctrine pour la persistance des données.
+
+Les annotations #[ORM\Entity], #[ORM\Id], #[ORM\Column], #[ORM\ManyToOne], et #[ORM\JoinColumn] sont utilisées pour définir les propriétés de la classe et les relations avec d'autres entités telles que Position. La classe utilise également le Repository BookingRepository pour l'accès aux données.
 
 ### Constantes pour les prix, taux de TVA, taxes, etc.
 
-- const RETRIBUTION = 0.35; // 35%
-- const DISCOUNT_RATE = 0.05; // Remise 5%
-- const HS_RATE = 1.15; // +15%
-- const VAT_RATE_10 = 1.10;
-- const VAT_RATE_20 = 1.20;
-- const POOL_ADULT_PRICE = 1.50;
-- const POOL_CHILD_PRICE = 1.00;
-- const TAX_ADULT_PRICE = 60;
-- const TAX_CHILD_PRICE = 35;
+- const RETRIBUTION = 0.35; // 35% (pour le calcul de la rétribution au propriétaire)
+- const DISCOUNT_RATE = 0.05; // 5% (pour le calcul de la remise à effectuer)
+- const HS_RATE = 1.15; // 15% - Haute Saison (Hs)
+- const VAT_RATE_10 = 1.10; // 10% (pour le calcul des prix HT et montant de TVA)
+- const VAT_RATE_20 = 1.20; // 20% (pour le calcul des prix HT et montant de TVA)
+- const POOL_ADULT_PRICE = 1.50; (le prix du ticket piscine adulte)
+- const POOL_CHILD_PRICE = 1.00; (le prix du ticket piscine enfant)
+- const TAX_ADULT_PRICE = 0.60; (le prix de la taxe de séjour adulte)
+- const TAX_CHILD_PRICE = 0.35; (le prix de la taxe de séjour enfant)
 
 ### Propriétés de la classe :
 
-- $id : l'identifiant unique de la réservation.
-- $checkin et $checkout : la date d'arrivée et la date de départ de la réservation.
-- $adult : le nombre d'adultes réservant l'emplacement.
-- $child : le nombre d'enfants réservant l'emplacement.
-- $adultPool et $childPool : le nombre de billets d'accès à la piscine réservés pour les adultes et les enfants.
-- $position : l'emplacement réservé (associé à une position de camping).
-- $createdAt et $updatedAt : la date de création et la date de dernière modification de la réservation.
-- $status : le statut de la réservation (par exemple "En attente", "Confirmé", "Annulé", etc.).
-- $customer : le client qui a effectué la réservation.
+- $id : identifiant unique de la réservation.
+- $checkin et $checkout : date d'arrivée et date de départ.
+- $adult : nombre d'adultes.
+- $child : le nombre d'enfants.
+- $adultPool et $childPool : le nombre de tickets piscine pour adultes et enfants.
+- $position : emplacement concerné par la réservation.
+- $createdAt et $updatedAt : date de création de la réservation date de dernière modification de.
+- $status : statut de la réservation (pending, confirmed, cancelled, checkin, checkout, closed, invoiced).
+- $customer : client qui a effectué la réservation.
 
 ### Les méthodes de la classe : Getters et setters pour toutes les propriétés.
 
 - getPersons() : retourne le nombre total de personnes (adultes + enfants) pour la réservation.
 - getDays() : retourne le nombre de jours de la réservation.
-- getHsDays() : retourne le nombre de jours en haute saison (déterminé en fonction des dates de la réservation).
+- getHsDays() : retourne le nombre de jours en haute saison.
+- getBsDays() : retourne le nombre de jours en basse saison.
 - getNormalPrice() : retourne le prix normal de l'emplacement.
 - getHsPrice() : retourne le prix de l'emplacement en haute saison.
-- getTotalPriceHsDays() : calcule le prix total pour les jours en haute saison.
-- getHsCash() : calcule la commission de l'entreprise pour les jours en haute saison.
-- getBsDays() : retourne le nombre de jours en basse saison.
 - getTotalPriceBsDays() : calcule le prix total pour les jours en basse saison.
-- getBsCash() : calcule la commission de l'entreprise pour les jours en basse saison.
-- getPoolAdultPrice() et getPoolChildPrice() : retournent les prix des billets d'accès à la piscine pour les adultes et les enfants.
-- getTotalPoolAdultPrice() et getTotalPoolChildPrice() : calculent le prix total pour les billets d'accès à la piscine pour les adultes et les enfants.
+- getTotalPriceHsDays() : calcule le prix total pour les jours en haute saison.
+- getBsCash() : retourne le montant de la rétribution pour les jours en basse saison.
+- getHsCash() : retourne le montant de la rétribution pour les jours en haute saison.
+- getPoolAdultPrice() et getPoolChildPrice() : retournent le prix des billets d'accès à la piscine.
+- getTotalPoolAdultPrice() et getTotalPoolChildPrice() : retournent les prix total des tickets piscine.
 - getTaxAdultQty() : retourne le nombre de taxe de séjour pour les adultes.
+
 - getTotalTaxAdultPrice() : Cette méthode calcule le montant total de la taxe de séjour pour les adultes. Elle utilise la méthode getTaxAdultQty() pour récupérer le nombre total de nuits réservées par les adultes, multiplie ce nombre par le prix de la taxe de séjour pour les adultes (défini dans les constantes de la classe) et retourne le résultat en euros.
+
 - getTaxChildQty() : Cette méthode calcule le nombre total de nuits réservées par les enfants en multipliant le nombre total de nuits réservées par le nombre d'enfants. Elle est utilisée pour le calcul du montant total de la taxe de séjour pour les enfants dans la méthode getTotalTaxChildPrice().
+
 - getTotalTaxChildPrice() : Cette méthode calcule le montant total de la taxe de séjour pour les enfants. Elle utilise la méthode getTaxChildQty() pour récupérer le nombre total de nuits réservées par les enfants, multiplie ce nombre par le prix de la taxe de séjour pour les enfants (défini dans les constantes de la classe) et retourne le résultat en euros.
+
 - getTotalTtc() : Cette méthode calcule le montant total de la réservation toutes taxes comprises (TTC). Elle utilise les méthodes getTotalPriceBsDays(), getTotalPriceHsDays(), getTotalPoolAdultPrice() et getTotalPoolChildPrice() pour calculer le prix total de la location, le prix total de l'accès à la piscine pour les adultes et pour les enfants. Ces prix sont ensuite additionnés pour obtenir le prix total TTC.
+
 - getVat10() : Cette méthode calcule le montant de la TVA à 10% pour la réservation. Elle utilise les méthodes getTotalPriceBsDays() et getTotalPriceHsDays() pour calculer le montant total HT de la location en basse et haute saison. Elle calcule ensuite le montant HT total (en additionnant les montants HT de la location et de l'accès à la piscine pour les adultes), et calcule le montant de la TVA à 10% en appliquant le taux de 10% à ce montant HT.
+
 - getVat20() : Cette méthode calcule le montant de la TVA à 20% pour la réservation. Elle utilise les méthodes getTotalPoolAdultPrice() et getTotalPoolChildPrice() pour calculer le montant HT total de l'accès à la piscine pour les adultes et pour les enfants, et calcule ensuite le montant de la TVA à 20% en appliquant le taux de 20% à ce montant HT.
+
 - getTotalHt() : Cette méthode calcule le montant total HT de la réservation. Elle utilise les méthodes - getTotalTtc(), getVat10() et getVat20() pour calculer le montant HT total (en soustrayant la TVA à 10% et en ajoutant la TVA à 20% au prix TTC total).
+
 - getDiscountedPrice() : Cette méthode calcule le montant total de la réservation après application d'une remise. Elle utilise les méthodes getNormalPrice(), getDays(), getHsDays() et getBsDays() pour calculer le prix total de...
 
 ## BookingController

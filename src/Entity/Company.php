@@ -43,6 +43,9 @@ class Company
     #[ORM\Column]
     private ?int $vatRate = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $registrationCity = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +167,18 @@ class Company
     public function setVatRate(int $vatRate): self
     {
         $this->vatRate = $vatRate;
+
+        return $this;
+    }
+
+    public function getRegistrationCity(): ?string
+    {
+        return $this->registrationCity;
+    }
+
+    public function setRegistrationCity(?string $registrationCity): self
+    {
+        $this->registrationCity = $registrationCity;
 
         return $this;
     }
