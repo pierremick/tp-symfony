@@ -167,8 +167,8 @@ class BookingController extends AbstractController
     }
 
 
-    #[Route('/informations-client', name: 'customer_info')]
-    public function customer_info(Request $request, SessionInterface $session): Response
+    #[Route('/informations-client', name: 'booking_customer_info')]
+    public function booking_customer_info(Request $request, SessionInterface $session): Response
     {
         // Récupère les données de réservation stockées en session
         $booking = $session->get('booking');
@@ -233,8 +233,8 @@ class BookingController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation/confirmation', name: 'booking_summary_confirmation')]
-    public function booking_summary_confirmation(SessionInterface $session): Response
+    #[Route('/reservation/confirmation', name: 'booking_confirmation')]
+    public function booking_confirmation(SessionInterface $session): Response
     {
         // Récupère les données de réservation et de client stockées en session
         $booking = $session->get('booking');
