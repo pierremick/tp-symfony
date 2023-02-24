@@ -26,43 +26,43 @@ Les annotations #[ORM\Entity], #[ORM\Id], #[ORM\Column], #[ORM\ManyToOne], et #[
 
 ### Constantes pour les prix, taux de TVA, taxes, etc.
 
-- const RETRIBUTION = 0.35; // 35% (pour le calcul de la rétribution au propriétaire)
-- const DISCOUNT_RATE = 0.05; // 5% (pour le calcul de la remise à effectuer)
-- const HS_RATE = 1.15; // 15% - Haute Saison (Hs)
-- const VAT_RATE_10 = 1.10; // 10% (pour le calcul des prix HT et montant de TVA)
-- const VAT_RATE_20 = 1.20; // 20% (pour le calcul des prix HT et montant de TVA)
-- const POOL_ADULT_PRICE = 1.50; (le prix du ticket piscine adulte)
-- const POOL_CHILD_PRICE = 1.00; (le prix du ticket piscine enfant)
-- const TAX_ADULT_PRICE = 0.60; (le prix de la taxe de séjour adulte)
-- const TAX_CHILD_PRICE = 0.35; (le prix de la taxe de séjour enfant)
+- **const RETRIBUTION = 0.35**; // 35% (pour le calcul de la rétribution au propriétaire)
+- **const DISCOUNT_RATE = 0.05**; // 5% (pour le calcul de la remise à effectuer)
+- **const HS_RATE = 1.15;** // 15% - Haute Saison (Hs)
+- **const VAT_RATE_10 = 1.10;** // 10% (pour le calcul des prix HT et montant de TVA)
+- **const VAT_RATE_20 = 1.20;** // 20% (pour le calcul des prix HT et montant de TVA)
+- **const POOL_ADULT_PRICE = 1.50;** (le prix du ticket piscine adulte)
+- **const POOL_CHILD_PRICE = 1.00;** (le prix du ticket piscine enfant)
+- **const TAX_ADULT_PRICE = 0.60;** (le prix de la taxe de séjour adulte)
+- **const TAX_CHILD_PRICE = 0.35;** (le prix de la taxe de séjour enfant)
 
 ### Propriétés de la classe :
 
-- $id : identifiant unique de la réservation.
-- $checkin et $checkout : date d'arrivée et date de départ.
-- $adult : nombre d'adultes.
-- $child : le nombre d'enfants.
-- $adultPool et $childPool : le nombre de tickets piscine pour adultes et enfants.
-- $position : emplacement concerné par la réservation.
-- $createdAt et $updatedAt : date de création de la réservation date de dernière modification de.
-- $status : statut de la réservation (pending, confirmed, cancelled, checkin, checkout, closed, invoiced).
-- $customer : client qui a effectué la réservation.
+- **$id** : identifiant unique de la réservation.
+- **$checkin** et **$checkout** : date d'arrivée et date de départ.
+- **$adult** : nombre d'adultes.
+- **$child** : le nombre d'enfants.
+- **$adultPool** et **$childPool** : le nombre de tickets piscine pour adultes et enfants.
+- **$position** : emplacement concerné par la réservation.
+- **$createdAt** et **$updatedAt** : date de création de la réservation date de dernière modification de.
+- **$status** : statut de la réservation (pending, confirmed, cancelled, checkin, checkout, closed, invoiced).
+- **$customer** : client qui a effectué la réservation.
 
 ### Les méthodes de la classe : Getters et setters pour toutes les propriétés.
 
-- getPersons() : retourne le nombre total de personnes (adultes + enfants) pour la réservation.
-- getDays() : retourne le nombre de jours de la réservation.
-- getHsDays() : retourne le nombre de jours en haute saison.
-- getBsDays() : retourne le nombre de jours en basse saison.
-- getNormalPrice() : retourne le prix normal de l'emplacement.
-- getHsPrice() : retourne le prix de l'emplacement en haute saison.
-- getTotalPriceBsDays() : calcule le prix total pour les jours en basse saison.
-- getTotalPriceHsDays() : calcule le prix total pour les jours en haute saison.
-- getBsCash() : retourne le montant de la rétribution pour les jours en basse saison.
-- getHsCash() : retourne le montant de la rétribution pour les jours en haute saison.
-- getPoolAdultPrice() et getPoolChildPrice() : retournent le prix des billets d'accès à la piscine.
-- getTotalPoolAdultPrice() et getTotalPoolChildPrice() : retournent les prix total des tickets piscine.
-- getTaxAdultQty() : retourne le nombre de taxe de séjour pour les adultes.
+- **getPersons()** : retourne le nombre total de personnes (adultes + enfants) pour la réservation.
+- **getDays()** : retourne le nombre de jours de la réservation.
+- **getHsDays()** : retourne le nombre de jours en haute saison.
+- **getBsDays()** : retourne le nombre de jours en basse saison.
+- **getNormalPrice()** : retourne le prix normal de l'emplacement.
+- **getHsPrice()** : retourne le prix de l'emplacement en haute saison.
+- **getTotalPriceBsDays()** : calcule le prix total pour les jours en basse saison.
+- **getTotalPriceHsDays()** : calcule le prix total pour les jours en haute saison.
+- **getBsCash()** : retourne le montant de la rétribution pour les jours en basse saison.
+- **getHsCash()** : retourne le montant de la rétribution pour les jours en haute saison.
+- **getPoolAdultPrice()** et **getPoolChildPrice()** : retournent le prix des billets d'accès à la piscine.
+- **getTotalPoolAdultPrice()** et **getTotalPoolChildPrice()** : retournent les prix total des tickets piscine.
+- **getTaxAdultQty()** : retourne le nombre de taxe de séjour pour les adultes.
 
 - getTotalTaxAdultPrice() : Cette méthode calcule le montant total de la taxe de séjour pour les adultes. Elle utilise la méthode getTaxAdultQty() pour récupérer le nombre total de nuits réservées par les adultes, multiplie ce nombre par le prix de la taxe de séjour pour les adultes (défini dans les constantes de la classe) et retourne le résultat en euros.
 
