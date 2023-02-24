@@ -63,22 +63,14 @@ Les annotations #[ORM\Entity], #[ORM\Id], #[ORM\Column], #[ORM\ManyToOne], et #[
 - **getPoolAdultPrice()** et **getPoolChildPrice()** : retournent le prix des billets d'accès à la piscine.
 - **getTotalPoolAdultPrice()** et **getTotalPoolChildPrice()** : retournent les prix total des tickets piscine.
 - **getTaxAdultQty()** : retourne le nombre de taxe de séjour pour les adultes.
-
-- getTotalTaxAdultPrice() : Cette méthode calcule le montant total de la taxe de séjour pour les adultes. Elle utilise la méthode getTaxAdultQty() pour récupérer le nombre total de nuits réservées par les adultes, multiplie ce nombre par le prix de la taxe de séjour pour les adultes (défini dans les constantes de la classe) et retourne le résultat en euros.
-
-- getTaxChildQty() : Cette méthode calcule le nombre total de nuits réservées par les enfants en multipliant le nombre total de nuits réservées par le nombre d'enfants. Elle est utilisée pour le calcul du montant total de la taxe de séjour pour les enfants dans la méthode getTotalTaxChildPrice().
-
-- getTotalTaxChildPrice() : Cette méthode calcule le montant total de la taxe de séjour pour les enfants. Elle utilise la méthode getTaxChildQty() pour récupérer le nombre total de nuits réservées par les enfants, multiplie ce nombre par le prix de la taxe de séjour pour les enfants (défini dans les constantes de la classe) et retourne le résultat en euros.
-
-- getTotalTtc() : Cette méthode calcule le montant total de la réservation toutes taxes comprises (TTC). Elle utilise les méthodes getTotalPriceBsDays(), getTotalPriceHsDays(), getTotalPoolAdultPrice() et getTotalPoolChildPrice() pour calculer le prix total de la location, le prix total de l'accès à la piscine pour les adultes et pour les enfants. Ces prix sont ensuite additionnés pour obtenir le prix total TTC.
-
-- getVat10() : Cette méthode calcule le montant de la TVA à 10% pour la réservation. Elle utilise les méthodes getTotalPriceBsDays() et getTotalPriceHsDays() pour calculer le montant total HT de la location en basse et haute saison. Elle calcule ensuite le montant HT total (en additionnant les montants HT de la location et de l'accès à la piscine pour les adultes), et calcule le montant de la TVA à 10% en appliquant le taux de 10% à ce montant HT.
-
-- getVat20() : Cette méthode calcule le montant de la TVA à 20% pour la réservation. Elle utilise les méthodes getTotalPoolAdultPrice() et getTotalPoolChildPrice() pour calculer le montant HT total de l'accès à la piscine pour les adultes et pour les enfants, et calcule ensuite le montant de la TVA à 20% en appliquant le taux de 20% à ce montant HT.
-
-- getTotalHt() : Cette méthode calcule le montant total HT de la réservation. Elle utilise les méthodes - getTotalTtc(), getVat10() et getVat20() pour calculer le montant HT total (en soustrayant la TVA à 10% et en ajoutant la TVA à 20% au prix TTC total).
-
-- getDiscountedPrice() : Cette méthode calcule le montant total de la réservation après application d'une remise. Elle utilise les méthodes getNormalPrice(), getDays(), getHsDays() et getBsDays() pour calculer le prix total de...
+- **getTotalTaxAdultPrice()** : retourne le montant total de la taxe de séjour pour les adultes.
+- **getTaxChildQty()** : retourne la quantité de taxe de séjour enfant
+- **getTotalTaxChildPrice()** : retourne le montant total de la taxe de séjour enfants
+- **getTotalTtc()** : retourne le montant total de la réservation TTC
+- **getVat10()** : retourne le montant total de TVA à 10%
+- **getVat20()** : retourne le montant de la TVA à 20%
+- **getTotalHt()** : retourne le montant total HT
+- **getDiscountedPrice()** : retourne le montant total de la réservation après application d'une remise.
 
 ## BookingController
 
