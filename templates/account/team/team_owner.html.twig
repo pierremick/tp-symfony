@@ -84,11 +84,8 @@
                                         <img class="avatar avatar-sm avatar-circle" src="/upload/avatar/{{ user.avatar }}" alt="Avatar {{ user.firstname }} {{ user.lastname }}">
                                         {% else %}
                                         <span class="avatar avatar-sm avatar-danger avatar-circle">
-<<<<<<< HEAD
                                             <span class="avatar-initials">EV</span>
-=======
                                             <span class="avatar-initials">{{ user.firstname|u.truncate(1) }}{{ user.lastname }}</span>
->>>>>>> dbec372 (Documentation)
                                         </span>
                                       {% endif %}
                                     </div>
