@@ -3,28 +3,63 @@
 {% block title %}{{ page_title }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <h1>{{ page_title }}</h1>
-            </div>
-            <div class="col-6">
-                <div class="card p-3">
-                    {{ form_start(registrationForm) }}
+    <div class="container my-4">
+        <h1 class="text-center">Inscription</h1>
 
-                        {{ form_row(registrationForm.firstname) }}
-                        {{ form_row(registrationForm.lastname) }}
-                        {{ form_row(registrationForm.phone) }}
-                        {{ form_row(registrationForm.email) }}
-                        {{ form_row(registrationForm.plainPassword, {
-                            label: 'Password'
-                        }) }}
-                        {{ form_row(registrationForm.agreeTerms) }}
-
-                        <button type="submit" class="btn btn-lg btn-primary">rejoindre l'espadrille volante</button>
-                    {{ form_end(registrationForm) }}
+        {{ form_start(registrationForm) }}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(registrationForm.firstname) }}
+                        {{ form_widget(registrationForm.firstname) }}
+                        {{ form_label(registrationForm.firstname) }}
+                    </div>
                 </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(registrationForm.lastname) }}
+                        {{ form_widget(registrationForm.lastname) }}
+                        {{ form_label(registrationForm.lastname) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(registrationForm.email) }}
+                        {{ form_widget(registrationForm.email) }}
+                        {{ form_label(registrationForm.email) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(registrationForm.phone) }}
+                        {{ form_widget(registrationForm.phone) }}
+                        {{ form_label(registrationForm.phone) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(registrationForm.password.first) }}
+                        {{ form_widget(registrationForm.password.first) }}
+                        {{ form_label(registrationForm.password.first) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(registrationForm.password.second) }}
+                        {{ form_widget(registrationForm.password.second) }}
+                        {{ form_label(registrationForm.password.second) }}
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-check mb-3">
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        {{ form_label(registrationForm.agreeTerms) }}
+                    </div>
             </div>
-        </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </div>
+        {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

@@ -8,7 +8,14 @@
 .dropdown-toggle::after {
     border-top: none;
 }
-
+.navbar-toggler-default > i.fa-bars {
+    font-size: 0.8rem;
+}
+.navbar-toggler-toggled > i.fa-x {
+    font-size: 0.8rem;
+    padding-left: 0.05rem;
+    padding-right: 0.01rem;
+}
 h1, h2, h3 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;

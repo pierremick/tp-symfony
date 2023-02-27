@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <h1 class="text-center">Inscription</h1>
+
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(form.firstname) }}
+                        {{ form_widget(form.firstname) }}
+                        {{ form_label(form.firstname) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(form.lastname) }}
+                        {{ form_widget(form.lastname) }}
+                        {{ form_label(form.lastname) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email) }}
+                        {{ form_label(form.email) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(form.phone) }}
+                        {{ form_widget(form.phone) }}
+                        {{ form_label(form.phone) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(form.plainPassword) }}
+                        {{ form_widget(form.plainPassword) }}
+                        {{ form_label(form.plainPassword.first) }}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating mb-3">
+                        {{ form_errors(form.plainPassword) }}
+                        {{ form_widget(form.plainPassword.second) }}
+                        {{ form_label(form.plainPassword.second) }}
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-check mb-3">
+                        {{ form_errors(form.agreeTerms) }}
+                        {{ form_widget(form.agreeTerms) }}
+                        {{ form_label(form.agreeTerms) }}
+                    </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
