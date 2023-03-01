@@ -84,7 +84,7 @@
                                         <img class="avatar avatar-sm avatar-circle" src="/upload/avatar/{{ user.avatar }}" alt="Avatar {{ user.firstname }} {{ user.lastname }}">
                                         {% else %}
                                         <span class="avatar avatar-sm avatar-danger avatar-circle">
-                                            <span class="avatar-initials">EV</span>
+                                            <span class="avatar-initials">{{ user.firstname|u.truncate(1) }}{{ user.lastname|u.truncate(1) }}</span>
                                         </span>
                                       {% endif %}
                                     </div>
